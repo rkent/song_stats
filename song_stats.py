@@ -608,13 +608,19 @@ def main():
     # years, sorted by their combined plays over those years (descending). Shows
     # only the recent year columns plus a combined "Recent" total.
     indices = recent_indices(yearly)
-    recent_rows = [r for r in rows if recent_usage(r, indices) > 0]
+    recent_rows = [
+        # "New" songs: every all-time play happened within the recent years.
+        {**r, "bold_title": r["all_time"] == recent_usage(r, indices)}
+        for r in rows if recent_usage(r, indices) > 0
+    ]
     by_recent = sorted(recent_rows,
                        key=lambda r: (-recent_usage(r, indices), r["title"].lower()))
     recent_cols = make_columns(year_labels, year_indices=indices,
                                combined_label="Recent", fill_title=True)
     render_pdf(OUT_DIR / "ByRecentUsage.pdf", "By Recent Usage", by_recent,
-               recent_cols, prepared_date)
+               recent_cols, prepared_date,
+               footer="Bold titles: every all-time play of the song happened "
+                      "within these recent years (i.e., new to the congregation).")
 
     # Recent Months: like By Recent Usage, but the period columns are months from
     # the per-service grid, with a combined "Total" of those months. Monthly

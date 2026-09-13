@@ -1,14 +1,14 @@
 #!/usr/bin/env python3
 """Generate song-usage statistics PDFs from Planning Center data.
 
-Reads the song catalog from the Planning Center Services API and the usage
-exports in data/ and produces these PDFs in output/:
+Reads everything from the Planning Center Services API (no data files) and
+produces these PDFs in output/:
 
   * ByTitle.pdf       - every (non-Christmas) song, sorted alphabetically
   * ByAllTime.pdf     - the same songs, sorted by all-time play count (desc)
   * ByRecentUsage.pdf - only songs played in the two most recent years, with
                         per-year columns and a combined "Recent" total
-  * RecentMonths.pdf  - songs from the per-service grid, with a column per month
+  * RecentMonths.pdf  - songs from recent plans, with a column per month
                         and a combined "Total"
   * NeverPlayed.pdf   - catalog songs with no recorded plays
   * Christmas.pdf     - the Christmas songs excluded from the other reports
@@ -17,27 +17,31 @@ exports in data/ and produces these PDFs in output/:
 Most rows show the all-time play count, period columns, and the date the song
 was last scheduled.
 
-Data sources:
-  * Planning Center Services API (/services/v2/songs) ... the song catalog
-                                        (titles, themes, last scheduled date).
-                                        Requires CLIENT_ID and CLIENT_SECRET, a
-                                        Planning Center personal access token
+API data used:
+  * /services/v2/songs ... the song catalog (titles, themes, last scheduled
+                                        date). Requires CLIENT_ID and
+                                        CLIENT_SECRET, a Planning Center
+                                        personal access token
                                         (https://api.planningcenteronline.com/oauth/applications),
                                         set in the environment or a .env file.
-  * data/Song Usage Report(... to ...).csv . one per period; a report whose
-                                        start and end years differ is treated
-                                        as the all-time total. Yearly reports
-                                        (start and end years match) are also
-                                        read this way, except the current
-                                        year, which instead comes live from
-                                        the API (see below).
-  * Planning Center Services API (/service_types/.../plans and .../items) ...
-                                        the Sunday Morning Worship Services
-                                        plans and their song items, used for
-                                        both the current year's Plans counts
-                                        and, for the current month plus the
-                                        RECENT_MONTHS_COUNT - 1 preceding full
-                                        months, the Recent Months report.
+  * /service_types/.../plans and .../items ... the Sunday Morning Worship
+                                        Services plans and their song items,
+                                        used for:
+                                          - the current year's Plans counts,
+                                            and the YEARLY_COLUMNS - 1
+                                            preceding years' (completed past
+                                            years are cached in
+                                            usage_cache.json, since that data
+                                            never changes; only the current
+                                            year is fetched live);
+                                          - the all-time total, which sums
+                                            every year's Plans counts from
+                                            EARLIEST_YEAR through the current
+                                            year;
+                                          - the Recent Months report, for the
+                                            current month plus the
+                                            RECENT_MONTHS_COUNT - 1 preceding
+                                            full months.
 
 Songs are matched between the catalog and the usage data by TITLE only.
 Christmas songs are excluded, and duplicate titles in the catalog are collapsed
@@ -46,10 +50,9 @@ into a single row.
 
 from __future__ import annotations
 
-import csv
 import functools
+import json
 import os
-import re
 import sys
 from datetime import date, datetime, timedelta
 from pathlib import Path
@@ -65,7 +68,6 @@ load_dotenv()
 # --- Configuration ----------------------------------------------------------
 
 ROOT = Path(__file__).resolve().parent
-DATA_DIR = ROOT / "data"
 OUT_DIR = ROOT / "output"
 
 PREPARED_BY = "Kent James"
@@ -76,8 +78,16 @@ SERVICE_TYPE_NAME = "Sunday Morning Worship Services"
 # Recent Months covers the current (partial) month plus this many preceding
 # full calendar months.
 RECENT_MONTHS_COUNT = 6
-# Matches "Song Usage Report(01_01_2012 to 12_31_2025).csv" and captures years.
-USAGE_RE = re.compile(r"Song Usage Report\((\d\d)_(\d\d)_(\d{4}) to (\d\d)_(\d\d)_(\d{4})\)")
+# Number of trailing years (including the current one) shown as columns in
+# ByTitle/ByAllTime/etc.
+YEARLY_COLUMNS = 5
+# First year with Sunday Morning Worship Services plans in Planning Center;
+# the all-time total sums every year's API usage from here through the
+# current year.
+EARLIEST_YEAR = 2014
+# Completed past years' usage never changes, so it's cached here instead of
+# being refetched from the API on every run.
+USAGE_CACHE_FILE = ROOT / "usage_cache.json"
 
 
 # Christmas-specific themes that, alongside a "Christmas" tag, confirm a song
@@ -300,63 +310,59 @@ def load_service_songs(months: int = RECENT_MONTHS_COUNT):
     return month_labels, songs
 
 
-def load_usage(path: Path) -> dict[str, int]:
-    """Load a usage report into {title: plans_count}."""
-    counts: dict[str, int] = {}
-    with path.open(newline="", encoding="utf-8") as f:
-        for row in csv.DictReader(f):
-            title = row["Song Name"].strip()
-            try:
-                plans = int(row["Plans"])
-            except (KeyError, ValueError):
-                plans = 0
-            # Same title may appear more than once; accumulate to be safe.
-            counts[title] = counts.get(title, 0) + plans
-    return counts
+def load_usage_cache() -> dict[int, dict[str, int]]:
+    """Load cached {year: {title: plans}} for completed past years."""
+    if not USAGE_CACHE_FILE.exists():
+        return {}
+    with USAGE_CACHE_FILE.open(encoding="utf-8") as f:
+        raw = json.load(f)
+    return {int(year): counts for year, counts in raw.items()}
+
+
+def save_usage_cache(cache: dict[int, dict[str, int]]) -> None:
+    with USAGE_CACHE_FILE.open("w", encoding="utf-8") as f:
+        json.dump({str(year): counts for year, counts in cache.items()}, f,
+                  indent=2, sort_keys=True)
+
+
+def ensure_year_cache(current_year: int) -> dict[int, dict[str, int]]:
+    """Ensure every completed year from EARLIEST_YEAR through current_year - 1
+    is in the on-disk usage cache, fetching any missing ones from the API, and
+    return the full cache."""
+    cache = load_usage_cache()
+    for year in range(EARLIEST_YEAR, current_year):
+        if year not in cache:
+            print(f"Fetching {year} usage from the API to seed the cache "
+                  f"(one-time)...", file=sys.stderr)
+            cache[year] = fetch_year_usage(year)
+            save_usage_cache(cache)  # save incrementally in case of interruption
+    return cache
 
 
 def discover_reports():
-    """Find the all-time report and the per-year reports in data/.
+    """Compute the all-time usage total and the per-year usage columns.
 
-    Returns (all_time_counts, [(year, counts), ...]) with years sorted ascending.
-
-    The all-time report (a span of multiple years, e.g. 2012-2025) may end before
-    the latest yearly report. Any yearly report for a year *after* the all-time
-    report's span is added into the all-time totals, so AllTime stays complete
-    without needing the multi-year export re-run every year. (Years inside the
-    span are already covered by it and are not re-added, avoiding double counting.)
+    Returns (all_time_counts, [(year, counts), ...]) with years sorted
+    ascending. Everything comes from the Planning Center API: the all-time
+    total sums every year's Plans counts from EARLIEST_YEAR through the
+    current year, and the yearly columns cover the most recent YEARLY_COLUMNS
+    of those years. Completed past years are cached in USAGE_CACHE_FILE since
+    that data never changes; only the current year is fetched live every run.
     """
     current_year = date.today().year
-    all_time: dict[str, int] | None = None
-    all_time_end: int | None = None
-    yearly: list[tuple[int, dict[str, int]]] = []
-    for path in sorted(DATA_DIR.glob("Song Usage Report*.csv")):
-        if path.name.endswith(".old.csv"):
-            continue
-        m = USAGE_RE.search(path.name)
-        if not m:
-            continue
-        start_year, end_year = int(m.group(3)), int(m.group(6))
-        if start_year == end_year == current_year:
-            continue  # the current year comes from the API instead, below
-        counts = load_usage(path)
-        if start_year == end_year:
-            yearly.append((start_year, counts))
-        else:
-            if all_time is not None:
-                print(f"Warning: multiple all-time reports found; using {path.name}",
-                      file=sys.stderr)
-            all_time = counts
-            all_time_end = end_year
-    if all_time is None:
-        sys.exit("Error: no all-time usage report (span of multiple years) found in data/.")
-    yearly.append((current_year, fetch_year_usage(current_year)))
-    # Fold in yearly reports beyond the all-time report's span.
-    for year, counts in yearly:
-        if year > all_time_end:
-            for title, plans in counts.items():
-                all_time[title] = all_time.get(title, 0) + plans
-    yearly.sort(key=lambda x: x[0])
+    current_year_counts = fetch_year_usage(current_year)
+    cache = ensure_year_cache(current_year)
+
+    all_time: dict[str, int] = {}
+    for year in range(EARLIEST_YEAR, current_year):
+        for title, plans in cache[year].items():
+            all_time[title] = all_time.get(title, 0) + plans
+    for title, plans in current_year_counts.items():
+        all_time[title] = all_time.get(title, 0) + plans
+
+    yearly = [(year, cache[year])
+              for year in range(current_year - YEARLY_COLUMNS + 1, current_year)]
+    yearly.append((current_year, current_year_counts))
     return all_time, yearly
 
 

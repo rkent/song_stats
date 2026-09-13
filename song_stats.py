@@ -412,12 +412,13 @@ HEADER_SIZE = 12
 
 NUMERIC_START = MARGIN + 2.5 * inch  # right edge of the first numeric column
 NUMERIC_STEP = 0.64 * inch           # spacing between right-aligned numeric columns
+MONTH_NUMERIC_STEP = 0.4 * inch      # narrower spacing for small monthly counts
 LAST_SCHED_GAP = 0.6 * inch          # gap before the left-aligned Last Scheduled
 LAST_SCHED_WIDTH = 1.0 * inch        # space reserved for the Last Scheduled text
 
 
 def make_columns(year_labels, year_indices=None, combined_label=None,
-                 fill_title=False, id_column=False):
+                 fill_title=False, id_column=False, numeric_step=NUMERIC_STEP):
     """Build the column specs for a report.
 
     Each spec is a dict with: label, align, get(row)->str, and (for the title) a
@@ -431,6 +432,9 @@ def make_columns(year_labels, year_indices=None, combined_label=None,
     fill_title right-justifies the numeric block against the right margin so the
     Title column expands to use all remaining width (useful when a report has
     few columns).
+    numeric_step overrides the spacing between right-aligned numeric columns;
+    narrower for reports whose numeric columns hold only small counts (e.g.
+    monthly totals), so the Title column keeps most of the width.
     """
     if year_indices is None:
         year_indices = list(range(len(year_labels)))
@@ -461,7 +465,7 @@ def make_columns(year_labels, year_indices=None, combined_label=None,
     if fill_title:
         n_right = sum(1 for col in cols if col["align"] == "right")
         numeric_start = (PAGE_W - MARGIN - LAST_SCHED_WIDTH - LAST_SCHED_GAP
-                         - (n_right - 1) * NUMERIC_STEP)
+                         - (n_right - 1) * numeric_step)
 
     # Assign x positions: title at the left margin, right-aligned numeric columns
     # stepping across, and the trailing left-aligned column after a gap.
@@ -470,7 +474,7 @@ def make_columns(year_labels, year_indices=None, combined_label=None,
         if col.get("title"):
             col["x"] = MARGIN
         elif col["align"] == "right":
-            x = numeric_start if x is None else x + NUMERIC_STEP
+            x = numeric_start if x is None else x + numeric_step
             col["x"] = x
         else:  # trailing left-aligned column
             col["x"] = (x if x is not None else numeric_start) + LAST_SCHED_GAP
@@ -622,7 +626,8 @@ def main():
             "bold_title": at == sum(s["months"]),
         })
     by_month = sorted(month_rows, key=lambda r: (-sum(r["years"]), r["title"].lower()))
-    month_cols = make_columns(month_labels, combined_label="Total", fill_title=True)
+    month_cols = make_columns(month_labels, combined_label="Total", fill_title=True,
+                              numeric_step=MONTH_NUMERIC_STEP)
     render_pdf(OUT_DIR / "RecentMonths.pdf", "Recent Months", by_month,
                month_cols, prepared_date,
                footer=f"Total songs: {len(by_month)}")

@@ -1,3 +1,5 @@
 .env
 __pycache__/
 usage_cache.json
+output/
+_site/

@@ -51,6 +51,7 @@ into a single row.
 from __future__ import annotations
 
 import functools
+import html
 import json
 import os
 import sys
@@ -69,6 +70,7 @@ load_dotenv()
 
 ROOT = Path(__file__).resolve().parent
 OUT_DIR = ROOT / "output"
+SITE_DIR = ROOT / "_site"
 
 PREPARED_BY = "Kent James"
 
@@ -584,6 +586,135 @@ def render_pdf(path, subtitle, rows, cols, prepared_date, footer=None):
     c.save()
 
 
+# --- HTML rendering -----------------------------------------------------------
+
+STYLE_CSS = """\
+:root { color-scheme: light dark; }
+body {
+  font-family: -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+  max-width: 900px; margin: 2rem auto; padding: 0 1rem;
+}
+header { margin-bottom: 1.5rem; }
+h1 { margin-bottom: 0.25rem; }
+.meta { color: #767676; font-size: 0.9rem; }
+table { border-collapse: collapse; width: 100%; font-size: 0.9rem; }
+th, td { padding: 0.35rem 0.6rem; border-bottom: 1px solid #ccc; text-align: left; }
+th.num, td.num { text-align: right; }
+thead th { border-bottom: 2px solid; }
+.footer-note { font-weight: bold; margin-top: 1rem; }
+ul.reports {
+  list-style: none; padding: 0; display: grid; gap: 1rem;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+}
+.card { border: 1px solid #ccc; border-radius: 8px; padding: 1rem; }
+.card h2 { margin: 0 0 0.4rem; font-size: 1.05rem; }
+.card p { margin: 0.3rem 0 0; }
+.card .count { color: #767676; font-size: 0.85rem; }
+a { color: #0645ad; text-decoration: none; }
+a:hover { text-decoration: underline; }
+@media (prefers-color-scheme: dark) {
+  a { color: #8ab4f8; }
+}
+"""
+
+
+def render_html(path: Path, subtitle: str, rows, cols, prepared_date, footer=None):
+    """Render one report as a static HTML page, using the same column specs
+    (label, align, get, and the title flag) that render_pdf uses."""
+
+    def cell_html(col, row):
+        text = html.escape(str(col["get"](row)))
+        if col.get("title") and row.get("bold_title"):
+            text = f"<strong>{text}</strong>"
+        return text
+
+    thead = "".join(
+        f'<th class="{"num" if c["align"] == "right" else "text"}">'
+        f'{html.escape(c["label"])}</th>'
+        for c in cols
+    )
+    body = "".join(
+        "<tr>" + "".join(
+            f'<td class="{"num" if c["align"] == "right" else "text"}">'
+            f'{cell_html(c, row)}</td>'
+            for c in cols
+        ) + "</tr>"
+        for row in rows
+    )
+
+    footer_html = ""
+    if footer:
+        lines = [footer] if isinstance(footer, str) else footer
+        footer_html = "".join(f'<p class="footer-note">{html.escape(line)}</p>' for line in lines)
+
+    path.write_text(f"""\
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{html.escape(subtitle)}</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+<h1>{html.escape(subtitle)}</h1>
+<p class="meta">Prepared by {html.escape(PREPARED_BY)} &middot; {prepared_date:%-m/%-d/%Y}
+&middot; <a href="index.html">Home</a></p>
+</header>
+<table>
+<thead><tr>{thead}</tr></thead>
+<tbody>
+{body}
+</tbody>
+</table>
+{footer_html}
+</body>
+</html>
+""", encoding="utf-8")
+
+
+def render_report(name: str, subtitle: str, description: str, rows, cols, prepared_date,
+                  footer=None) -> dict:
+    """Render one report as both a PDF (in OUT_DIR) and an HTML page (in
+    SITE_DIR), and return the metadata the home page needs to link to it."""
+    render_pdf(OUT_DIR / f"{name}.pdf", subtitle, rows, cols, prepared_date, footer=footer)
+    render_html(SITE_DIR / f"{name}.html", subtitle, rows, cols, prepared_date, footer=footer)
+    return {"name": name, "title": subtitle, "description": description, "count": len(rows)}
+
+
+def render_index(reports: list[dict], prepared_date) -> None:
+    """Render the _site/index.html home page linking to each report."""
+    cards = "".join(f"""\
+<li class="card">
+<h2><a href="{r['name']}.html">{html.escape(r['title'])}</a></h2>
+<p>{html.escape(r['description'])}</p>
+<p class="count">{r['count']} songs</p>
+</li>
+""" for r in reports)
+
+    (SITE_DIR / "index.html").write_text(f"""\
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Creekside Song Stats</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+<h1>Creekside Song Stats</h1>
+<p class="meta">Prepared by {html.escape(PREPARED_BY)} &middot; {prepared_date:%-m/%-d/%Y}</p>
+</header>
+<ul class="reports">
+{cards}
+</ul>
+</body>
+</html>
+""", encoding="utf-8")
+
+
 # --- Main --------------------------------------------------------------------
 
 def main():
@@ -594,15 +725,22 @@ def main():
     prepared_date = date.today()
 
     OUT_DIR.mkdir(exist_ok=True)
+    SITE_DIR.mkdir(exist_ok=True)
+    (SITE_DIR / "style.css").write_text(STYLE_CSS, encoding="utf-8")
+    reports = []
 
     # By Title and By All Time show every year column.
     full_cols = make_columns(year_labels)
 
     by_title = sorted(rows, key=lambda r: r["title"].lower())
-    render_pdf(OUT_DIR / "ByTitle.pdf", "By Title", by_title, full_cols, prepared_date)
+    reports.append(render_report(
+        "ByTitle", "By Title", "Every (non-Christmas) song, sorted alphabetically.",
+        by_title, full_cols, prepared_date))
 
     by_all_time = sorted(rows, key=lambda r: (-r["all_time"], r["title"].lower()))
-    render_pdf(OUT_DIR / "ByAllTime.pdf", "By All Time", by_all_time, full_cols, prepared_date)
+    reports.append(render_report(
+        "ByAllTime", "By All Time", "The same songs, sorted by all-time play count.",
+        by_all_time, full_cols, prepared_date))
 
     # By Recent Usage: only songs played in the most recent RECENT_YEAR_COUNT
     # years, sorted by their combined plays over those years (descending). Shows
@@ -617,10 +755,12 @@ def main():
                        key=lambda r: (-recent_usage(r, indices), r["title"].lower()))
     recent_cols = make_columns(year_labels, year_indices=indices,
                                combined_label="Recent", fill_title=True)
-    render_pdf(OUT_DIR / "ByRecentUsage.pdf", "By Recent Usage", by_recent,
-               recent_cols, prepared_date,
-               footer="Bold titles: every all-time play of the song happened "
-                      "within these recent years (i.e., new to the congregation).")
+    reports.append(render_report(
+        "ByRecentUsage", "By Recent Usage",
+        "Songs played in the two most recent years, sorted by recent usage.",
+        by_recent, recent_cols, prepared_date,
+        footer="Bold titles: every all-time play of the song happened "
+               "within these recent years (i.e., new to the congregation)."))
 
     # Recent Months: like By Recent Usage, but the period columns are months from
     # the per-service grid, with a combined "Total" of those months. Monthly
@@ -644,11 +784,13 @@ def main():
     by_month = sorted(month_rows, key=lambda r: (-sum(r["years"]), r["title"].lower()))
     month_cols = make_columns(month_labels, combined_label="Total", fill_title=True,
                               numeric_step=MONTH_NUMERIC_STEP)
-    render_pdf(OUT_DIR / "RecentMonths.pdf", "Recent Months", by_month,
-               month_cols, prepared_date,
-               footer=[f"Total songs: {len(by_month)}",
-                       "Bold titles: every all-time play of the song happened "
-                       "within this report's months (i.e., new to the congregation)."])
+    reports.append(render_report(
+        "RecentMonths", "Recent Months",
+        "Songs from recent plans, with a column per month and a combined total.",
+        by_month, month_cols, prepared_date,
+        footer=[f"Total songs: {len(by_month)}",
+                "Bold titles: every all-time play of the song happened "
+                "within this report's months (i.e., new to the congregation)."]))
 
     # Never Played: catalog songs with no recorded plays, sorted by Id (which
     # increases with creation order, so this roughly orders by when they were
@@ -658,15 +800,20 @@ def main():
         key=lambda r: (r["id"] is None, r["id"]))
     never_cols = make_columns(year_labels, year_indices=[], id_column=True,
                               fill_title=True)
-    render_pdf(OUT_DIR / "NeverPlayed.pdf", "Never Played", never_played,
-               never_cols, prepared_date, footer=f"Total songs: {len(never_played)}")
+    reports.append(render_report(
+        "NeverPlayed", "Never Played", "Catalog songs with no recorded plays.",
+        never_played, never_cols, prepared_date,
+        footer=f"Total songs: {len(never_played)}"))
 
     # Christmas: the songs excluded from the other reports, most played first.
     christmas_rows = build_rows(load_catalog(christmas=True), all_time, yearly)
     by_christmas = sorted(christmas_rows,
                           key=lambda r: (-r["all_time"], r["title"].lower()))
-    render_pdf(OUT_DIR / "Christmas.pdf", "Christmas Songs", by_christmas,
-               full_cols, prepared_date, footer=f"Total songs: {len(by_christmas)}")
+    reports.append(render_report(
+        "Christmas", "Christmas Songs",
+        "The Christmas songs excluded from the other reports.",
+        by_christmas, full_cols, prepared_date,
+        footer=f"Total songs: {len(by_christmas)}"))
 
     # Not Played in N years: songs played at some point but not in the last
     # STALE_YEARS years (by Last Scheduled date), oldest first.
@@ -674,21 +821,25 @@ def main():
     stale = sorted(
         [r for r in rows if r["last_scheduled"] and r["last_scheduled"] < cutoff],
         key=lambda r: r["last_scheduled"])
-    render_pdf(OUT_DIR / "NotPlayed4Years.pdf",
-               f"Not Played Since {cutoff:%Y-%m-%d}", stale,
-               full_cols, prepared_date, footer=f"Total songs: {len(stale)}")
+    reports.append(render_report(
+        "NotPlayed4Years", f"Not Played Since {cutoff:%Y-%m-%d}",
+        f"Songs not scheduled in the last {STALE_YEARS} years.",
+        stale, full_cols, prepared_date,
+        footer=f"Total songs: {len(stale)}"))
+
+    render_index(reports, prepared_date)
 
     recent_labels = [year_labels[i] for i in indices]
-    print(f"Wrote {len(rows)} songs to:")
-    print(f"  {OUT_DIR / 'ByTitle.pdf'}")
-    print(f"  {OUT_DIR / 'ByAllTime.pdf'}")
-    print(f"  {OUT_DIR / 'ByRecentUsage.pdf'} ({len(by_recent)} songs, "
+    print(f"Wrote {len(rows)} songs to {OUT_DIR}/*.pdf and {SITE_DIR}/*.html:")
+    print("  ByTitle")
+    print("  ByAllTime")
+    print(f"  ByRecentUsage ({len(by_recent)} songs, "
           f"recent years: {', '.join(recent_labels)})")
-    print(f"  {OUT_DIR / 'RecentMonths.pdf'} ({len(by_month)} songs, "
+    print(f"  RecentMonths ({len(by_month)} songs, "
           f"months: {', '.join(month_labels)})")
-    print(f"  {OUT_DIR / 'NeverPlayed.pdf'} ({len(never_played)} songs)")
-    print(f"  {OUT_DIR / 'Christmas.pdf'} ({len(by_christmas)} songs)")
-    print(f"  {OUT_DIR / 'NotPlayed4Years.pdf'} ({len(stale)} songs, "
+    print(f"  NeverPlayed ({len(never_played)} songs)")
+    print(f"  Christmas ({len(by_christmas)} songs)")
+    print(f"  NotPlayed4Years ({len(stale)} songs, "
           f"last scheduled before {cutoff:%Y-%m-%d})")
     print(f"Year columns: {', '.join(year_labels)}")
 

@@ -543,6 +543,8 @@ def draw_row(c, cols, row, y, title_max_width):
 
 
 def render_pdf(path, subtitle, rows, cols, prepared_date, footer=None):
+    """Render one report. footer, if given, is a line or list of lines drawn
+    in bold below the table."""
     c = canvas.Canvas(str(path), pagesize=letter)
     # The Title column must not run into the next column.
     next_x = next(col["x"] for col in cols if not col.get("title"))
@@ -562,13 +564,15 @@ def render_pdf(path, subtitle, rows, cols, prepared_date, footer=None):
         y -= ROW_H
 
     if footer:
-        if y < MARGIN:
-            c.showPage()
-            page_num += 1
-            draw_page_header(c, subtitle, page_num, prepared_date)
-            y = draw_table_header(c, cols, TOP - 0.35 * inch)
-        c.setFont(FONT_BOLD, FONT_SIZE)
-        c.drawString(MARGIN, y - 2, footer)
+        for line in [footer] if isinstance(footer, str) else footer:
+            if y < MARGIN:
+                c.showPage()
+                page_num += 1
+                draw_page_header(c, subtitle, page_num, prepared_date)
+                y = draw_table_header(c, cols, TOP - 0.35 * inch)
+            c.setFont(FONT_BOLD, FONT_SIZE)
+            c.drawString(MARGIN, y - 2, line)
+            y -= ROW_H
 
     c.showPage()
     c.save()
@@ -630,7 +634,9 @@ def main():
                               numeric_step=MONTH_NUMERIC_STEP)
     render_pdf(OUT_DIR / "RecentMonths.pdf", "Recent Months", by_month,
                month_cols, prepared_date,
-               footer=f"Total songs: {len(by_month)}")
+               footer=[f"Total songs: {len(by_month)}",
+                       "Bold titles: every all-time play of the song happened "
+                       "within this report's months (i.e., new to the congregation)."])
 
     # Never Played: catalog songs with no recorded plays, sorted by Id (which
     # increases with creation order, so this roughly orders by when they were

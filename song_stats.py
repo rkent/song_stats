@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-"""Generate song-usage statistics PDFs from Planning Center exports.
+"""Generate song-usage statistics PDFs from Planning Center data.
 
-Reads the song catalog and the usage exports in data/ and produces these PDFs
-in output/:
+Reads the song catalog from the Planning Center Services API and the usage
+exports in data/ and produces these PDFs in output/:
 
   * ByTitle.pdf       - every (non-Christmas) song, sorted alphabetically
   * ByAllTime.pdf     - the same songs, sorted by all-time play count (desc)
@@ -17,14 +17,24 @@ in output/:
 Most rows show the all-time play count, period columns, and the date the song
 was last scheduled.
 
-Data sources (all in data/):
-  * Songs.csv ......................... the song catalog (titles + Last Scheduled)
-  * Song Usage Report(... to ...).csv . one per period; a report whose start and
-                                        end years differ is treated as the
-                                        all-time total, one whose years match is
-                                        treated as that single year's column.
-  * Sunday Morning Worship Services Songs.csv . a grid of songs x dated Sundays
-                                        ("✓" per service), summarized by month.
+Data sources:
+  * Planning Center Services API (/services/v2/songs) ... the song catalog
+                                        (titles, themes, last scheduled date).
+                                        Requires CLIENT_ID and CLIENT_SECRET, a
+                                        Planning Center personal access token
+                                        (https://api.planningcenteronline.com/oauth/applications),
+                                        set in the environment or a .env file.
+  * data/Song Usage Report(... to ...).csv . one per period; a report whose
+                                        start and end years differ is treated
+                                        as the all-time total, one whose years
+                                        match is treated as that single year's
+                                        column.
+  * Planning Center Services API (/service_types/.../plans and .../items) ...
+                                        the Sunday Morning Worship Services
+                                        plans and their song items for the
+                                        current month plus the RECENT_MONTHS_COUNT - 1
+                                        preceding full months, summarized by
+                                        month.
 
 Songs are matched between the catalog and the usage data by TITLE only.
 Christmas songs are excluded, and duplicate titles in the catalog are collapsed
@@ -34,14 +44,20 @@ into a single row.
 from __future__ import annotations
 
 import csv
+import functools
+import os
 import re
 import sys
-from datetime import date, datetime
+from datetime import date, datetime, timedelta
 from pathlib import Path
 
+import requests
+from dotenv import load_dotenv
 from reportlab.lib.pagesizes import letter
 from reportlab.lib.units import inch
 from reportlab.pdfgen import canvas
+
+load_dotenv()
 
 # --- Configuration ----------------------------------------------------------
 
@@ -51,9 +67,12 @@ OUT_DIR = ROOT / "output"
 
 PREPARED_BY = "Kent James"
 
-SONGS_FILE = DATA_DIR / "Songs.csv"
-# Per-service grid: a row per song with a "✓" in each dated Sunday it was played.
-SERVICE_FILE = DATA_DIR / "Sunday Morning Worship Services Songs.csv"
+PCO_API_BASE = "https://api.planningcenteronline.com/services/v2"
+# The Planning Center service type whose plans feed the Recent Months report.
+SERVICE_TYPE_NAME = "Sunday Morning Worship Services"
+# Recent Months covers the current (partial) month plus this many preceding
+# full calendar months.
+RECENT_MONTHS_COUNT = 6
 # Matches "Song Usage Report(01_01_2012 to 12_31_2025).csv" and captures years.
 USAGE_RE = re.compile(r"Song Usage Report\((\d\d)_(\d\d)_(\d{4}) to (\d\d)_(\d\d)_(\d{4})\)")
 
@@ -90,19 +109,58 @@ def is_christmas(themes: str) -> bool:
 
 # --- Loading -----------------------------------------------------------------
 
-def parse_scheduled_date(value: str) -> date | None:
-    """Parse a Last Scheduled Date like 'April 13, 2025' into a date."""
-    value = value.strip()
+def parse_scheduled_datetime(value: str | None) -> date | None:
+    """Parse a last_scheduled_at value like '2025-04-13T12:00:00Z' into a date."""
     if not value:
         return None
-    try:
-        return datetime.strptime(value, "%B %d, %Y").date()
-    except ValueError:
-        return None
+    return datetime.fromisoformat(value.replace("Z", "+00:00")).date()
+
+
+@functools.lru_cache(maxsize=1)
+def pco_auth() -> tuple[str, str]:
+    """Return the (CLIENT_ID, CLIENT_SECRET) HTTP Basic Auth credentials.
+
+    These are a Planning Center personal access token
+    (https://api.planningcenteronline.com/oauth/applications), set in the
+    environment or a .env file.
+    """
+    app_id = os.environ.get("CLIENT_ID")
+    secret = os.environ.get("CLIENT_SECRET")
+    if not app_id or not secret:
+        sys.exit(
+            "Error: CLIENT_ID and CLIENT_SECRET must be set (in the environment or "
+            "a .env file) to a Planning Center personal access token. Create one "
+            "at https://api.planningcenteronline.com/oauth/applications."
+        )
+    return app_id, secret
+
+
+def fetch_all_pages(url: str, params: dict) -> list[dict]:
+    """GET url and follow JSON:API "next" links, returning all data entries."""
+    results = []
+    while url:
+        resp = requests.get(url, params=params, auth=pco_auth())
+        resp.raise_for_status()
+        payload = resp.json()
+        results.extend(payload["data"])
+        url = payload.get("links", {}).get("next")
+        params = None  # the "next" link already carries the query params
+    return results
+
+
+@functools.lru_cache(maxsize=1)
+def fetch_songs() -> tuple[dict, ...]:
+    """Fetch every non-hidden song from the Planning Center Services API.
+
+    Results are cached for the life of the process since several reports need
+    the full catalog.
+    """
+    songs = fetch_all_pages(f"{PCO_API_BASE}/songs", {"per_page": 100})
+    return tuple(s for s in songs if not s["attributes"].get("hidden"))
 
 
 def load_catalog(christmas=False):
-    """Load Songs.csv into {title: {"id", "last_scheduled"}}.
+    """Load the song catalog into {title: {"id", "last_scheduled"}}.
 
     By default only non-Christmas songs are returned; pass christmas=True to get
     only the Christmas songs instead. Duplicate titles are collapsed into one
@@ -110,67 +168,112 @@ def load_catalog(christmas=False):
     Id increases with creation order, so the smallest marks the earliest-added).
     """
     catalog: dict[str, dict] = {}
-    with SONGS_FILE.open(newline="", encoding="utf-8") as f:
-        for row in csv.DictReader(f):
-            title = row["Title"].strip()
-            if not title or is_christmas(row["Themes"]) != christmas:
-                continue
-            scheduled = parse_scheduled_date(row["Last Scheduled Date"])
-            try:
-                song_id = int(row["Id"])
-            except (KeyError, ValueError):
-                song_id = None
-            if title in catalog:
-                entry = catalog[title]
-                existing = entry["last_scheduled"]
-                if scheduled and (existing is None or scheduled > existing):
-                    entry["last_scheduled"] = scheduled
-                if song_id is not None and (entry["id"] is None or song_id < entry["id"]):
-                    entry["id"] = song_id
-            else:
-                catalog[title] = {"id": song_id, "last_scheduled": scheduled}
+    for song in fetch_songs():
+        attrs = song["attributes"]
+        title = (attrs.get("title") or "").strip()
+        if not title or is_christmas(attrs.get("themes") or "") != christmas:
+            continue
+        scheduled = parse_scheduled_datetime(attrs.get("last_scheduled_at"))
+        try:
+            song_id = int(song["id"])
+        except (KeyError, ValueError, TypeError):
+            song_id = None
+        if title in catalog:
+            entry = catalog[title]
+            existing = entry["last_scheduled"]
+            if scheduled and (existing is None or scheduled > existing):
+                entry["last_scheduled"] = scheduled
+            if song_id is not None and (entry["id"] is None or song_id < entry["id"]):
+                entry["id"] = song_id
+        else:
+            catalog[title] = {"id": song_id, "last_scheduled": scheduled}
     return catalog
 
 
 def load_christmas_titles() -> set[str]:
     """Return the set of catalog titles classified as Christmas songs."""
     titles: set[str] = set()
-    with SONGS_FILE.open(newline="", encoding="utf-8") as f:
-        for row in csv.DictReader(f):
-            if is_christmas(row["Themes"]):
-                titles.add(row["Title"].strip())
+    for song in fetch_songs():
+        attrs = song["attributes"]
+        if is_christmas(attrs.get("themes") or ""):
+            titles.add((attrs.get("title") or "").strip())
     return titles
 
 
-def load_service_songs(path: Path):
-    """Load the per-service grid into month totals.
+def add_months(d: date, delta: int) -> date:
+    """Return the first of the month `delta` months from d's month."""
+    total = d.year * 12 + (d.month - 1) + delta
+    year, month = divmod(total, 12)
+    return date(year, month + 1, 1)
 
-    The header is: name, new, total, <dated Sunday columns like "Mar 1">. Each
-    dated cell holds "✓" when the song was played that Sunday. Returns
-    (month_labels, [{title, months}]) where month_labels are the distinct months
-    in column order (e.g. ["Mar", "Apr", "May"]) and months is the per-month
-    count of services for that song, aligned to month_labels.
+
+@functools.lru_cache(maxsize=1)
+def fetch_service_type_id(name: str) -> str:
+    """Look up a Planning Center service type's id by name."""
+    for st in fetch_all_pages(f"{PCO_API_BASE}/service_types", {"per_page": 100}):
+        if st["attributes"]["name"] == name:
+            return st["id"]
+    sys.exit(f"Error: no Planning Center service type named {name!r} found.")
+
+
+def fetch_recent_plans(service_type_id: str, start: date, end: date) -> list[dict]:
+    """Plans for a service type with a sort_date in [start, end]."""
+    return fetch_all_pages(
+        f"{PCO_API_BASE}/service_types/{service_type_id}/plans",
+        {
+            "per_page": 100,
+            "order": "sort_date",
+            "filter": "after,before",
+            "after": start.isoformat(),
+            # "before" is an exclusive bound, so push it past `end`.
+            "before": (end + timedelta(days=1)).isoformat(),
+        },
+    )
+
+
+def fetch_plan_song_titles(service_type_id: str, plan_id: str) -> set[str]:
+    """Distinct song titles scheduled in one plan."""
+    items = fetch_all_pages(
+        f"{PCO_API_BASE}/service_types/{service_type_id}/plans/{plan_id}/items",
+        {"per_page": 100},
+    )
+    return {
+        item["attributes"]["title"].strip()
+        for item in items
+        if item["attributes"].get("item_type") == "song" and item["attributes"].get("title")
+    }
+
+
+def load_service_songs(months: int = RECENT_MONTHS_COUNT):
+    """Summarize recent Sunday plans' song usage by month.
+
+    Covers the current (partial) month plus the (months - 1) preceding full
+    calendar months. Returns (month_labels, [{title, months}]) where
+    month_labels are the covered months in chronological order (e.g.
+    ["Apr", "May", "Jun"]) and months is the per-month count of services that
+    song was scheduled in, aligned to month_labels.
     """
-    with path.open(newline="", encoding="utf-8") as f:
-        reader = csv.DictReader(f)
-        fields = reader.fieldnames or []
-        date_cols = fields[fields.index("total") + 1:] if "total" in fields else []
-        month_labels: list[str] = []
-        for col in date_cols:
-            month = col.split()[0]
-            if month not in month_labels:
-                month_labels.append(month)
+    today = date.today()
+    start = add_months(date(today.year, today.month, 1), -(months - 1))
 
-        songs = []
-        for row in reader:
-            title = (row.get("name") or "").strip()
-            if not title:
-                continue
-            counts = {m: 0 for m in month_labels}
-            for col in date_cols:
-                if (row.get(col) or "").strip():
-                    counts[col.split()[0]] += 1
-            songs.append({"title": title, "months": [counts[m] for m in month_labels]})
+    service_type_id = fetch_service_type_id(SERVICE_TYPE_NAME)
+    plans = fetch_recent_plans(service_type_id, start, today)
+
+    month_labels: list[str] = []
+    counts: dict[str, dict[str, int]] = {}
+    for plan in plans:
+        sort_date = parse_scheduled_datetime(plan["attributes"]["sort_date"])
+        month_label = f"{sort_date:%b}"
+        if month_label not in month_labels:
+            month_labels.append(month_label)
+        for title in fetch_plan_song_titles(service_type_id, plan["id"]):
+            counts.setdefault(title, {})[month_label] = (
+                counts.get(title, {}).get(month_label, 0) + 1)
+
+    songs = [
+        {"title": title, "months": [by_month.get(m, 0) for m in month_labels]}
+        for title, by_month in counts.items()
+    ]
     return month_labels, songs
 
 
@@ -476,7 +579,7 @@ def main():
     # the per-service grid, with a combined "Total" of those months. Monthly
     # counts reuse the row's "years" slot so make_columns/render_pdf apply as-is.
     christmas = load_christmas_titles()
-    month_labels, service = load_service_songs(SERVICE_FILE)
+    month_labels, service = load_service_songs()
     month_rows = []
     for s in service:
         if s["title"] in christmas:

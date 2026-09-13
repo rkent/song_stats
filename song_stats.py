@@ -26,15 +26,18 @@ Data sources:
                                         set in the environment or a .env file.
   * data/Song Usage Report(... to ...).csv . one per period; a report whose
                                         start and end years differ is treated
-                                        as the all-time total, one whose years
-                                        match is treated as that single year's
-                                        column.
+                                        as the all-time total. Yearly reports
+                                        (start and end years match) are also
+                                        read this way, except the current
+                                        year, which instead comes live from
+                                        the API (see below).
   * Planning Center Services API (/service_types/.../plans and .../items) ...
                                         the Sunday Morning Worship Services
-                                        plans and their song items for the
-                                        current month plus the RECENT_MONTHS_COUNT - 1
-                                        preceding full months, summarized by
-                                        month.
+                                        plans and their song items, used for
+                                        both the current year's Plans counts
+                                        and, for the current month plus the
+                                        RECENT_MONTHS_COUNT - 1 preceding full
+                                        months, the Recent Months report.
 
 Songs are matched between the catalog and the usage data by TITLE only.
 Christmas songs are excluded, and duplicate titles in the catalog are collapsed
@@ -231,17 +234,37 @@ def fetch_recent_plans(service_type_id: str, start: date, end: date) -> list[dic
     )
 
 
-def fetch_plan_song_titles(service_type_id: str, plan_id: str) -> set[str]:
-    """Distinct song titles scheduled in one plan."""
+@functools.lru_cache(maxsize=None)
+def fetch_plan_song_titles(service_type_id: str, plan_id: str) -> frozenset[str]:
+    """Distinct song titles scheduled in one plan.
+
+    Cached since fetch_year_usage() and load_service_songs() both fetch items
+    for plans in overlapping date ranges.
+    """
     items = fetch_all_pages(
         f"{PCO_API_BASE}/service_types/{service_type_id}/plans/{plan_id}/items",
         {"per_page": 100},
     )
-    return {
+    return frozenset(
         item["attributes"]["title"].strip()
         for item in items
         if item["attributes"].get("item_type") == "song" and item["attributes"].get("title")
-    }
+    )
+
+
+def fetch_year_usage(year: int) -> dict[str, int]:
+    """Count Plans per song title for a calendar year, from the API.
+
+    Mirrors the "Song Usage Report" CSVs: for each song, the number of Sunday
+    Morning Worship Services plans it was scheduled in during the year.
+    """
+    service_type_id = fetch_service_type_id(SERVICE_TYPE_NAME)
+    plans = fetch_recent_plans(service_type_id, date(year, 1, 1), date(year, 12, 31))
+    counts: dict[str, int] = {}
+    for plan in plans:
+        for title in fetch_plan_song_titles(service_type_id, plan["id"]):
+            counts[title] = counts.get(title, 0) + 1
+    return counts
 
 
 def load_service_songs(months: int = RECENT_MONTHS_COUNT):
@@ -303,6 +326,7 @@ def discover_reports():
     without needing the multi-year export re-run every year. (Years inside the
     span are already covered by it and are not re-added, avoiding double counting.)
     """
+    current_year = date.today().year
     all_time: dict[str, int] | None = None
     all_time_end: int | None = None
     yearly: list[tuple[int, dict[str, int]]] = []
@@ -313,6 +337,8 @@ def discover_reports():
         if not m:
             continue
         start_year, end_year = int(m.group(3)), int(m.group(6))
+        if start_year == end_year == current_year:
+            continue  # the current year comes from the API instead, below
         counts = load_usage(path)
         if start_year == end_year:
             yearly.append((start_year, counts))
@@ -324,6 +350,7 @@ def discover_reports():
             all_time_end = end_year
     if all_time is None:
         sys.exit("Error: no all-time usage report (span of multiple years) found in data/.")
+    yearly.append((current_year, fetch_year_usage(current_year)))
     # Fold in yearly reports beyond the all-time report's span.
     for year, counts in yearly:
         if year > all_time_end:

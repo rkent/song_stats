@@ -13,6 +13,9 @@ produces these PDFs in output/:
   * NeverPlayed.pdf   - catalog songs with no recorded plays
   * Christmas.pdf     - the Christmas songs excluded from the other reports
   * NotPlayed4Years.pdf - songs not scheduled in the last STALE_YEARS years
+  * SongKeys.pdf      - every song with a recorded key, sorted alphabetically,
+                        listing each key it's been played in and how many
+                        times, most-used key first
 
 Most rows show the all-time play count, period columns, and the date the song
 was last scheduled.
@@ -41,7 +44,13 @@ API data used:
                                           - the Recent Months report, for the
                                             current month plus the
                                             RECENT_MONTHS_COUNT - 1 preceding
-                                            full months.
+                                            full months;
+                                          - the SongKeys report, from each
+                                            song item's key_name attribute
+                                            (the key it was actually played
+                                            in on that date), also cached in
+                                            usage_cache.json alongside the
+                                            play counts.
 
 Songs are matched between the catalog and the usage data by TITLE only.
 Christmas songs are excluded, and duplicate titles in the catalog are collapsed
@@ -247,21 +256,36 @@ def fetch_recent_plans(service_type_id: str, start: date, end: date) -> list[dic
 
 
 @functools.lru_cache(maxsize=None)
-def fetch_plan_song_titles(service_type_id: str, plan_id: str) -> frozenset[str]:
-    """Distinct song titles scheduled in one plan.
+def fetch_plan_song_items(service_type_id: str, plan_id: str) -> tuple[dict, ...]:
+    """Song items (item_type == "song", with a title) scheduled in one plan, as
+    {"title", "key_name"} dicts (key_name is "" when no key was recorded).
 
-    Cached since fetch_year_usage() and load_service_songs() both fetch items
-    for plans in overlapping date ranges.
+    Cached since fetch_year_usage(), fetch_year_keys(), and load_service_songs()
+    all fetch items for plans in overlapping date ranges.
     """
     items = fetch_all_pages(
         f"{PCO_API_BASE}/service_types/{service_type_id}/plans/{plan_id}/items",
         {"per_page": 100},
     )
-    return frozenset(
-        item["attributes"]["title"].strip()
+    return tuple(
+        {"title": item["attributes"]["title"].strip(),
+         "key_name": (item["attributes"].get("key_name") or "").strip()}
         for item in items
         if item["attributes"].get("item_type") == "song" and item["attributes"].get("title")
     )
+
+
+def fetch_plan_song_titles(service_type_id: str, plan_id: str) -> frozenset[str]:
+    """Distinct song titles scheduled in one plan."""
+    return frozenset(item["title"]
+                     for item in fetch_plan_song_items(service_type_id, plan_id))
+
+
+def fetch_plan_song_keys(service_type_id: str, plan_id: str) -> list[tuple[str, str]]:
+    """(title, key_name) for every song item in one plan that has a key set."""
+    return [(item["title"], item["key_name"])
+            for item in fetch_plan_song_items(service_type_id, plan_id)
+            if item["key_name"]]
 
 
 def fetch_year_usage(year: int) -> dict[str, int]:
@@ -276,6 +300,22 @@ def fetch_year_usage(year: int) -> dict[str, int]:
     for plan in plans:
         for title in fetch_plan_song_titles(service_type_id, plan["id"]):
             counts[title] = counts.get(title, 0) + 1
+    return counts
+
+
+def fetch_year_keys(year: int) -> dict[str, dict[str, int]]:
+    """{title: {key: count}} of key usage for a calendar year, from the API.
+
+    Shares fetch_plan_song_items()'s cache with fetch_year_usage(), so calling
+    both for the same year costs no extra API requests.
+    """
+    service_type_id = fetch_service_type_id(SERVICE_TYPE_NAME)
+    plans = fetch_recent_plans(service_type_id, date(year, 1, 1), date(year, 12, 31))
+    counts: dict[str, dict[str, int]] = {}
+    for plan in plans:
+        for title, key_name in fetch_plan_song_keys(service_type_id, plan["id"]):
+            by_key = counts.setdefault(title, {})
+            by_key[key_name] = by_key.get(key_name, 0) + 1
     return counts
 
 
@@ -312,79 +352,136 @@ def load_service_songs(months: int = RECENT_MONTHS_COUNT):
     return month_labels, songs
 
 
-def load_usage_cache() -> dict[int, dict[str, int]]:
-    """Load cached {year: {title: plans}} for completed past years."""
+def load_usage_cache() -> dict[int, dict]:
+    """Load cached {year: {"usage": {title: plans}, "keys": {title: {key: count}}}}
+    for completed past years."""
     if not USAGE_CACHE_FILE.exists():
         return {}
     with USAGE_CACHE_FILE.open(encoding="utf-8") as f:
         raw = json.load(f)
-    return {int(year): counts for year, counts in raw.items()}
+    return {int(year): entry for year, entry in raw.items()}
 
 
-def save_usage_cache(cache: dict[int, dict[str, int]]) -> None:
+def save_usage_cache(cache: dict[int, dict]) -> None:
     with USAGE_CACHE_FILE.open("w", encoding="utf-8") as f:
-        json.dump({str(year): counts for year, counts in cache.items()}, f,
+        json.dump({str(year): entry for year, entry in cache.items()}, f,
                   indent=2, sort_keys=True)
 
 
-def ensure_year_cache(current_year: int) -> dict[int, dict[str, int]]:
+def ensure_year_cache(current_year: int) -> dict[int, dict]:
     """Ensure every completed year from EARLIEST_YEAR through current_year - 1
-    is in the on-disk usage cache, fetching any missing ones from the API, and
-    return the full cache."""
+    has {"usage": ..., "keys": ...} in the on-disk cache, fetching whatever is
+    missing from the API, and return the full cache.
+
+    A cache written before the "keys" column existed stores the year's usage
+    dict directly (not wrapped in {"usage": ..., "keys": ...}); that's
+    recognized as a legacy entry, reused as the usage half, and upgraded in
+    place instead of refetching usage that's already on disk.
+    """
     cache = load_usage_cache()
     for year in range(EARLIEST_YEAR, current_year):
-        if year not in cache:
-            print(f"Fetching {year} usage from the API to seed the cache "
+        entry = cache.get(year)
+        legacy_usage = None
+        if entry is not None and not ("usage" in entry and "keys" in entry):
+            legacy_usage, entry = entry, None
+        if entry is None:
+            usage = legacy_usage
+            if usage is None:
+                print(f"Fetching {year} usage from the API to seed the cache "
+                      f"(one-time)...", file=sys.stderr)
+                usage = fetch_year_usage(year)
+            print(f"Fetching {year} keys from the API to seed the cache "
                   f"(one-time)...", file=sys.stderr)
-            cache[year] = fetch_year_usage(year)
+            keys = fetch_year_keys(year)
+            cache[year] = {"usage": usage, "keys": keys}
             save_usage_cache(cache)  # save incrementally in case of interruption
     return cache
 
 
 def discover_reports():
-    """Compute the all-time usage total and the per-year usage columns.
+    """Compute the all-time usage and key totals and the per-year usage columns.
 
-    Returns (all_time_counts, [(year, counts), ...]) with years sorted
-    ascending. Everything comes from the Planning Center API: the all-time
-    total sums every year's Plans counts from EARLIEST_YEAR through the
-    current year, and the yearly columns cover the most recent YEARLY_COLUMNS
-    of those years. Completed past years are cached in USAGE_CACHE_FILE since
-    that data never changes; only the current year is fetched live every run.
+    Returns (all_time_counts, [(year, counts), ...], all_time_keys) with years
+    sorted ascending. Everything comes from the Planning Center API: the
+    all-time total sums every year's Plans counts from EARLIEST_YEAR through
+    the current year, all_time_keys sums each song's {key: count} the same
+    way, and the yearly columns cover the most recent YEARLY_COLUMNS of those
+    years. Completed past years are cached in USAGE_CACHE_FILE since that data
+    never changes; only the current year is fetched live every run.
     """
     current_year = date.today().year
     current_year_counts = fetch_year_usage(current_year)
+    current_year_keys = fetch_year_keys(current_year)
     cache = ensure_year_cache(current_year)
 
     all_time: dict[str, int] = {}
+    all_time_keys: dict[str, dict[str, int]] = {}
     for year in range(EARLIEST_YEAR, current_year):
-        for title, plans in cache[year].items():
+        for title, plans in cache[year]["usage"].items():
             all_time[title] = all_time.get(title, 0) + plans
+        for title, by_key in cache[year]["keys"].items():
+            dest = all_time_keys.setdefault(title, {})
+            for key_name, count in by_key.items():
+                dest[key_name] = dest.get(key_name, 0) + count
     for title, plans in current_year_counts.items():
         all_time[title] = all_time.get(title, 0) + plans
+    for title, by_key in current_year_keys.items():
+        dest = all_time_keys.setdefault(title, {})
+        for key_name, count in by_key.items():
+            dest[key_name] = dest.get(key_name, 0) + count
 
-    yearly = [(year, cache[year])
+    yearly = [(year, cache[year]["usage"])
               for year in range(current_year - YEARLY_COLUMNS + 1, current_year)]
     yearly.append((current_year, current_year_counts))
-    return all_time, yearly
+    return all_time, yearly, all_time_keys
 
 
 # --- Building rows -----------------------------------------------------------
 
-def build_rows(catalog, all_time, yearly):
+def top_keys(by_key: dict[str, int]) -> list[str]:
+    """A song's keys, most-played first (ties broken alphabetically)."""
+    return [key for key, _ in sorted(by_key.items(), key=lambda kv: (-kv[1], kv[0]))]
+
+
+def format_keys_summary(by_key: dict[str, int]) -> str:
+    """" (Key1, Key2)" for a song's top two most-played keys, with a trailing
+    ellipsis if it's been played in more keys than that, or "" if it has no
+    recorded key. Meant to be appended to a title for display."""
+    if not by_key:
+        return ""
+    keys = top_keys(by_key)
+    shown = keys[:2] + (["…"] if len(keys) > 2 else [])
+    return f" ({', '.join(shown)})"
+
+
+def build_rows(catalog, all_time, yearly, all_time_keys):
     """Assemble the table rows.
 
     Each row is a dict with: title, id, all_time, years (list aligned to year
-    order), last_scheduled (date or None).
+    order), last_scheduled (date or None), and title_display (title plus a
+    " (Key1, Key2, ...)" summary of its top played keys, for the Title column).
     """
     rows = []
     for title, info in catalog.items():
         rows.append({
             "title": title,
+            "title_display": title + format_keys_summary(all_time_keys.get(title, {})),
             "id": info["id"],
             "all_time": all_time.get(title, 0),
             "years": [counts.get(title, 0) for _, counts in yearly],
             "last_scheduled": info["last_scheduled"],
         })
+    return rows
+
+
+def build_key_rows(all_time_keys: dict[str, dict[str, int]]) -> list[dict]:
+    """One row per song with a recorded key, sorted alphabetically, listing
+    every key it's been played in with a count (most-used key first)."""
+    rows = []
+    for title in sorted(all_time_keys, key=str.lower):
+        keys_str = ", ".join(f"{key} ({all_time_keys[title][key]})"
+                             for key in top_keys(all_time_keys[title]))
+        rows.append({"title": title, "keys_str": keys_str})
     return rows
 
 
@@ -449,7 +546,7 @@ def make_columns(year_labels, year_indices=None, combined_label=None,
 
     cols = [
         {"label": "Title", "align": "left", "title": True,
-         "get": lambda r: r["title"]},
+         "get": lambda r: r.get("title_display", r["title"])},
         {"label": "AllTime", "align": "right",
          "get": lambda r: str(r["all_time"])},
     ]
@@ -487,6 +584,18 @@ def make_columns(year_labels, year_indices=None, combined_label=None,
         else:  # trailing left-aligned column
             col["x"] = (x if x is not None else numeric_start) + LAST_SCHED_GAP
     return cols
+
+
+def make_key_columns():
+    """Column specs for the SongKeys report: Title, then a wide left-aligned
+    Keys Played column (truncated to the remaining page width)."""
+    keys_x = MARGIN + 2.9 * inch
+    return [
+        {"label": "Title", "align": "left", "title": True, "get": lambda r: r["title"],
+         "x": MARGIN},
+        {"label": "Keys Played (times)", "align": "left", "get": lambda r: r["keys_str"],
+         "x": keys_x, "max_width": PAGE_W - MARGIN - keys_x},
+    ]
 
 
 def draw_page_header(c, subtitle, page_num, prepared_date):
@@ -535,6 +644,8 @@ def draw_row(c, cols, row, y, title_max_width):
         text = col["get"](row)
         if col.get("title"):
             text = truncate_to_width(c, text, title_max_width)
+        elif col.get("max_width") is not None:
+            text = truncate_to_width(c, text, col["max_width"])
         return text
 
     def font(col):
@@ -719,8 +830,8 @@ def render_index(reports: list[dict], prepared_date) -> None:
 
 def main():
     catalog = load_catalog()
-    all_time, yearly = discover_reports()
-    rows = build_rows(catalog, all_time, yearly)
+    all_time, yearly, all_time_keys = discover_reports()
+    rows = build_rows(catalog, all_time, yearly, all_time_keys)
     year_labels = [str(year) for year, _ in yearly]
     prepared_date = date.today()
 
@@ -775,6 +886,7 @@ def main():
         info = catalog.get(s["title"])
         month_rows.append({
             "title": s["title"],
+            "title_display": s["title"] + format_keys_summary(all_time_keys.get(s["title"], {})),
             "all_time": at,
             "years": s["months"],
             "last_scheduled": info["last_scheduled"] if info else None,
@@ -806,7 +918,7 @@ def main():
         footer=f"Total songs: {len(never_played)}"))
 
     # Christmas: the songs excluded from the other reports, most played first.
-    christmas_rows = build_rows(load_catalog(christmas=True), all_time, yearly)
+    christmas_rows = build_rows(load_catalog(christmas=True), all_time, yearly, all_time_keys)
     by_christmas = sorted(christmas_rows,
                           key=lambda r: (-r["all_time"], r["title"].lower()))
     reports.append(render_report(
@@ -827,6 +939,15 @@ def main():
         stale, full_cols, prepared_date,
         footer=f"Total songs: {len(stale)}"))
 
+    # Song Keys: every song with a recorded key, sorted alphabetically, listing
+    # each key it's been played in and how many times, most-used key first.
+    key_rows = build_key_rows(all_time_keys)
+    reports.append(render_report(
+        "SongKeys", "Songs by Key",
+        "Every song with a recorded key, listing each key it's been played in "
+        "and how many times, most-used key first.",
+        key_rows, make_key_columns(), prepared_date))
+
     render_index(reports, prepared_date)
 
     recent_labels = [year_labels[i] for i in indices]
@@ -841,6 +962,7 @@ def main():
     print(f"  Christmas ({len(by_christmas)} songs)")
     print(f"  NotPlayed4Years ({len(stale)} songs, "
           f"last scheduled before {cutoff:%Y-%m-%d})")
+    print(f"  SongKeys ({len(key_rows)} songs)")
     print(f"Year columns: {', '.join(year_labels)}")
 
 

@@ -1,0 +1,110 @@
+# song_stats
+
+Generates song-usage reports for Creekside's Sunday Morning Worship Services from
+Planning Center data. See [song_stats.py](song_stats.py)'s module docstring for the
+full list of reports and how they're built; [all_time_ranking.py](all_time_ranking.py)
+is a separate, simpler all-time-usage ranking script. Weekly song suggestions (see
+below) are saved as JSON under `song_sets/`; [render_song_sets.py](render_song_sets.py)
+turns one of those JSON files into an HTML page and a PDF.
+
+## Suggesting songs for upcoming weeks
+
+When asked to suggest songs (e.g. "suggest 5 songs for the next few weeks"):
+
+1. Regenerate the reports first (`python song_stats.py`) so the suggestions reflect
+   current data, unless the user says the existing `_site/`/`output/` reports are
+   fresh enough.
+2. Pull candidates primarily from `_site/RecentMonths.json` and
+   `_site/ByRecentUsage.json` — these show what the congregation currently knows.
+   Cross-check `_site/SongKeys.json` for each candidate's usual key(s).
+3. Forced inclusions: check for `include_songs.txt` in the project root (same
+   one-title-per-line format as `exclude_songs.txt`; blank lines and lines
+   starting with `#` are ignored). Every title listed there must appear
+   exactly once somewhere across the 4 weeks being generated — period. This
+   overrides the normal recency-based selection and, for that one occurrence,
+   the 8-week no-repeat rule in step 4 below (a forced song may legitimately
+   land less than 8 weeks after its last outing). It does not override the
+   3-30 all-time play range or `exclude_songs.txt`: if a title is on both
+   `include_songs.txt` and `exclude_songs.txt`, or falls outside 3-30 plays,
+   skip it and flag the conflict to the user instead of forcing it in. Place
+   each forced song in whichever week fits it best (thematically, or by
+   oldness balance), never more than once across the set, then fill the
+   remaining slots using the normal process below.
+4. Hard constraints — never violate these:
+   - Exclude any song with an all-time play count under 3 or over 30 (check
+     the `all_time` field in `ByAllTime.json`/`ByRecentUsage.json` or sum
+     `usage_cache.json`) — the eligible range is 3-30 plays, inclusive.
+   - Exclude any song scheduled within the last 8 weeks — check `last_scheduled`
+     (or `RecentMonths.json`) against the target date and skip anything inside
+     that 8-week window, so no song repeats more often than every 8 weeks.
+     (Forced inclusions from step 3 are exempt from this one rule.)
+   - Exclude any song (by title) listed in `exclude_songs.txt` (one title per
+     line; blank lines and lines starting with `#` are ignored). Check this list
+     before suggesting.
+5. Apply these defaults unless the user says otherwise:
+   - Favor songs with solid recent usage (played multiple times in the last 6
+     months) over songs never played or not played in years — the goal is songs
+     the congregation can sing confidently, not novelty.
+   - Occasionally include one under-used or new-to-rotation song (rows with
+     `"new": true` in `ByRecentUsage.json`, still subject to the 3-30 all-time
+     range above — so not from `NeverPlayed.json`, which is all below that
+     floor) if the user wants variety, but call it out explicitly as a
+     "stretch" pick rather than mixing it in silently.
+   - Skip Christmas songs (`Christmas.json`) unless the target date is in the
+     Christmas season.
+   - Note each suggested song's most-played key(s) from `SongKeys.json`'s
+     `keys` list (most-played first) so the suggestion is immediately usable
+     for planning.
+6. Present exactly 5 songs (unless asked for a different number), each with:
+   title, all-time/recent play count, most-played key, and a one-line reason it
+   fits (e.g. "known but not recently played" / "congregation favorite").
+7. Save the suggestion as JSON to `song_sets/<today's date, YYYY-MM-DD>.json`
+   (creating the `song_sets/` directory if needed), shaped as:
+   ```json
+   {
+     "generated_date": "YYYY-MM-DD",
+     "prepared_by": "Kent James",
+     "sets": [
+       {
+         "date": "YYYY-MM-DD",
+         "oldness_score": 73,
+         "theme": null,
+         "songs": [
+           {"title": "...", "all_time": 3, "recent_6mo": 3, "keys": "G, Bb",
+            "last_scheduled": "YYYY-MM-DD", "reason": "...", "stretch": false}
+         ]
+       }
+     ]
+   }
+   ```
+   One entry in `sets` per week presented, in the same order shown to the user.
+   `last_scheduled` is each song's `last_scheduled` value from the source
+   report (`RecentMonths.json`/`ByRecentUsage.json`), not the target date.
+   `theme` is the user's requested theme/topic for that week if any, else null.
+   `stretch` is true only for the explicit "stretch" pick called out in step 5.
+   After saving, mention that `python render_song_sets.py song_sets/<file>.json`
+   will turn it into a shareable HTML page and PDF (in `_site/` and `output/`)
+   — run it only if the user asks for those.
+8. If the user gives a theme, sermon topic, or season, prioritize thematically
+   fitting songs among the eligible candidates over pure usage stats. Each
+   catalog song has a free-text "Themes" tag list from Planning Center (not
+   shown in any report or cached in `usage_cache.json`) — fetch it live via
+   `fetch_songs()` in `song_stats.py` (e.g. `python -c "from song_stats import
+   fetch_songs; ..."`) and match candidates' `themes` attribute against the
+   requested topic. Tagging is inconsistent (some songs have rich curated lists,
+   others one word, some typos) — use it to narrow/prioritize, not as a hard
+   filter, and don't assume a song lacking a matching tag is actually off-topic.
+
+## Set "oldness" heuristic
+
+For a proposed set of 5 songs, sum each song's all-time play count (the same
+`all_time` field used in the hard constraint above). That sum is the set's
+"oldness" score — lower means a fresher/newer-feeling set, higher means a more
+familiar/well-known set. Keep each week's oldness score between 30 and 120,
+but treat that as the outer bound, not the target: aim for something close to
+68, and lean toward more lesser-known/fresher songs rather than defaulting to
+the most familiar ones whenever the mix allows it. Mention the computed score
+when presenting the set.
+
+Don't fabricate play counts or dates — read them from the generated reports or
+`usage_cache.json`, don't estimate.

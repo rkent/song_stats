@@ -2,7 +2,8 @@
 """Generate song-usage statistics PDFs from Planning Center data.
 
 Reads everything from the Planning Center Services API (no data files) and
-produces these PDFs in output/:
+produces these reports in output/ (PDF) and _site/ (HTML plus a JSON version of
+each report, easier to consume programmatically than scraping the HTML):
 
   * ByTitle.pdf       - every (non-Christmas) song, sorted alphabetically
   * ByAllTime.pdf     - the same songs, sorted by all-time play count (desc)
@@ -479,9 +480,10 @@ def build_key_rows(all_time_keys: dict[str, dict[str, int]]) -> list[dict]:
     every key it's been played in with a count (most-used key first)."""
     rows = []
     for title in sorted(all_time_keys, key=str.lower):
-        keys_str = ", ".join(f"{key} ({all_time_keys[title][key]})"
-                             for key in top_keys(all_time_keys[title]))
-        rows.append({"title": title, "keys_str": keys_str})
+        keys = [{"key": key, "count": all_time_keys[title][key]}
+                for key in top_keys(all_time_keys[title])]
+        keys_str = ", ".join(f"{k['key']} ({k['count']})" for k in keys)
+        rows.append({"title": title, "keys_str": keys_str, "keys": keys})
     return rows
 
 
@@ -527,8 +529,11 @@ def make_columns(year_labels, year_indices=None, combined_label=None,
     """Build the column specs for a report.
 
     Each spec is a dict with: label, align, get(row)->str, and (for the title) a
-    title flag. Columns are always Title, AllTime, the selected year columns, an
-    optional combined column, then Last Scheduled.
+    title flag. Also included: key, a short machine-readable field name, and
+    json(row)->value, returning the column's data in its natural type (int,
+    ISO date string, or None) rather than get()'s display-formatted string;
+    both are used by render_json(). Columns are always Title, AllTime, the
+    selected year columns, an optional combined column, then Last Scheduled.
 
     year_indices selects which entries of row["years"] to show (default: all);
     pass [] to show no year columns.
@@ -545,23 +550,30 @@ def make_columns(year_labels, year_indices=None, combined_label=None,
         year_indices = list(range(len(year_labels)))
 
     cols = [
-        {"label": "Title", "align": "left", "title": True,
-         "get": lambda r: r.get("title_display", r["title"])},
-        {"label": "AllTime", "align": "right",
-         "get": lambda r: str(r["all_time"])},
+        {"label": "Title", "align": "left", "title": True, "key": "title",
+         "get": lambda r: r.get("title_display", r["title"]),
+         "json": lambda r: r["title"]},
+        {"label": "AllTime", "align": "right", "key": "all_time",
+         "get": lambda r: str(r["all_time"]),
+         "json": lambda r: r["all_time"]},
     ]
     if id_column:
-        cols.append({"label": "Id", "align": "right",
-                     "get": lambda r: str(r["id"]) if r.get("id") is not None else ""})
+        cols.append({"label": "Id", "align": "right", "key": "id",
+                     "get": lambda r: str(r["id"]) if r.get("id") is not None else "",
+                     "json": lambda r: r.get("id")})
     for i in year_indices:
-        cols.append({"label": year_labels[i], "align": "right",
-                     "get": (lambda r, i=i: str(r["years"][i]))})
+        cols.append({"label": year_labels[i], "align": "right", "key": year_labels[i],
+                     "get": (lambda r, i=i: str(r["years"][i])),
+                     "json": (lambda r, i=i: r["years"][i])})
     if combined_label:
-        cols.append({"label": combined_label, "align": "right",
-                     "get": (lambda r: str(sum(r["years"][i] for i in year_indices)))})
-    cols.append({"label": "Last Scheduled", "align": "left",
+        cols.append({"label": combined_label, "align": "right", "key": combined_label.lower(),
+                     "get": (lambda r: str(sum(r["years"][i] for i in year_indices))),
+                     "json": (lambda r: sum(r["years"][i] for i in year_indices))})
+    cols.append({"label": "Last Scheduled", "align": "left", "key": "last_scheduled",
                  "get": lambda r: (f"{r['last_scheduled']:%Y-%m-%d}"
-                                   if r["last_scheduled"] else "")})
+                                   if r["last_scheduled"] else ""),
+                 "json": lambda r: (r["last_scheduled"].isoformat()
+                                    if r["last_scheduled"] else None)})
 
     # Where the first numeric column sits. By default it is a fixed distance from
     # the left margin; with fill_title we instead push the whole numeric block to
@@ -591,9 +603,10 @@ def make_key_columns():
     Keys Played column (truncated to the remaining page width)."""
     keys_x = MARGIN + 2.9 * inch
     return [
-        {"label": "Title", "align": "left", "title": True, "get": lambda r: r["title"],
-         "x": MARGIN},
-        {"label": "Keys Played (times)", "align": "left", "get": lambda r: r["keys_str"],
+        {"label": "Title", "align": "left", "title": True, "key": "title",
+         "get": lambda r: r["title"], "json": lambda r: r["title"], "x": MARGIN},
+        {"label": "Keys Played (times)", "align": "left", "key": "keys",
+         "get": lambda r: r["keys_str"], "json": lambda r: r["keys"],
          "x": keys_x, "max_width": PAGE_W - MARGIN - keys_x},
     ]
 
@@ -723,8 +736,19 @@ ul.reports {
 .card .count { color: #767676; font-size: 0.85rem; }
 a { color: #0645ad; text-decoration: none; }
 a:hover { text-decoration: underline; }
+.song-sets-card {
+  border: 1px solid #a15c00; border-radius: 8px; padding: 1rem;
+  margin-top: 1.5rem;
+}
+.song-sets-card h2 { margin: 0 0 0.4rem; font-size: 1.05rem; }
+.song-sets-card .ai-disclaimer {
+  font-style: italic; color: #a15c00; margin: 0.3rem 0; font-size: 0.9rem;
+}
+.song-sets-card .count { color: #767676; font-size: 0.85rem; margin: 0.3rem 0 0; }
 @media (prefers-color-scheme: dark) {
   a { color: #8ab4f8; }
+  .song-sets-card { border-color: #e0a94a; }
+  .song-sets-card .ai-disclaimer { color: #e0a94a; }
 }
 """
 
@@ -785,17 +809,50 @@ def render_html(path: Path, subtitle: str, rows, cols, prepared_date, footer=Non
 """, encoding="utf-8")
 
 
+def render_json(path: Path, subtitle: str, rows, cols, prepared_date, footer=None) -> None:
+    """Render one report as JSON: {title, prepared_by, prepared_date, footer,
+    rows: [{col.key: col.json(row), ...}, ...]}.
+
+    Each column contributes its value under col["key"] using col["json"] (falls
+    back to col["get"]'s display string if a column has no "json"). A row whose
+    title was bold in the PDF/HTML (a song new to the congregation within the
+    report's period) gets an added "new": true.
+    """
+    footer_lines = ([footer] if isinstance(footer, str) else footer) if footer else []
+
+    def row_json(row):
+        d = {col["key"]: col.get("json", col["get"])(row) for col in cols}
+        if row.get("bold_title"):
+            d["new"] = True
+        return d
+
+    data = {
+        "title": subtitle,
+        "prepared_by": PREPARED_BY,
+        "prepared_date": prepared_date.isoformat(),
+        "footer": footer_lines,
+        "count": len(rows),
+        "rows": [row_json(row) for row in rows],
+    }
+    path.write_text(json.dumps(data, indent=2), encoding="utf-8")
+
+
 def render_report(name: str, subtitle: str, description: str, rows, cols, prepared_date,
                   footer=None) -> dict:
-    """Render one report as both a PDF (in OUT_DIR) and an HTML page (in
+    """Render one report as a PDF (in OUT_DIR), and as HTML and JSON pages (in
     SITE_DIR), and return the metadata the home page needs to link to it."""
     render_pdf(OUT_DIR / f"{name}.pdf", subtitle, rows, cols, prepared_date, footer=footer)
     render_html(SITE_DIR / f"{name}.html", subtitle, rows, cols, prepared_date, footer=footer)
+    render_json(SITE_DIR / f"{name}.json", subtitle, rows, cols, prepared_date, footer=footer)
     return {"name": name, "title": subtitle, "description": description, "count": len(rows)}
 
 
-def render_index(reports: list[dict], prepared_date) -> None:
-    """Render the _site/index.html home page linking to each report."""
+def render_index(reports: list[dict], prepared_date, song_set_summary: dict | None = None) -> None:
+    """Render the _site/index.html home page linking to each report.
+
+    song_set_summary, if given, is {name, generated_date, n_weeks} for the most
+    recently generated song_sets/*.json (see render_song_sets.py); it's shown
+    as a callout above the report grid, clearly marked as AI-generated."""
     cards = "".join(f"""\
 <li class="card">
 <h2><a href="{r['name']}.html">{html.escape(r['title'])}</a></h2>
@@ -803,6 +860,18 @@ def render_index(reports: list[dict], prepared_date) -> None:
 <p class="count">{r['count']} songs</p>
 </li>
 """ for r in reports)
+
+    song_sets_html = ""
+    if song_set_summary:
+        song_sets_html = f"""\
+<section class="song-sets-card">
+<h2><a href="{song_set_summary['name']}.html">Suggested Song Sets</a></h2>
+<p class="ai-disclaimer">AI-generated: recommended song sets for upcoming
+Sundays, not a usage report.</p>
+<p class="count">{song_set_summary['n_weeks']} weeks &middot;
+generated {html.escape(song_set_summary['generated_date'])}</p>
+</section>
+"""
 
     (SITE_DIR / "index.html").write_text(f"""\
 <!doctype html>
@@ -821,6 +890,7 @@ def render_index(reports: list[dict], prepared_date) -> None:
 <ul class="reports">
 {cards}
 </ul>
+{song_sets_html}
 </body>
 </html>
 """, encoding="utf-8")
@@ -948,10 +1018,32 @@ def main():
         "and how many times, most-used key first.",
         key_rows, make_key_columns(), prepared_date))
 
-    render_index(reports, prepared_date)
+    # Suggested Song Sets: the most recently generated song_sets/*.json (see
+    # CLAUDE.md's "Suggesting songs for upcoming weeks" and
+    # render_song_sets.py), rendered and surfaced on the home page as an
+    # AI-generated callout. Imported lazily to avoid a circular import
+    # (render_song_sets imports OUT_DIR/SITE_DIR/STYLE_CSS from this module).
+    song_set_summary = None
+    import render_song_sets
+    try:
+        sets_path = render_song_sets.latest_set_file()
+    except SystemExit:
+        sets_path = None
+    if sets_path:
+        sets_data = render_song_sets.load_sets(sets_path)
+        stem = f"SongSets-{sets_data.get('generated_date', sets_path.stem)}"
+        render_song_sets.render_pdf(OUT_DIR / f"{stem}.pdf", sets_data)
+        render_song_sets.render_html(SITE_DIR / f"{stem}.html", sets_data)
+        song_set_summary = {
+            "name": stem,
+            "generated_date": sets_data.get("generated_date", ""),
+            "n_weeks": len(sets_data.get("sets", [])),
+        }
+
+    render_index(reports, prepared_date, song_set_summary)
 
     recent_labels = [year_labels[i] for i in indices]
-    print(f"Wrote {len(rows)} songs to {OUT_DIR}/*.pdf and {SITE_DIR}/*.html:")
+    print(f"Wrote {len(rows)} songs to {OUT_DIR}/*.pdf and {SITE_DIR}/*.html,*.json:")
     print("  ByTitle")
     print("  ByAllTime")
     print(f"  ByRecentUsage ({len(by_recent)} songs, "
@@ -964,6 +1056,9 @@ def main():
           f"last scheduled before {cutoff:%Y-%m-%d})")
     print(f"  SongKeys ({len(key_rows)} songs)")
     print(f"Year columns: {', '.join(year_labels)}")
+    if song_set_summary:
+        print(f"  SongSets ({song_set_summary['n_weeks']} weeks, "
+              f"generated {song_set_summary['generated_date']})")
 
 
 if __name__ == "__main__":

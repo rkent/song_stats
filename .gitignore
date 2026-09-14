@@ -3,3 +3,4 @@ __pycache__/
 usage_cache.json
 output/
 _site/
+venv

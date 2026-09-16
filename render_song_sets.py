@@ -41,7 +41,7 @@ from reportlab.lib.pagesizes import letter
 from reportlab.lib.units import inch
 from reportlab.pdfgen import canvas
 
-from song_stats import OUT_DIR, SITE_DIR, STYLE_CSS
+from song_stats import OUT_DIR, SITE_DIR, STYLE_CSS, load_catalog, song_url
 
 ROOT = Path(__file__).resolve().parent
 SETS_DIR = ROOT / "song_sets"
@@ -73,6 +73,17 @@ def latest_set_file() -> Path:
 def load_sets(path: Path) -> dict:
     with path.open(encoding="utf-8") as f:
         return json.load(f)
+
+
+def load_song_id_map() -> dict[str, int]:
+    """{title: Planning Center song id}, across both non-Christmas and
+    Christmas catalogs, for linking song titles to Planning Center."""
+    ids = {}
+    for catalog in (load_catalog(), load_catalog(christmas=True)):
+        for title, info in catalog.items():
+            if info["id"] is not None:
+                ids[title] = info["id"]
+    return ids
 
 
 def song_detail_line(song: dict) -> str:
@@ -178,6 +189,7 @@ ol.songs li { margin-bottom: 0.5rem; }
 def render_html(path: Path, data: dict) -> None:
     prepared_by = data.get("prepared_by", "")
     generated_date = data.get("generated_date", "")
+    song_ids = load_song_id_map()
 
     weeks_html = []
     for wk in data.get("sets", []):
@@ -187,8 +199,11 @@ def render_html(path: Path, data: dict) -> None:
                       if song.get("stretch") else "")
             detail = song_detail_line(song)
             detail_html = f'<div class="song-detail">{html.escape(detail)}</div>' if detail else ""
+            title = html.escape(song.get("title", ""))
+            url = song_url(song_ids.get(song.get("title")))
+            title_html = f'<a href="{html.escape(url)}">{title}</a>' if url else title
             songs_html.append(f"""\
-<li><span class="song-title">{html.escape(song.get("title", ""))}</span>{stretch}
+<li><span class="song-title">{title_html}</span>{stretch}
 {detail_html}</li>""")
 
         score = wk.get("oldness_score")

@@ -85,6 +85,8 @@ SITE_DIR = ROOT / "_site"
 PREPARED_BY = "Kent James"
 
 PCO_API_BASE = "https://api.planningcenteronline.com/services/v2"
+# Planning Center's song-viewer URL (not part of the API), for linking titles.
+PCO_SONG_URL_BASE = "https://services.planningcenteronline.com/songs"
 # The Planning Center service type whose plans feed the Recent Months report.
 SERVICE_TYPE_NAME = "Sunday Morning Worship Services"
 # Recent Months covers the current (partial) month plus this many preceding
@@ -111,6 +113,11 @@ CHRISTMAS_SECONDARY = {
 # A "Christmas"-tagged song with more themes than this, and no secondary
 # Christmas theme, is treated as a worship song that merely carries a stray tag.
 MAX_UNRELATED_THEMES = 9
+
+
+def song_url(song_id: int | None) -> str | None:
+    """The Planning Center song-viewer URL for a song id, or None if unknown."""
+    return f"{PCO_SONG_URL_BASE}/{song_id}/" if song_id is not None else None
 
 
 def is_christmas(themes: str) -> bool:
@@ -475,7 +482,7 @@ def build_rows(catalog, all_time, yearly, all_time_keys):
     return rows
 
 
-def build_key_rows(all_time_keys: dict[str, dict[str, int]]) -> list[dict]:
+def build_key_rows(all_time_keys: dict[str, dict[str, int]], catalog: dict) -> list[dict]:
     """One row per song with a recorded key, sorted alphabetically, listing
     every key it's been played in with a count (most-used key first)."""
     rows = []
@@ -483,7 +490,9 @@ def build_key_rows(all_time_keys: dict[str, dict[str, int]]) -> list[dict]:
         keys = [{"key": key, "count": all_time_keys[title][key]}
                 for key in top_keys(all_time_keys[title])]
         keys_str = ", ".join(f"{k['key']} ({k['count']})" for k in keys)
-        rows.append({"title": title, "keys_str": keys_str, "keys": keys})
+        info = catalog.get(title)
+        rows.append({"title": title, "keys_str": keys_str, "keys": keys,
+                     "id": info["id"] if info else None})
     return rows
 
 
@@ -761,6 +770,10 @@ def render_html(path: Path, subtitle: str, rows, cols, prepared_date, footer=Non
         text = html.escape(str(col["get"](row)))
         if col.get("title") and row.get("bold_title"):
             text = f"<strong>{text}</strong>"
+        if col.get("title"):
+            url = song_url(row.get("id"))
+            if url:
+                text = f'<a href="{html.escape(url)}">{text}</a>'
         return text
 
     thead = "".join(
@@ -960,6 +973,7 @@ def main():
             "all_time": at,
             "years": s["months"],
             "last_scheduled": info["last_scheduled"] if info else None,
+            "id": info["id"] if info else None,
             # "New" songs: every all-time play happened within the recent months.
             "bold_title": at == sum(s["months"]),
         })
@@ -1011,7 +1025,7 @@ def main():
 
     # Song Keys: every song with a recorded key, sorted alphabetically, listing
     # each key it's been played in and how many times, most-used key first.
-    key_rows = build_key_rows(all_time_keys)
+    key_rows = build_key_rows(all_time_keys, catalog)
     reports.append(render_report(
         "SongKeys", "Songs by Key",
         "Every song with a recorded key, listing each key it's been played in "

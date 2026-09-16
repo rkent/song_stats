@@ -14,10 +14,24 @@ When asked to suggest songs (e.g. "suggest 5 songs for the next few weeks"):
 1. Regenerate the reports first (`python song_stats.py`) so the suggestions reflect
    current data, unless the user says the existing `_site/`/`output/` reports are
    fresh enough.
-2. Pull candidates primarily from `_site/RecentMonths.json` and
+2. Determine the starting Sunday: find the last upcoming week that already has
+   songs entered in Planning Center, and start the suggestions on the Sunday
+   *after* that one — don't assume "next week" is open. Check live via the API,
+   e.g.:
+   ```python
+   from datetime import date, timedelta
+   from song_stats import fetch_service_type_id, fetch_recent_plans, \
+       fetch_plan_song_items, SERVICE_TYPE_NAME
+   st = fetch_service_type_id(SERVICE_TYPE_NAME)
+   for p in fetch_recent_plans(st, date.today(), date.today() + timedelta(days=90)):
+       d = p["attributes"]["sort_date"][:10]
+       print(d, len(fetch_plan_song_items(st, p["id"])), "songs")
+   ```
+   The first Sunday with 0 songs is where the new suggestions should start.
+3. Pull candidates primarily from `_site/RecentMonths.json` and
    `_site/ByRecentUsage.json` — these show what the congregation currently knows.
    Cross-check `_site/SongKeys.json` for each candidate's usual key(s).
-3. Forced inclusions: check for `include_songs.txt` in the project root (same
+4. Forced inclusions: check for `include_songs.txt` in the project root (same
    one-title-per-line format as `exclude_songs.txt`; blank lines and lines
    starting with `#` are ignored). Every title listed there must appear
    exactly once somewhere across the 4 weeks being generated — period. This
@@ -30,7 +44,7 @@ When asked to suggest songs (e.g. "suggest 5 songs for the next few weeks"):
    each forced song in whichever week fits it best (thematically, or by
    oldness balance), never more than once across the set, then fill the
    remaining slots using the normal process below.
-4. Hard constraints — never violate these:
+5. Hard constraints — never violate these:
    - Exclude any song with an all-time play count under 3 or over 30 (check
      the `all_time` field in `ByAllTime.json`/`ByRecentUsage.json` or sum
      `usage_cache.json`) — the eligible range is 3-30 plays, inclusive.
@@ -41,7 +55,7 @@ When asked to suggest songs (e.g. "suggest 5 songs for the next few weeks"):
    - Exclude any song (by title) listed in `exclude_songs.txt` (one title per
      line; blank lines and lines starting with `#` are ignored). Check this list
      before suggesting.
-5. Apply these defaults unless the user says otherwise:
+6. Apply these defaults unless the user says otherwise:
    - Favor songs with solid recent usage (played multiple times in the last 6
      months) over songs never played or not played in years — the goal is songs
      the congregation can sing confidently, not novelty.
@@ -55,10 +69,10 @@ When asked to suggest songs (e.g. "suggest 5 songs for the next few weeks"):
    - Note each suggested song's most-played key(s) from `SongKeys.json`'s
      `keys` list (most-played first) so the suggestion is immediately usable
      for planning.
-6. Present exactly 5 songs (unless asked for a different number), each with:
+7. Present exactly 5 songs (unless asked for a different number), each with:
    title, all-time/recent play count, most-played key, and a one-line reason it
    fits (e.g. "known but not recently played" / "congregation favorite").
-7. Save the suggestion as JSON to `song_sets/<today's date, YYYY-MM-DD>.json`
+8. Save the suggestion as JSON to `song_sets/<today's date, YYYY-MM-DD>.json`
    (creating the `song_sets/` directory if needed), shaped as:
    ```json
    {
@@ -85,7 +99,7 @@ When asked to suggest songs (e.g. "suggest 5 songs for the next few weeks"):
    After saving, mention that `python render_song_sets.py song_sets/<file>.json`
    will turn it into a shareable HTML page and PDF (in `_site/` and `output/`)
    — run it only if the user asks for those.
-8. If the user gives a theme, sermon topic, or season, prioritize thematically
+9. If the user gives a theme, sermon topic, or season, prioritize thematically
    fitting songs among the eligible candidates over pure usage stats. Each
    catalog song has a free-text "Themes" tag list from Planning Center (not
    shown in any report or cached in `usage_cache.json`) — fetch it live via

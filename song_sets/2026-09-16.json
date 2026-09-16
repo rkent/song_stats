@@ -1,0 +1,54 @@
+{
+  "generated_date": "2026-09-16",
+  "prepared_by": "Kent James",
+  "sets": [
+    {
+      "date": "2026-09-27",
+      "oldness_score": 64,
+      "theme": null,
+      "songs": [
+        {"title": "Thank You Jesus For The Blood", "all_time": 3, "recent_6mo": 3, "keys": "G, Bb", "last_scheduled": "2026-04-19", "reason": "Fresh but consistently used this year", "stretch": false},
+        {"title": "Rest On Us", "all_time": 13, "recent_6mo": 3, "keys": "E, A", "last_scheduled": "2026-06-14", "reason": "Congregation favorite, played multiple times recently", "stretch": false},
+        {"title": "The Lord Will Provide", "all_time": 10, "recent_6mo": 3, "keys": "B, G", "last_scheduled": "2026-07-26", "reason": "Solid recent usage", "stretch": false},
+        {"title": "Raise A Hallelujah", "all_time": 24, "recent_6mo": 2, "keys": "A, Bb", "last_scheduled": "2026-07-05", "reason": "Known favorite, not overused", "stretch": false},
+        {"title": "Gratitude", "all_time": 14, "recent_6mo": 2, "keys": "Bb, B", "last_scheduled": "2026-06-14", "reason": "Solid recent usage", "stretch": false}
+      ]
+    },
+    {
+      "date": "2026-10-04",
+      "oldness_score": 62,
+      "theme": null,
+      "songs": [
+        {"title": "We Praise You", "all_time": 9, "recent_6mo": 4, "keys": "A", "last_scheduled": "2026-08-02", "reason": "Most-used song in the last 6 months", "stretch": false},
+        {"title": "I Thank God", "all_time": 13, "recent_6mo": 3, "keys": "A, Bb", "last_scheduled": "2026-08-09", "reason": "Recently in heavy rotation", "stretch": false},
+        {"title": "House Of The Lord", "all_time": 20, "recent_6mo": 2, "keys": "D, A", "last_scheduled": "2026-06-21", "reason": "Solid, singable, recently active", "stretch": false},
+        {"title": "The Wonderful Cross", "all_time": 12, "recent_6mo": 2, "keys": "D, C", "last_scheduled": "2026-08-02", "reason": "Familiar, singable, not overused", "stretch": false},
+        {"title": "Christ Be All Around Me", "all_time": 8, "recent_6mo": 2, "keys": "B, C", "last_scheduled": "2026-08-09", "reason": "Solid recent usage", "stretch": false}
+      ]
+    },
+    {
+      "date": "2026-10-11",
+      "oldness_score": 58,
+      "theme": null,
+      "songs": [
+        {"title": "Who Else", "all_time": 4, "recent_6mo": 4, "keys": "G, Ab", "last_scheduled": "2026-08-16", "reason": "New to rotation, quickly become a recent favorite", "stretch": true},
+        {"title": "I Speak Jesus", "all_time": 10, "recent_6mo": 2, "keys": "D, C", "last_scheduled": "2026-08-09", "reason": "Solid recent usage", "stretch": false},
+        {"title": "God So Loved", "all_time": 23, "recent_6mo": 2, "keys": "G, A", "last_scheduled": "2026-08-16", "reason": "Well-known, recently active", "stretch": false},
+        {"title": "Here Again", "all_time": 15, "recent_6mo": 1, "keys": "B, C", "last_scheduled": "2026-04-26", "reason": "Forced inclusion from include_songs.txt", "stretch": false},
+        {"title": "Man Of Sorrows", "all_time": 6, "recent_6mo": 1, "keys": "E, D", "last_scheduled": "2026-04-26", "reason": "Lesser-used, fits without overreaching", "stretch": false}
+      ]
+    },
+    {
+      "date": "2026-10-18",
+      "oldness_score": 45,
+      "theme": null,
+      "songs": [
+        {"title": "All Hail King Jesus", "all_time": 9, "recent_6mo": 1, "keys": "E", "last_scheduled": "2026-05-03", "reason": "Known but not overused", "stretch": false},
+        {"title": "Holy Forever", "all_time": 9, "recent_6mo": 1, "keys": "F, Bb", "last_scheduled": "2026-04-19", "reason": "Known but not overused", "stretch": false},
+        {"title": "Simple Kingdom", "all_time": 9, "recent_6mo": 1, "keys": "C, D", "last_scheduled": "2026-04-02", "reason": "Lesser-used, worth reintroducing", "stretch": false},
+        {"title": "Trust In God", "all_time": 9, "recent_6mo": 1, "keys": "A, C", "last_scheduled": "2026-06-07", "reason": "Fresher pick, keeps the set from leaning too familiar", "stretch": false},
+        {"title": "Rising Sun", "all_time": 9, "recent_6mo": 1, "keys": "E, G", "last_scheduled": "2026-04-19", "reason": "Lesser-used, worth reintroducing", "stretch": false}
+      ]
+    }
+  ]
+}

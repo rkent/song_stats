@@ -38,20 +38,28 @@ When asked to suggest songs (e.g. "suggest 5 songs for the next few weeks"):
    overrides the normal recency-based selection and, for that one occurrence,
    the 8-week no-repeat rule in step 4 below (a forced song may legitimately
    land less than 8 weeks after its last outing). It does not override the
-   3-30 all-time play range or `exclude_songs.txt`: if a title is on both
-   `include_songs.txt` and `exclude_songs.txt`, or falls outside 3-30 plays,
-   skip it and flag the conflict to the user instead of forcing it in. Place
-   each forced song in whichever week fits it best (thematically, or by
-   oldness balance), never more than once across the set, then fill the
-   remaining slots using the normal process below.
+   3-30 all-time play range or `exclude_songs.txt` by itself: if a title is on
+   both `include_songs.txt` and `exclude_songs.txt`, or falls outside 3-30
+   plays, skip it and flag the conflict to the user instead of forcing it in.
+   However, if the user explicitly requests a named song, that direct request
+   overrides the 3-30 play-count range and the 8-week recency rule for that
+   song. Include it once, report its actual counts and dates, and label the
+   exception clearly; an explicit request does not override `exclude_songs.txt`
+   unless the user also explicitly asks to use an excluded song. Place each
+   forced song in whichever week fits it best (thematically, or by oldness
+   balance), never more than once across the set, then fill the remaining slots
+   using the normal process below.
 5. Hard constraints — never violate these:
    - Exclude any song with an all-time play count under 3 or over 30 (check
      the `all_time` field in `ByAllTime.json`/`ByRecentUsage.json` or sum
-     `usage_cache.json`) — the eligible range is 3-30 plays, inclusive.
+     `usage_cache.json`) — the eligible range is 3-30 plays, inclusive, unless
+     the user explicitly requested that named song; in that case include it,
+     preserve the actual count, and clearly flag the exception.
    - Exclude any song scheduled within the last 8 weeks — check `last_scheduled`
      (or `RecentMonths.json`) against the target date and skip anything inside
-     that 8-week window, so no song repeats more often than every 8 weeks.
-     (Forced inclusions from step 3 are exempt from this one rule.)
+     that 8-week window, so no song repeats more often than every 8 weeks,
+     unless the user explicitly requested that named song; clearly flag the
+     exception.
    - Exclude any song (by title) listed in `exclude_songs.txt` (one title per
      line; blank lines and lines starting with `#` are ignored). Check this list
      before suggesting.

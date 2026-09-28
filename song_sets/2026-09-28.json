@@ -1,0 +1,54 @@
+{
+  "generated_date": "2026-09-28",
+  "prepared_by": "Kent James",
+  "sets": [
+    {
+      "date": "2026-10-11",
+      "oldness_score": 69,
+      "theme": null,
+      "songs": [
+        {"title": "We Praise You", "all_time": 9, "recent_6mo": 4, "keys": "A", "last_scheduled": "2026-08-02", "reason": "One of the strongest recent songs", "stretch": false},
+        {"title": "I Thank God", "all_time": 13, "recent_6mo": 3, "keys": "A, Bb, G", "last_scheduled": "2026-08-09", "reason": "Recently in steady rotation", "stretch": false},
+        {"title": "Rest On Us", "all_time": 13, "recent_6mo": 3, "keys": "E, A, F, Bb", "last_scheduled": "2026-06-14", "reason": "Congregation favorite with solid recent usage", "stretch": false},
+        {"title": "Gratitude", "all_time": 14, "recent_6mo": 2, "keys": "Bb, B, C, G", "last_scheduled": "2026-06-14", "reason": "Solid recent usage", "stretch": false},
+        {"title": "House Of The Lord", "all_time": 20, "recent_6mo": 2, "keys": "D, A, G, Bb", "last_scheduled": "2026-06-21", "reason": "Solid, singable, recently active", "stretch": false}
+      ]
+    },
+    {
+      "date": "2026-10-18",
+      "oldness_score": 68,
+      "theme": null,
+      "songs": [
+        {"title": "Who Else", "all_time": 4, "recent_6mo": 4, "keys": "G, Ab", "last_scheduled": "2026-08-16", "reason": "Recent favorite with a light rotation history", "stretch": false},
+        {"title": "God So Loved", "all_time": 23, "recent_6mo": 2, "keys": "G, A, Bb", "last_scheduled": "2026-08-16", "reason": "Familiar favorite, recently active", "stretch": false},
+        {"title": "Great Things", "all_time": 26, "recent_6mo": 1, "keys": "G, B, D, A", "last_scheduled": "2026-06-07", "reason": "Well-known anchor with room since its last use", "stretch": false},
+        {"title": "Thank You Jesus For The Blood", "all_time": 3, "recent_6mo": 3, "keys": "G, Bb", "last_scheduled": "2026-04-19", "reason": "Fresh but consistently used this year", "stretch": false},
+        {"title": "King Of Kings", "all_time": 12, "recent_6mo": 1, "keys": "D, G", "last_scheduled": "2026-05-10", "reason": "Known song with room since its last use", "stretch": false}
+      ]
+    },
+    {
+      "date": "2026-10-25",
+      "oldness_score": 69,
+      "theme": null,
+      "songs": [
+        {"title": "All Hail King Jesus", "all_time": 9, "recent_6mo": 1, "keys": "E", "last_scheduled": "2026-05-03", "reason": "Known but not overused", "stretch": false},
+        {"title": "Take My Life", "all_time": 12, "recent_6mo": 1, "keys": "D, Bb, G", "last_scheduled": "2026-04-02", "reason": "Lesser-used song with room in the rotation", "stretch": false},
+        {"title": "Come As You Are", "all_time": 14, "recent_6mo": 1, "keys": "C, G", "last_scheduled": "2026-08-16", "reason": "Recent use with room before a return", "stretch": false},
+        {"title": "Here Again", "all_time": 15, "recent_6mo": 1, "keys": "B, C", "last_scheduled": "2026-04-26", "reason": "Known song that has had room since its last use", "stretch": false},
+        {"title": "Battle Belongs", "all_time": 19, "recent_6mo": 1, "keys": "Bb, C, G", "last_scheduled": "2026-07-05", "reason": "Familiar, energetic anchor", "stretch": false}
+      ]
+    },
+    {
+      "date": "2026-11-08",
+      "oldness_score": 68,
+      "theme": null,
+      "songs": [
+        {"title": "Washed", "all_time": 5, "recent_6mo": 5, "keys": "B, G, E", "last_scheduled": "2026-09-13", "reason": "Consistently used in recent months", "stretch": false},
+        {"title": "Firm Foundation (He Won't)", "all_time": 22, "recent_6mo": 2, "keys": "G, A, Bb, C", "last_scheduled": "2026-09-06", "reason": "Strong familiar anchor", "stretch": false},
+        {"title": "The Blessing", "all_time": 12, "recent_6mo": 3, "keys": "G", "last_scheduled": "2026-09-06", "reason": "Solid recent usage", "stretch": false},
+        {"title": "Living Hope", "all_time": 20, "recent_6mo": 1, "keys": "A, D", "last_scheduled": "2026-05-10", "reason": "Known song with room since its last use", "stretch": false},
+        {"title": "Praise", "all_time": 9, "recent_6mo": 2, "keys": "E", "last_scheduled": "2026-09-06", "reason": "Recent use with a light rotation history", "stretch": false}
+      ]
+    }
+  ]
+}

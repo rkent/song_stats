@@ -41,7 +41,9 @@ from reportlab.lib.pagesizes import letter
 from reportlab.lib.units import inch
 from reportlab.pdfgen import canvas
 
-from song_stats import OUT_DIR, SITE_DIR, STYLE_CSS, load_catalog, song_url
+from song_stats import (
+    OUT_DIR, SITE_DIR, STYLE_CSS, load_catalog, song_url,
+)
 
 ROOT = Path(__file__).resolve().parent
 SETS_DIR = ROOT / "song_sets"

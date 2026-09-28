@@ -7,6 +7,68 @@ is a separate, simpler all-time-usage ranking script. Weekly song suggestions (s
 below) are saved as JSON under `song_sets/`; [render_song_sets.py](render_song_sets.py)
 turns one of those JSON files into an HTML page and a PDF.
 
+## Single-week song candidate list
+
+Use this workflow when the user asks for songs for one upcoming week (e.g.
+"Suggest songs for the next week"). This is a ranked shortlist, not a request
+to prepare four weekly sets; use the next section for requests for multiple
+weeks or sets.
+
+1. Regenerate the reports with `python song_stats.py` unless the user says the
+   existing `_site/`/`output/` reports are fresh enough.
+2. Find the first upcoming Planning Center plan with no song items. Check plans
+   from today forward via the API, ordered by date; choose the earliest plan
+   with zero songs. A later populated plan must not delay the start. If the
+   search window contains no empty plans, extend it until one is found.
+3. Build eligible candidates for that plan using the hard constraints and
+   defaults in the following section, evaluated against this plan's date.
+   Honor `include_songs.txt` as a priority and allow its recency exception, but
+   it does not override the 3-30 all-time range or `exclude_songs.txt`; report
+   any conflict. User-named songs follow the explicit-request exceptions below.
+4. Choose and present a coherent top five as the proposed lineup. Keep its
+   oldness score (sum of the five all-time counts) between 30 and 120, aiming
+   near 68; favor songs with solid usage in the last six months and a balanced
+   mix of familiar and fresher songs. Then list two distinct, eligible
+   alternatives for each proposed song (10 alternatives total), grouped by the
+   proposed song they could replace. Choose options that keep a replacement
+   lineup's score in range and near 68. If hard constraints leave fewer than
+   two alternatives for a proposed song, explain the shortfall rather than
+   relaxing a hard constraint. For each alternative, identify the proposed
+   song it could replace, then give a concise fit-based reason similar to the
+   proposed-song reasons. Do not mention oldness scores or score arithmetic in
+   alternative reasons; use score only to guide selection and ordering.
+5. For every song, include its title, all-time and recent-six-month play
+   counts, most-played key(s), last-scheduled date, and a concise reason it
+   fits. Read the recent-six-month count from `RecentMonths.json`'s `total`
+   field (use 0 if the song is absent); do not use `ByRecentUsage.json`'s
+   `recent` field as a six-month count. Clearly identify the top five as the
+   proposed lineup and the rest as replacements, and include the computed
+   oldness score for the top five.
+6. Save the shortlist, including all alternatives presented, to
+   `song_candidates/<today's date, YYYY-MM-DD>.json` (create the directory if
+   needed). Keep this separate from `song_sets/`, which is reserved for
+   multi-week sets. Use this shape:
+   ```json
+   {
+     "generated_date": "YYYY-MM-DD",
+     "service_date": "YYYY-MM-DD",
+     "oldness_score": 68,
+     "proposed_songs": [
+       {"title": "...", "all_time": 3, "recent_6mo": 3, "keys": "G, Bb",
+        "last_scheduled": "YYYY-MM-DD", "reason": "..."}
+     ],
+     "alternatives": [
+       {"title": "...", "all_time": 3, "recent_6mo": 3, "keys": "G, Bb",
+        "last_scheduled": "YYYY-MM-DD", "reason": "..."}
+     ]
+   }
+   ```
+   Include each proposed song and each alternative shown to the user exactly
+   once in its corresponding array. Don't save this shortlist as a four-week
+   song-set JSON. Then run `python render_song_candidates.py
+   song_candidates/<file>.json` to render the HTML page and add its link to
+   `_site/index.html`.
+
 ## Suggesting songs for upcoming weeks
 
 When asked to suggest songs (e.g. "suggest 5 songs for the next few weeks"):
@@ -14,10 +76,11 @@ When asked to suggest songs (e.g. "suggest 5 songs for the next few weeks"):
 1. Regenerate the reports first (`python song_stats.py`) so the suggestions reflect
    current data, unless the user says the existing `_site/`/`output/` reports are
    fresh enough.
-2. Determine the starting Sunday: find the last upcoming week that already has
-   songs entered in Planning Center, and start the suggestions on the Sunday
-   *after* that one — don't assume "next week" is open. Check live via the API,
-   e.g.:
+2. Find the next four upcoming plans with no songs entered in Planning Center.
+  Start with the first upcoming empty plan, then continue forward, skipping
+  any plans that already have songs until four empty weeks are selected. Do
+  not wait until after the last populated future plan to begin. Check live via
+  the API, e.g.:
    ```python
    from datetime import date, timedelta
    from song_stats import fetch_service_type_id, fetch_recent_plans, \
@@ -27,7 +90,8 @@ When asked to suggest songs (e.g. "suggest 5 songs for the next few weeks"):
        d = p["attributes"]["sort_date"][:10]
        print(d, len(fetch_plan_song_items(st, p["id"])), "songs")
    ```
-   The first Sunday with 0 songs is where the new suggestions should start.
+    For example, if 10/4 has songs, 10/11, 10/18, and 10/25 are empty, and 11/1
+    has songs, suggest 10/11, 10/18, 10/25, and then 11/8 if it is empty.
 3. Pull candidates primarily from `_site/RecentMonths.json` and
    `_site/ByRecentUsage.json` — these show what the congregation currently knows.
    Cross-check `_site/SongKeys.json` for each candidate's usual key(s).

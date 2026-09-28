@@ -860,12 +860,45 @@ def render_report(name: str, subtitle: str, description: str, rows, cols, prepar
     return {"name": name, "title": subtitle, "description": description, "count": len(rows)}
 
 
-def render_index(reports: list[dict], prepared_date, song_set_summary: dict | None = None) -> None:
+def song_candidate_summary_html(candidate_summary: dict) -> str:
+    return f"""\
+<section class="song-candidates-card">
+<h2><a href="{html.escape(candidate_summary['name'])}.html">Next Week Song Suggestions</a></h2>
+<p class="count">Service date {html.escape(candidate_summary['service_date'])}
+&middot; generated {html.escape(candidate_summary['generated_date'])}</p>
+</section>
+"""
+
+
+def update_song_candidate_summary(candidate_summary: dict) -> None:
+    """Update or add the candidate-list callout in an existing home page."""
+    index_path = SITE_DIR / "index.html"
+    if not index_path.exists():
+        return
+
+    content = index_path.read_text(encoding="utf-8")
+    section = song_candidate_summary_html(candidate_summary)
+    start = content.find('<section class="song-candidates-card">')
+    if start >= 0:
+        end_marker = "</section>"
+        end = content.find(end_marker, start)
+        if end < 0:
+            raise ValueError(f"Unclosed song-candidate summary in {index_path}")
+        content = content[:start] + section + content[end + len(end_marker):]
+    else:
+        body_end = content.rfind("</body>")
+        if body_end < 0:
+            raise ValueError(f"No body element found in {index_path}")
+        content = content[:body_end] + section + content[body_end:]
+    index_path.write_text(content, encoding="utf-8")
+
+
+def render_index(reports: list[dict], prepared_date,
+                 candidate_summary: dict | None = None) -> None:
     """Render the _site/index.html home page linking to each report.
 
-    song_set_summary, if given, is {name, generated_date, n_weeks} for the most
-    recently generated song_sets/*.json (see render_song_sets.py); it's shown
-    as a callout above the report grid, clearly marked as AI-generated."""
+    candidate_summary, if given, links to the most recently generated
+    single-week candidate list."""
     cards = "".join(f"""\
 <li class="card">
 <h2><a href="{r['name']}.html">{html.escape(r['title'])}</a></h2>
@@ -874,17 +907,8 @@ def render_index(reports: list[dict], prepared_date, song_set_summary: dict | No
 </li>
 """ for r in reports)
 
-    song_sets_html = ""
-    if song_set_summary:
-        song_sets_html = f"""\
-<section class="song-sets-card">
-<h2><a href="{song_set_summary['name']}.html">Suggested Song Sets</a></h2>
-<p class="ai-disclaimer">AI-generated: recommended song sets for upcoming
-Sundays, not a usage report.</p>
-<p class="count">{song_set_summary['n_weeks']} weeks &middot;
-generated {html.escape(song_set_summary['generated_date'])}</p>
-</section>
-"""
+    song_candidates_html = (song_candidate_summary_html(candidate_summary)
+                            if candidate_summary else "")
 
     (SITE_DIR / "index.html").write_text(f"""\
 <!doctype html>
@@ -903,7 +927,7 @@ generated {html.escape(song_set_summary['generated_date'])}</p>
 <ul class="reports">
 {cards}
 </ul>
-{song_sets_html}
+{song_candidates_html}
 </body>
 </html>
 """, encoding="utf-8")
@@ -1032,12 +1056,7 @@ def main():
         "and how many times, most-used key first.",
         key_rows, make_key_columns(), prepared_date))
 
-    # Suggested Song Sets: the most recently generated song_sets/*.json (see
-    # CLAUDE.md's "Suggesting songs for upcoming weeks" and
-    # render_song_sets.py), rendered and surfaced on the home page as an
-    # AI-generated callout. Imported lazily to avoid a circular import
-    # (render_song_sets imports OUT_DIR/SITE_DIR/STYLE_CSS from this module).
-    song_set_summary = None
+    # Render the latest multi-week song set separately from the home page.
     import render_song_sets
     try:
         sets_path = render_song_sets.latest_set_file()
@@ -1048,13 +1067,17 @@ def main():
         stem = f"SongSets-{sets_data.get('generated_date', sets_path.stem)}"
         render_song_sets.render_pdf(OUT_DIR / f"{stem}.pdf", sets_data)
         render_song_sets.render_html(SITE_DIR / f"{stem}.html", sets_data)
-        song_set_summary = {
-            "name": stem,
-            "generated_date": sets_data.get("generated_date", ""),
-            "n_weeks": len(sets_data.get("sets", [])),
-        }
 
-    render_index(reports, prepared_date, song_set_summary)
+    candidate_summary = None
+    import render_song_candidates
+    candidate_path = render_song_candidates.latest_candidate_file()
+    if candidate_path:
+        candidate_data = json.loads(candidate_path.read_text(encoding="utf-8"))
+        candidate_summary = render_song_candidates.summary(candidate_data, candidate_path)
+        candidate_html = SITE_DIR / f"{candidate_summary['name']}.html"
+        render_song_candidates.render_html(candidate_html, candidate_data)
+
+    render_index(reports, prepared_date, candidate_summary)
 
     recent_labels = [year_labels[i] for i in indices]
     print(f"Wrote {len(rows)} songs to {OUT_DIR}/*.pdf and {SITE_DIR}/*.html,*.json:")
@@ -1070,9 +1093,6 @@ def main():
           f"last scheduled before {cutoff:%Y-%m-%d})")
     print(f"  SongKeys ({len(key_rows)} songs)")
     print(f"Year columns: {', '.join(year_labels)}")
-    if song_set_summary:
-        print(f"  SongSets ({song_set_summary['n_weeks']} weeks, "
-              f"generated {song_set_summary['generated_date']})")
 
 
 if __name__ == "__main__":

@@ -17,6 +17,8 @@ each report, easier to consume programmatically than scraping the HTML):
   * SongKeys.pdf      - every song with a recorded key, sorted alphabetically,
                         listing each key it's been played in and how many
                         times, most-used key first
+  * OldnessScores.html - per-song historical usage and the oldness score for
+                         the 8 most recent service sets
 
 Most rows show the all-time play count, period columns, and the date the song
 was last scheduled.
@@ -287,6 +289,96 @@ def fetch_plan_song_titles(service_type_id: str, plan_id: str) -> frozenset[str]
     """Distinct song titles scheduled in one plan."""
     return frozenset(item["title"]
                      for item in fetch_plan_song_items(service_type_id, plan_id))
+
+
+def plan_service_date(plan: dict) -> date:
+    service_date = parse_scheduled_datetime(
+        plan["attributes"].get("sort_date"))
+    if service_date is None:
+        raise ValueError(f"Plan {plan.get('id')} has no valid sort_date")
+    return service_date
+
+
+def load_recent_song_sets(service_type_id: str, as_of: date,
+                          limit: int = 8) -> list[dict]:
+    """Load the most recent plans with songs, including the next 90 days."""
+    oldest_date = date(EARLIEST_YEAR, 1, 1)
+    search_end = as_of + timedelta(days=90)
+    plans = fetch_recent_plans(service_type_id, oldest_date, search_end)
+    dated_plans = sorted(
+        ((plan_service_date(plan), plan) for plan in plans),
+        key=lambda pair: pair[0],
+        reverse=True,
+    )
+    sets = []
+    for service_date, plan in dated_plans:
+        songs = tuple(dict.fromkeys(
+            item["title"] for item in
+            fetch_plan_song_items(service_type_id, plan["id"])))
+        if songs:
+            sets.append({"service_date": service_date, "songs": songs})
+            if len(sets) == limit:
+                break
+    return sets
+
+
+def calculate_set_oldness(song_sets: list[dict], all_time: dict[str, int],
+                          later_plan_usage: list[tuple[date, frozenset[str]]]
+                          ) -> list[dict]:
+    """Calculate each set's song counts using only plans before its service
+    week. `all_time` includes this year through year end, so later plan uses
+    must be subtracted for each set."""
+    scored_sets = []
+    for song_set in song_sets:
+        service_date = song_set["service_date"]
+        week_start = service_date - timedelta(days=service_date.weekday())
+        songs = []
+        score = 0
+        for title in song_set["songs"]:
+            later_uses = sum(
+                title in plan_songs
+                for plan_date, plan_songs in later_plan_usage
+                if plan_date >= week_start
+            )
+            prior_uses = all_time.get(title, 0) - later_uses
+            if prior_uses < 0:
+                raise ValueError(
+                    f"Later scheduled uses for {title!r} exceed its all-time "
+                    f"count before {service_date}")
+            songs.append({"title": title, "prior_uses": prior_uses})
+            score += prior_uses
+        scored_sets.append({
+            "service_date": service_date,
+            "oldness_score": score,
+            "songs": songs,
+        })
+    return scored_sets
+
+
+def build_recent_set_oldness(all_time: dict[str, int], as_of: date) -> list[dict]:
+    """Build oldness scores for the 8 most recent service plans with songs."""
+    service_type_id = fetch_service_type_id(SERVICE_TYPE_NAME)
+    song_sets = load_recent_song_sets(service_type_id, as_of)
+    if not song_sets:
+        return []
+
+    first_week = min(
+        song_set["service_date"] -
+        timedelta(days=song_set["service_date"].weekday())
+        for song_set in song_sets)
+    through_year_end = date(as_of.year, 12, 31)
+    later_plan_usage = []
+    if first_week <= through_year_end:
+        later_plans = fetch_recent_plans(
+            service_type_id, first_week, through_year_end)
+        for plan in later_plans:
+            service_date = plan_service_date(plan)
+            if first_week <= service_date <= through_year_end:
+                later_plan_usage.append((
+                    service_date,
+                    fetch_plan_song_titles(service_type_id, plan["id"]),
+                ))
+    return calculate_set_oldness(song_sets, all_time, later_plan_usage)
 
 
 def fetch_plan_song_keys(service_type_id: str, plan_id: str) -> list[tuple[str, str]]:
@@ -752,6 +844,8 @@ a:hover { text-decoration: underline; }
 .candidate-heart:hover, .candidate-heart:focus-visible {
   opacity: 0.8; text-decoration: none;
 }
+.oldness-set { margin-top: 2rem; }
+.oldness-score { font-size: 1.1rem; font-weight: bold; }
 .song-sets-card {
   border: 1px solid #a15c00; border-radius: 8px; padding: 1rem;
   margin-top: 1.5rem;
@@ -868,13 +962,57 @@ def render_report(name: str, subtitle: str, description: str, rows, cols, prepar
     return {"name": name, "title": subtitle, "description": description, "count": len(rows)}
 
 
+def render_oldness_report(path: Path, scored_sets: list[dict], prepared_date: date) -> None:
+    sections = []
+    for song_set in scored_sets:
+        rows = "".join(
+            f"<tr><td>{html.escape(song['title'])}</td>"
+            f'<td class="num">{song["prior_uses"]}</td></tr>'
+            for song in song_set["songs"]
+        )
+        sections.append(f"""\
+<section class="oldness-set">
+<h2>{song_set['service_date']:%Y-%m-%d}</h2>
+<p class="oldness-score">Oldness score: {song_set['oldness_score']}</p>
+<table>
+<thead><tr><th>Song</th><th class="num">Uses before this set week</th></tr></thead>
+<tbody>{rows}</tbody>
+</table>
+</section>""")
+    sets_html = "".join(sections) or "<p>No scheduled song sets found.</p>"
+
+    path.write_text(f"""\
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Recent Set Oldness Scores</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+<h1>Recent Set Oldness Scores</h1>
+<p class="meta">Prepared by {html.escape(PREPARED_BY)} &middot; {prepared_date:%-m/%-d/%Y}
+&middot; <a href="index.html">Home</a></p>
+</header>
+<p>Populated plans through the next 90 days are eligible. Each song's count
+includes Sunday Morning Worship plans before the Monday that set's week began.
+Uses from that week onward are excluded. The set's oldness score is the sum of
+the listed counts.</p>
+{sets_html}
+</body>
+</html>
+""", encoding="utf-8")
+
+
 def render_index(reports: list[dict], prepared_date) -> None:
     """Render the docs/index.html home page linking to each report."""
     cards = "".join(f"""\
 <li class="card">
 <h2><a href="{r['name']}.html">{html.escape(r['title'])}</a></h2>
 <p>{html.escape(r['description'])}</p>
-<p class="count">{r['count']} songs</p>
+<p class="count">{r['count']} {r.get('count_unit', 'songs')}</p>
 </li>
 """ for r in reports)
 
@@ -1025,6 +1163,16 @@ def main():
         "and how many times, most-used key first.",
         key_rows, make_key_columns(), prepared_date))
 
+    oldness_sets = build_recent_set_oldness(all_time, prepared_date)
+    render_oldness_report(SITE_DIR / "OldnessScores.html", oldness_sets, prepared_date)
+    reports.append({
+        "name": "OldnessScores",
+        "title": "Recent Set Oldness Scores",
+        "description": "Historical song usage and oldness scores for the most recent service sets.",
+        "count": len(oldness_sets),
+        "count_unit": "sets",
+    })
+
     candidate_summary = None
     import render_song_candidates
     candidate_path = render_song_candidates.latest_candidate_file()
@@ -1042,6 +1190,7 @@ def main():
     print("  ByAllTime")
     print(f"  ByRecentUsage ({len(by_recent)} songs, "
           f"recent years: {', '.join(recent_labels)})")
+    print(f"  OldnessScores ({len(oldness_sets)} sets)")
     print(f"  RecentMonths ({len(by_month)} songs, "
           f"months: {', '.join(month_labels)})")
     print(f"  NeverPlayed ({len(never_played)} songs)")

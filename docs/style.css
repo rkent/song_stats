@@ -28,6 +28,8 @@ a:hover { text-decoration: underline; }
 .candidate-heart:hover, .candidate-heart:focus-visible {
   opacity: 0.8; text-decoration: none;
 }
+.oldness-set { margin-top: 2rem; }
+.oldness-score { font-size: 1.1rem; font-weight: bold; }
 .song-sets-card {
   border: 1px solid #a15c00; border-radius: 8px; padding: 1rem;
   margin-top: 1.5rem;

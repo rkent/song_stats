@@ -1,12 +1,21 @@
 name: Update song stats
 
 on:
+  push:
+    branches: [main]
   workflow_dispatch:
   schedule:
     - cron: "0 10 * * *"
 
 permissions:
   contents: write
+  pages: write
+  id-token: write
+
+# Don't let a push and the daily run race each other on gh-pages.
+concurrency:
+  group: song-stats
+  cancel-in-progress: false
 
 jobs:
   update:
@@ -45,3 +54,26 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_branch: gh-pages
           publish_dir: ./docs
+
+  deploy:
+    # Runs only after the update job has pushed to gh-pages, and deploys
+    # exactly what's on that branch.
+    needs: update
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Check out gh-pages
+        uses: actions/checkout@v4
+        with:
+          ref: gh-pages
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

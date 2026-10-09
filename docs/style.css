@@ -21,6 +21,13 @@ ul.reports {
 .card .count { color: #767676; font-size: 0.85rem; }
 a { color: #0645ad; text-decoration: none; }
 a:hover { text-decoration: underline; }
+.candidate-heart {
+  color: #c62828; font-size: 0.8em; margin-left: 0.2rem;
+  text-decoration: none;
+}
+.candidate-heart:hover, .candidate-heart:focus-visible {
+  opacity: 0.8; text-decoration: none;
+}
 .song-sets-card {
   border: 1px solid #a15c00; border-radius: 8px; padding: 1rem;
   margin-top: 1.5rem;
@@ -32,6 +39,7 @@ a:hover { text-decoration: underline; }
 .song-sets-card .count { color: #767676; font-size: 0.85rem; margin: 0.3rem 0 0; }
 @media (prefers-color-scheme: dark) {
   a { color: #8ab4f8; }
+  .candidate-heart { color: #ff6b6b; }
   .song-sets-card { border-color: #e0a94a; }
   .song-sets-card .ai-disclaimer { color: #e0a94a; }
 }

@@ -1,0 +1,37 @@
+:root { color-scheme: light dark; }
+body {
+  font-family: -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+  max-width: 900px; margin: 2rem auto; padding: 0 1rem;
+}
+header { margin-bottom: 1.5rem; }
+h1 { margin-bottom: 0.25rem; }
+.meta { color: #767676; font-size: 0.9rem; }
+table { border-collapse: collapse; width: 100%; font-size: 0.9rem; }
+th, td { padding: 0.35rem 0.6rem; border-bottom: 1px solid #ccc; text-align: left; }
+th.num, td.num { text-align: right; }
+thead th { border-bottom: 2px solid; }
+.footer-note { font-weight: bold; margin-top: 1rem; }
+ul.reports {
+  list-style: none; padding: 0; display: grid; gap: 1rem;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+}
+.card { border: 1px solid #ccc; border-radius: 8px; padding: 1rem; }
+.card h2 { margin: 0 0 0.4rem; font-size: 1.05rem; }
+.card p { margin: 0.3rem 0 0; }
+.card .count { color: #767676; font-size: 0.85rem; }
+a { color: #0645ad; text-decoration: none; }
+a:hover { text-decoration: underline; }
+.song-sets-card {
+  border: 1px solid #a15c00; border-radius: 8px; padding: 1rem;
+  margin-top: 1.5rem;
+}
+.song-sets-card h2 { margin: 0 0 0.4rem; font-size: 1.05rem; }
+.song-sets-card .ai-disclaimer {
+  font-style: italic; color: #a15c00; margin: 0.3rem 0; font-size: 0.9rem;
+}
+.song-sets-card .count { color: #767676; font-size: 0.85rem; margin: 0.3rem 0 0; }
+@media (prefers-color-scheme: dark) {
+  a { color: #8ab4f8; }
+  .song-sets-card { border-color: #e0a94a; }
+  .song-sets-card .ai-disclaimer { color: #e0a94a; }
+}

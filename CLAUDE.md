@@ -4,18 +4,17 @@ Generates song-usage reports for Creekside's Sunday Morning Worship Services fro
 Planning Center data. See [song_stats.py](song_stats.py)'s module docstring for the
 full list of reports and how they're built; [all_time_ranking.py](all_time_ranking.py)
 is a separate, simpler all-time-usage ranking script. Weekly song suggestions (see
-below) are saved as JSON under `song_sets/`; [render_song_sets.py](render_song_sets.py)
-turns one of those JSON files into an HTML page and a PDF.
+below) are saved as JSON under `song_candidates/`; [render_song_candidates.py](render_song_candidates.py)
+turns those JSON files into HTML pages.
 
 ## Single-week song candidate list
 
 Use this workflow when the user asks for songs for one upcoming week (e.g.
 "Suggest songs for the next week"). This is a ranked shortlist, not a request
-to prepare four weekly sets; use the next section for requests for multiple
-weeks or sets.
+to prepare multiple weeks.
 
 1. Regenerate the reports with `python song_stats.py` unless the user says the
-   existing `_site/`/`output/` reports are fresh enough.
+   existing `docs/`/`output/` reports are fresh enough.
 2. Find the first upcoming Planning Center plan with no song items. Check plans
    from today forward via the API, ordered by date; choose the earliest plan
    with zero songs. A later populated plan must not delay the start. If the
@@ -46,8 +45,7 @@ weeks or sets.
    oldness score for the top five.
 6. Save the shortlist, including all alternatives presented, to
    `song_candidates/<today's date, YYYY-MM-DD>.json` (create the directory if
-   needed). Keep this separate from `song_sets/`, which is reserved for
-   multi-week sets. Use this shape:
+   needed). Use this shape:
    ```json
    {
      "generated_date": "YYYY-MM-DD",
@@ -64,17 +62,15 @@ weeks or sets.
    }
    ```
    Include each proposed song and each alternative shown to the user exactly
-   once in its corresponding array. Don't save this shortlist as a four-week
-   song-set JSON. Then run `python render_song_candidates.py
-   song_candidates/<file>.json` to render the HTML page and add its link to
-   `_site/index.html`.
+   once in its corresponding array. Then run `python render_song_candidates.py
+   song_candidates/<file>.json` to render the HTML page.
 
 ## Suggesting songs for upcoming weeks
 
 When asked to suggest songs (e.g. "suggest 5 songs for the next few weeks"):
 
 1. Regenerate the reports first (`python song_stats.py`) so the suggestions reflect
-   current data, unless the user says the existing `_site/`/`output/` reports are
+   current data, unless the user says the existing `docs/`/`output/` reports are
    fresh enough.
 2. Find the next four upcoming plans with no songs entered in Planning Center.
   Start with the first upcoming empty plan, then continue forward, skipping
@@ -92,9 +88,9 @@ When asked to suggest songs (e.g. "suggest 5 songs for the next few weeks"):
    ```
     For example, if 10/4 has songs, 10/11, 10/18, and 10/25 are empty, and 11/1
     has songs, suggest 10/11, 10/18, 10/25, and then 11/8 if it is empty.
-3. Pull candidates primarily from `_site/RecentMonths.json` and
-   `_site/ByRecentUsage.json` — these show what the congregation currently knows.
-   Cross-check `_site/SongKeys.json` for each candidate's usual key(s).
+3. Pull candidates primarily from `docs/RecentMonths.json` and
+   `docs/ByRecentUsage.json` — these show what the congregation currently knows.
+   Cross-check `docs/SongKeys.json` for each candidate's usual key(s).
 4. Forced inclusions: check for `include_songs.txt` in the project root (same
    one-title-per-line format as `exclude_songs.txt`; blank lines and lines
    starting with `#` are ignored). Every title listed there must appear
@@ -144,34 +140,7 @@ When asked to suggest songs (e.g. "suggest 5 songs for the next few weeks"):
 7. Present exactly 5 songs (unless asked for a different number), each with:
    title, all-time/recent play count, most-played key, and a one-line reason it
    fits (e.g. "known but not recently played" / "congregation favorite").
-8. Save the suggestion as JSON to `song_sets/<today's date, YYYY-MM-DD>.json`
-   (creating the `song_sets/` directory if needed), shaped as:
-   ```json
-   {
-     "generated_date": "YYYY-MM-DD",
-     "prepared_by": "Kent James",
-     "sets": [
-       {
-         "date": "YYYY-MM-DD",
-         "oldness_score": 73,
-         "theme": null,
-         "songs": [
-           {"title": "...", "all_time": 3, "recent_6mo": 3, "keys": "G, Bb",
-            "last_scheduled": "YYYY-MM-DD", "reason": "...", "stretch": false}
-         ]
-       }
-     ]
-   }
-   ```
-   One entry in `sets` per week presented, in the same order shown to the user.
-   `last_scheduled` is each song's `last_scheduled` value from the source
-   report (`RecentMonths.json`/`ByRecentUsage.json`), not the target date.
-   `theme` is the user's requested theme/topic for that week if any, else null.
-   `stretch` is true only for the explicit "stretch" pick called out in step 5.
-   After saving, mention that `python render_song_sets.py song_sets/<file>.json`
-   will turn it into a shareable HTML page and PDF (in `_site/` and `output/`)
-   — run it only if the user asks for those.
-9. If the user gives a theme, sermon topic, or season, prioritize thematically
+8. If the user gives a theme, sermon topic, or season, prioritize thematically
    fitting songs among the eligible candidates over pure usage stats. Each
    catalog song has a free-text "Themes" tag list from Planning Center (not
    shown in any report or cached in `usage_cache.json`) — fetch it live via

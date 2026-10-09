@@ -1,0 +1,129 @@
+{
+  "generated_date": "2026-10-01",
+  "service_date": "2026-10-11",
+  "oldness_score": 71,
+  "proposed_songs": [
+    {
+      "title": "We Praise You",
+      "all_time": 9,
+      "recent_6mo": 3,
+      "keys": "A",
+      "last_scheduled": "2026-08-02",
+      "reason": "Strong recent familiarity and an energetic praise opener."
+    },
+    {
+      "title": "I Thank God",
+      "all_time": 13,
+      "recent_6mo": 2,
+      "keys": "A",
+      "last_scheduled": "2026-08-09",
+      "reason": "A recent, high-energy testimony song that keeps the set congregationally familiar."
+    },
+    {
+      "title": "Rest On Us",
+      "all_time": 13,
+      "recent_6mo": 2,
+      "keys": "E",
+      "last_scheduled": "2026-06-14",
+      "reason": "A prayerful, Spirit-centered change of pace with recent rotation support."
+    },
+    {
+      "title": "Build My Life",
+      "all_time": 17,
+      "recent_6mo": 1,
+      "keys": "G",
+      "last_scheduled": "2026-06-28",
+      "reason": "A familiar commitment song that brings a reflective worship moment."
+    },
+    {
+      "title": "Battle Belongs",
+      "all_time": 19,
+      "recent_6mo": 1,
+      "keys": "Bb, C",
+      "last_scheduled": "2026-07-05",
+      "reason": "An assured declaration of trust with enough recent exposure to feel familiar."
+    }
+  ],
+  "alternatives": [
+    {
+      "title": "All Hail King Jesus",
+      "all_time": 9,
+      "recent_6mo": 1,
+      "keys": "E",
+      "last_scheduled": "2026-05-03",
+      "reason": "Could replace We Praise You; a worshipful, Christ-centered opener with recent rotation."
+    },
+    {
+      "title": "Trust In God",
+      "all_time": 9,
+      "recent_6mo": 1,
+      "keys": "A",
+      "last_scheduled": "2026-06-07",
+      "reason": "Could replace We Praise You; a confident trust declaration with recent rotation."
+    },
+    {
+      "title": "Because Of Christ",
+      "all_time": 13,
+      "recent_6mo": 1,
+      "keys": "A",
+      "last_scheduled": "2026-07-12",
+      "reason": "Could replace I Thank God; a clear gospel-centered song with recent rotation."
+    },
+    {
+      "title": "Fresh Fire",
+      "all_time": 12,
+      "recent_6mo": 1,
+      "keys": "A, B, F",
+      "last_scheduled": "2026-05-17",
+      "reason": "Could replace I Thank God; a prayerful, Spirit-focused song for a similar intensity shift."
+    },
+    {
+      "title": "See A Victory",
+      "all_time": 14,
+      "recent_6mo": 1,
+      "keys": "A",
+      "last_scheduled": "2026-07-05",
+      "reason": "Could replace Rest On Us; a statement of faith with recent congregational familiarity."
+    },
+    {
+      "title": "Psalm 23 (I Am Not Alone)",
+      "all_time": 15,
+      "recent_6mo": 1,
+      "keys": "E",
+      "last_scheduled": "2026-07-05",
+      "reason": "Could replace Rest On Us; a pastoral assurance song that adds a quieter center."
+    },
+    {
+      "title": "Amazing Grace (My Chains Are Gone)",
+      "all_time": 16,
+      "recent_6mo": 1,
+      "keys": "E",
+      "last_scheduled": "2026-07-12",
+      "reason": "Could replace Build My Life; a familiar grace-centered worship song."
+    },
+    {
+      "title": "The Father's House",
+      "all_time": 16,
+      "recent_6mo": 1,
+      "keys": "G",
+      "last_scheduled": "2026-07-12",
+      "reason": "Could replace Build My Life; a restorative lyric with a familiar modern worship feel."
+    },
+    {
+      "title": "Nothing But The Blood (Plainfield)",
+      "all_time": 19,
+      "recent_6mo": 1,
+      "keys": "G",
+      "last_scheduled": "2026-07-26",
+      "reason": "Could replace Battle Belongs; a familiar redemption hymn in a fresh, singable arrangement."
+    },
+    {
+      "title": "House Of The Lord",
+      "all_time": 20,
+      "recent_6mo": 1,
+      "keys": "D",
+      "last_scheduled": "2026-06-21",
+      "reason": "Could replace Battle Belongs; an energetic celebration song with broad congregational familiarity."
+    }
+  ]
+}

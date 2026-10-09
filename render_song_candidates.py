@@ -8,9 +8,7 @@ import json
 import sys
 from pathlib import Path
 
-from song_stats import (
-    SITE_DIR, load_catalog, song_url, update_song_candidate_summary,
-)
+from song_stats import SITE_DIR, load_catalog, song_url
 
 ROOT = Path(__file__).resolve().parent
 CANDIDATE_DIR = ROOT / "song_candidates"
@@ -101,7 +99,7 @@ li {{ margin-bottom: 0.6rem; }}
 
 def summary(data: dict, path: Path) -> dict:
     return {
-        "name": f"SongCandidates-{data.get('generated_date', path.stem)}",
+        "name": "SongCandidates",
         "generated_date": data.get("generated_date", ""),
         "service_date": data.get("service_date", ""),
     }
@@ -123,8 +121,6 @@ def main() -> None:
 
     output = SITE_DIR / f"{summary(data, path)['name']}.html"
     render_html(output, data)
-    if latest_path and path.resolve() == latest_path.resolve():
-        update_song_candidate_summary(summary(data, path))
     print(f"Read {path}")
     print(f"Wrote {output}")
 

@@ -2,7 +2,7 @@
 """Generate song-usage statistics PDFs from Planning Center data.
 
 Reads everything from the Planning Center Services API (no data files) and
-produces these reports in output/ (PDF) and _site/ (HTML plus a JSON version of
+Produces these reports in output/ (PDF) and docs/ (HTML plus a JSON version of
 each report, easier to consume programmatically than scraping the HTML):
 
   * ByTitle.pdf       - every (non-Christmas) song, sorted alphabetically
@@ -80,7 +80,7 @@ load_dotenv()
 
 ROOT = Path(__file__).resolve().parent
 OUT_DIR = ROOT / "output"
-SITE_DIR = ROOT / "_site"
+SITE_DIR = ROOT / "docs"
 
 PREPARED_BY = "Kent James"
 
@@ -860,45 +860,8 @@ def render_report(name: str, subtitle: str, description: str, rows, cols, prepar
     return {"name": name, "title": subtitle, "description": description, "count": len(rows)}
 
 
-def song_candidate_summary_html(candidate_summary: dict) -> str:
-    return f"""\
-<section class="song-candidates-card">
-<h2><a href="{html.escape(candidate_summary['name'])}.html">Next Week Song Suggestions</a></h2>
-<p class="count">Service date {html.escape(candidate_summary['service_date'])}
-&middot; generated {html.escape(candidate_summary['generated_date'])}</p>
-</section>
-"""
-
-
-def update_song_candidate_summary(candidate_summary: dict) -> None:
-    """Update or add the candidate-list callout in an existing home page."""
-    index_path = SITE_DIR / "index.html"
-    if not index_path.exists():
-        return
-
-    content = index_path.read_text(encoding="utf-8")
-    section = song_candidate_summary_html(candidate_summary)
-    start = content.find('<section class="song-candidates-card">')
-    if start >= 0:
-        end_marker = "</section>"
-        end = content.find(end_marker, start)
-        if end < 0:
-            raise ValueError(f"Unclosed song-candidate summary in {index_path}")
-        content = content[:start] + section + content[end + len(end_marker):]
-    else:
-        body_end = content.rfind("</body>")
-        if body_end < 0:
-            raise ValueError(f"No body element found in {index_path}")
-        content = content[:body_end] + section + content[body_end:]
-    index_path.write_text(content, encoding="utf-8")
-
-
-def render_index(reports: list[dict], prepared_date,
-                 candidate_summary: dict | None = None) -> None:
-    """Render the _site/index.html home page linking to each report.
-
-    candidate_summary, if given, links to the most recently generated
-    single-week candidate list."""
+def render_index(reports: list[dict], prepared_date) -> None:
+    """Render the docs/index.html home page linking to each report."""
     cards = "".join(f"""\
 <li class="card">
 <h2><a href="{r['name']}.html">{html.escape(r['title'])}</a></h2>
@@ -906,9 +869,6 @@ def render_index(reports: list[dict], prepared_date,
 <p class="count">{r['count']} songs</p>
 </li>
 """ for r in reports)
-
-    song_candidates_html = (song_candidate_summary_html(candidate_summary)
-                            if candidate_summary else "")
 
     (SITE_DIR / "index.html").write_text(f"""\
 <!doctype html>
@@ -927,7 +887,6 @@ def render_index(reports: list[dict], prepared_date,
 <ul class="reports">
 {cards}
 </ul>
-{song_candidates_html}
 </body>
 </html>
 """, encoding="utf-8")
@@ -1056,18 +1015,6 @@ def main():
         "and how many times, most-used key first.",
         key_rows, make_key_columns(), prepared_date))
 
-    # Render the latest multi-week song set separately from the home page.
-    import render_song_sets
-    try:
-        sets_path = render_song_sets.latest_set_file()
-    except SystemExit:
-        sets_path = None
-    if sets_path:
-        sets_data = render_song_sets.load_sets(sets_path)
-        stem = f"SongSets-{sets_data.get('generated_date', sets_path.stem)}"
-        render_song_sets.render_pdf(OUT_DIR / f"{stem}.pdf", sets_data)
-        render_song_sets.render_html(SITE_DIR / f"{stem}.html", sets_data)
-
     candidate_summary = None
     import render_song_candidates
     candidate_path = render_song_candidates.latest_candidate_file()
@@ -1077,7 +1024,7 @@ def main():
         candidate_html = SITE_DIR / f"{candidate_summary['name']}.html"
         render_song_candidates.render_html(candidate_html, candidate_data)
 
-    render_index(reports, prepared_date, candidate_summary)
+    render_index(reports, prepared_date)
 
     recent_labels = [year_labels[i] for i in indices]
     print(f"Wrote {len(rows)} songs to {OUT_DIR}/*.pdf and {SITE_DIR}/*.html,*.json:")

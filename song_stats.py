@@ -66,6 +66,7 @@ import functools
 import html
 import json
 import os
+import shutil
 import sys
 from datetime import date, datetime, timedelta
 from pathlib import Path
@@ -83,6 +84,7 @@ load_dotenv()
 ROOT = Path(__file__).resolve().parent
 OUT_DIR = ROOT / "output"
 SITE_DIR = ROOT / "docs"
+ICON_FILE = ROOT / "Creekside_Tree.ico"
 
 PREPARED_BY = "Kent James"
 
@@ -905,6 +907,7 @@ def render_html(path: Path, subtitle: str, rows, cols, prepared_date, footer=Non
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{html.escape(subtitle)}</title>
 <link rel="stylesheet" href="style.css">
+<link rel="icon" href="favicon.ico">
 </head>
 <body>
 <header>
@@ -989,6 +992,7 @@ def render_oldness_report(path: Path, scored_sets: list[dict], prepared_date: da
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Recent Set Oldness Scores</title>
 <link rel="stylesheet" href="style.css">
+<link rel="icon" href="favicon.ico">
 </head>
 <body>
 <header>
@@ -1024,6 +1028,7 @@ def render_index(reports: list[dict], prepared_date) -> None:
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Creekside Song Stats</title>
 <link rel="stylesheet" href="style.css">
+<link rel="icon" href="favicon.ico">
 </head>
 <body>
 <header>
@@ -1052,6 +1057,7 @@ def main():
     OUT_DIR.mkdir(exist_ok=True)
     SITE_DIR.mkdir(exist_ok=True)
     (SITE_DIR / "style.css").write_text(STYLE_CSS, encoding="utf-8")
+    shutil.copyfile(ICON_FILE, SITE_DIR / "favicon.ico")
     reports = []
 
     # By Title and By All Time show every year column.

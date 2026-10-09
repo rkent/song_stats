@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import html
 import json
+import shutil
 import sys
 from pathlib import Path
 
@@ -74,6 +75,7 @@ def render_html(path: Path, data: dict) -> None:
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Next Week Song Suggestions</title>
 <link rel="stylesheet" href="style.css">
+<link rel="icon" href="favicon.ico">
 <style>
 section {{ margin-bottom: 2rem; }}
 li {{ margin-bottom: 0.6rem; }}
@@ -118,6 +120,9 @@ def main() -> None:
     if not (SITE_DIR / "style.css").exists():
         from song_stats import STYLE_CSS
         (SITE_DIR / "style.css").write_text(STYLE_CSS, encoding="utf-8")
+    if not (SITE_DIR / "favicon.ico").exists():
+        from song_stats import ICON_FILE
+        shutil.copyfile(ICON_FILE, SITE_DIR / "favicon.ico")
 
     output = SITE_DIR / f"{summary(data, path)['name']}.html"
     render_html(output, data)

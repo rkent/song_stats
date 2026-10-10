@@ -1,7 +1,7 @@
 {
   "title": "By Recent Usage",
   "prepared_by": "Kent James",
-  "prepared_date": "2026-10-09",
+  "prepared_date": "2026-10-10",
   "footer": [
     "Bold titles: every all-time play of the song happened within these recent years (i.e., new to the congregation)."
   ],
@@ -23,6 +23,14 @@
       "recent": 11,
       "last_scheduled": "2026-10-04",
       "new": true
+    },
+    {
+      "title": "Firm Foundation (He Won't)",
+      "all_time": 23,
+      "2025": 6,
+      "2026": 4,
+      "recent": 10,
+      "last_scheduled": "2026-10-25"
     },
     {
       "title": "I Thank God",
@@ -50,14 +58,6 @@
       "last_scheduled": "2026-10-04"
     },
     {
-      "title": "Firm Foundation (He Won't)",
-      "all_time": 22,
-      "2025": 6,
-      "2026": 3,
-      "recent": 9,
-      "last_scheduled": "2026-09-06"
-    },
-    {
       "title": "We Praise You",
       "all_time": 9,
       "2025": 3,
@@ -82,6 +82,14 @@
       "recent": 8,
       "last_scheduled": "2026-09-20",
       "new": true
+    },
+    {
+      "title": "Praise",
+      "all_time": 10,
+      "2025": 4,
+      "2026": 4,
+      "recent": 8,
+      "last_scheduled": "2026-10-25"
     },
     {
       "title": "The Lord Will Provide",
@@ -122,14 +130,6 @@
       "2026": 3,
       "recent": 7,
       "last_scheduled": "2026-06-21"
-    },
-    {
-      "title": "Praise",
-      "all_time": 9,
-      "2025": 4,
-      "2026": 3,
-      "recent": 7,
-      "last_scheduled": "2026-09-06"
     },
     {
       "title": "Rest On Us",
@@ -204,6 +204,14 @@
       "last_scheduled": "2026-08-16"
     },
     {
+      "title": "Holy Forever",
+      "all_time": 10,
+      "2025": 4,
+      "2026": 2,
+      "recent": 6,
+      "last_scheduled": "2026-10-25"
+    },
+    {
       "title": "Reckless Love",
       "all_time": 48,
       "2025": 4,
@@ -245,14 +253,6 @@
       "last_scheduled": "2026-06-21"
     },
     {
-      "title": "Holy Forever",
-      "all_time": 9,
-      "2025": 4,
-      "2026": 1,
-      "recent": 5,
-      "last_scheduled": "2026-04-19"
-    },
-    {
       "title": "How Deep The Father's Love For Us",
       "all_time": 26,
       "2025": 3,
@@ -292,6 +292,14 @@
       "recent": 5,
       "last_scheduled": "2026-09-13",
       "new": true
+    },
+    {
+      "title": "Be Thou My Vision",
+      "all_time": 29,
+      "2025": 1,
+      "2026": 3,
+      "recent": 4,
+      "last_scheduled": "2026-10-25"
     },
     {
       "title": "Come As You Are",
@@ -432,12 +440,12 @@
       "last_scheduled": "2025-11-09"
     },
     {
-      "title": "Be Thou My Vision",
-      "all_time": 28,
+      "title": "Build My Life",
+      "all_time": 18,
       "2025": 1,
       "2026": 2,
       "recent": 3,
-      "last_scheduled": "2026-07-19"
+      "last_scheduled": "2026-10-25"
     },
     {
       "title": "Crown Him With Many Crowns",
@@ -530,14 +538,6 @@
       "last_scheduled": "2026-01-04"
     },
     {
-      "title": "Revelation Song",
-      "all_time": 27,
-      "2025": 1,
-      "2026": 2,
-      "recent": 3,
-      "last_scheduled": "2026-10-11"
-    },
-    {
       "title": "Rising Sun",
       "all_time": 9,
       "2025": 2,
@@ -609,14 +609,6 @@
       "2026": 1,
       "recent": 2,
       "last_scheduled": "2026-02-08"
-    },
-    {
-      "title": "Build My Life",
-      "all_time": 17,
-      "2025": 1,
-      "2026": 1,
-      "recent": 2,
-      "last_scheduled": "2026-06-28"
     },
     {
       "title": "Came To My Rescue",
@@ -708,6 +700,14 @@
       "2026": 1,
       "recent": 2,
       "last_scheduled": "2026-03-15"
+    },
+    {
+      "title": "Revelation Song",
+      "all_time": 26,
+      "2025": 1,
+      "2026": 1,
+      "recent": 2,
+      "last_scheduled": "2026-04-02"
     },
     {
       "title": "Royal Son",

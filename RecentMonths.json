@@ -1,12 +1,12 @@
 {
   "title": "Recent Months",
   "prepared_by": "Kent James",
-  "prepared_date": "2026-10-10",
+  "prepared_date": "2026-10-11",
   "footer": [
-    "Total songs: 71",
+    "Total songs: 73",
     "Bold titles: every all-time play of the song happened within this report's months (i.e., new to the congregation)."
   ],
-  "count": 71,
+  "count": 73,
   "rows": [
     {
       "title": "Washed",
@@ -239,6 +239,18 @@
       "last_scheduled": "2026-09-20"
     },
     {
+      "title": "Nothing But The Blood (Plainfield)",
+      "all_time": 20,
+      "May": 0,
+      "Jun": 0,
+      "Jul": 1,
+      "Aug": 0,
+      "Sep": 0,
+      "Oct": 1,
+      "total": 2,
+      "last_scheduled": "2026-10-11"
+    },
+    {
       "title": "Raise A Hallelujah",
       "all_time": 25,
       "May": 0,
@@ -273,6 +285,18 @@
       "Oct": 0,
       "total": 2,
       "last_scheduled": "2026-09-13"
+    },
+    {
+      "title": "See A Victory",
+      "all_time": 15,
+      "May": 0,
+      "Jun": 0,
+      "Jul": 1,
+      "Aug": 0,
+      "Sep": 0,
+      "Oct": 1,
+      "total": 2,
+      "last_scheduled": "2026-10-11"
     },
     {
       "title": "The Wonderful Cross",
@@ -566,6 +590,18 @@
       "last_scheduled": "2026-06-21"
     },
     {
+      "title": "Hosanna",
+      "all_time": 12,
+      "May": 0,
+      "Jun": 0,
+      "Jul": 0,
+      "Aug": 0,
+      "Sep": 0,
+      "Oct": 1,
+      "total": 1,
+      "last_scheduled": "2026-10-11"
+    },
+    {
       "title": "House Of The Lord",
       "all_time": 20,
       "May": 0,
@@ -674,6 +710,18 @@
       "last_scheduled": "2026-05-10"
     },
     {
+      "title": "Lead Me To The Cross",
+      "all_time": 10,
+      "May": 0,
+      "Jun": 0,
+      "Jul": 0,
+      "Aug": 0,
+      "Sep": 0,
+      "Oct": 1,
+      "total": 1,
+      "last_scheduled": "2026-10-11"
+    },
+    {
       "title": "Living Hope",
       "all_time": 20,
       "May": 1,
@@ -684,18 +732,6 @@
       "Oct": 0,
       "total": 1,
       "last_scheduled": "2026-05-10"
-    },
-    {
-      "title": "Nothing But The Blood (Plainfield)",
-      "all_time": 20,
-      "May": 0,
-      "Jun": 0,
-      "Jul": 1,
-      "Aug": 0,
-      "Sep": 0,
-      "Oct": 0,
-      "total": 1,
-      "last_scheduled": "2026-10-11"
     },
     {
       "title": "Open The Eyes Of My Heart",
@@ -756,18 +792,6 @@
       "Oct": 0,
       "total": 1,
       "last_scheduled": "2026-07-26"
-    },
-    {
-      "title": "See A Victory",
-      "all_time": 15,
-      "May": 0,
-      "Jun": 0,
-      "Jul": 1,
-      "Aug": 0,
-      "Sep": 0,
-      "Oct": 0,
-      "total": 1,
-      "last_scheduled": "2026-10-11"
     },
     {
       "title": "Still I Will Praise",

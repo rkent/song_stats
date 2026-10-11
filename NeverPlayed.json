@@ -1,11 +1,11 @@
 {
   "title": "Never Played",
   "prepared_by": "Kent James",
-  "prepared_date": "2026-10-10",
+  "prepared_date": "2026-10-11",
   "footer": [
-    "Total songs: 124"
+    "Total songs: 125"
   ],
-  "count": 124,
+  "count": 125,
   "rows": [
     {
       "title": "Down To The River To Pray - old hymn",
@@ -749,6 +749,12 @@
       "title": "Desperate",
       "all_time": 0,
       "id": 30917576,
+      "last_scheduled": null
+    },
+    {
+      "title": "See a Victory / What a Beautiful Name (Medley)",
+      "all_time": 0,
+      "id": 30933548,
       "last_scheduled": null
     }
   ]

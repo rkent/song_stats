@@ -1,7 +1,7 @@
 {
   "title": "Christmas Songs",
   "prepared_by": "Kent James",
-  "prepared_date": "2026-10-11",
+  "prepared_date": "2026-10-12",
   "footer": [
     "Total songs: 31"
   ],
@@ -59,13 +59,13 @@
     },
     {
       "title": "Silent Night",
-      "all_time": 8,
+      "all_time": 9,
       "2022": 1,
       "2023": 1,
       "2024": 1,
       "2025": 0,
-      "2026": 0,
-      "last_scheduled": "2025-12-24"
+      "2026": 1,
+      "last_scheduled": "2026-12-24"
     },
     {
       "title": "Go Tell It On The Mountain (Go Tell It)",

@@ -1,7 +1,7 @@
 {
   "title": "By Title",
   "prepared_by": "Kent James",
-  "prepared_date": "2026-10-12",
+  "prepared_date": "2026-10-13",
   "footer": [],
   "count": 354,
   "rows": [
@@ -137,13 +137,13 @@
     },
     {
       "title": "All Creatures Of Our God And King",
-      "all_time": 19,
+      "all_time": 20,
       "2022": 1,
       "2023": 0,
       "2024": 0,
       "2025": 1,
-      "2026": 0,
-      "last_scheduled": "2025-05-04"
+      "2026": 1,
+      "last_scheduled": "2026-10-18"
     },
     {
       "title": "All Glory Be To Christ",
@@ -1767,13 +1767,13 @@
     },
     {
       "title": "In Christ Alone",
-      "all_time": 26,
+      "all_time": 27,
       "2022": 4,
       "2023": 1,
       "2024": 3,
       "2025": 2,
-      "2026": 1,
-      "last_scheduled": "2026-05-03"
+      "2026": 2,
+      "last_scheduled": "2026-10-18"
     },
     {
       "title": "In Jesus Name (God Of Possible)",
@@ -1977,13 +1977,13 @@
     },
     {
       "title": "Light Of The World",
-      "all_time": 1,
+      "all_time": 2,
       "2022": 0,
       "2023": 0,
       "2024": 0,
       "2025": 1,
-      "2026": 0,
-      "last_scheduled": "2025-12-21"
+      "2026": 1,
+      "last_scheduled": "2026-12-20"
     },
     {
       "title": "Little Drummer Boy",
@@ -2927,13 +2927,13 @@
     },
     {
       "title": "The Blessing",
-      "all_time": 12,
+      "all_time": 13,
       "2022": 0,
       "2023": 5,
       "2024": 3,
       "2025": 1,
-      "2026": 3,
-      "last_scheduled": "2026-09-06"
+      "2026": 4,
+      "last_scheduled": "2026-10-18"
     },
     {
       "title": "The Butterfly Song / If I Were A Butterfly",
@@ -3117,13 +3117,13 @@
     },
     {
       "title": "This Is Amazing Grace",
-      "all_time": 73,
+      "all_time": 74,
       "2022": 4,
       "2023": 3,
       "2024": 2,
       "2025": 4,
-      "2026": 1,
-      "last_scheduled": "2026-05-10"
+      "2026": 2,
+      "last_scheduled": "2026-10-18"
     },
     {
       "title": "This Is How I Fight My Battles",
@@ -3357,13 +3357,13 @@
     },
     {
       "title": "Who Else",
-      "all_time": 4,
+      "all_time": 5,
       "2022": 0,
       "2023": 0,
       "2024": 0,
       "2025": 0,
-      "2026": 4,
-      "last_scheduled": "2026-08-16"
+      "2026": 5,
+      "last_scheduled": "2026-10-18"
     },
     {
       "title": "Who You Say I Am",

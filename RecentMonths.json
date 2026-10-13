@@ -1,7 +1,7 @@
 {
   "title": "Recent Months",
   "prepared_by": "Kent James",
-  "prepared_date": "2026-10-12",
+  "prepared_date": "2026-10-13",
   "footer": [
     "Total songs: 73",
     "Bold titles: every all-time play of the song happened within this report's months (i.e., new to the congregation)."
@@ -108,7 +108,7 @@
     },
     {
       "title": "The Blessing",
-      "all_time": 12,
+      "all_time": 13,
       "May": 1,
       "Jun": 0,
       "Jul": 0,
@@ -116,7 +116,7 @@
       "Sep": 1,
       "Oct": 0,
       "total": 3,
-      "last_scheduled": "2026-09-06"
+      "last_scheduled": "2026-10-18"
     },
     {
       "title": "We Praise You",
@@ -132,7 +132,7 @@
     },
     {
       "title": "Who Else",
-      "all_time": 4,
+      "all_time": 5,
       "May": 1,
       "Jun": 1,
       "Jul": 0,
@@ -140,7 +140,7 @@
       "Sep": 0,
       "Oct": 0,
       "total": 3,
-      "last_scheduled": "2026-08-16"
+      "last_scheduled": "2026-10-18"
     },
     {
       "title": "Be Thou My Vision",
@@ -663,7 +663,7 @@
     },
     {
       "title": "In Christ Alone",
-      "all_time": 26,
+      "all_time": 27,
       "May": 1,
       "Jun": 0,
       "Jul": 0,
@@ -671,7 +671,7 @@
       "Sep": 0,
       "Oct": 0,
       "total": 1,
-      "last_scheduled": "2026-05-03"
+      "last_scheduled": "2026-10-18"
     },
     {
       "title": "It Is Well",
@@ -833,7 +833,7 @@
     },
     {
       "title": "This Is Amazing Grace",
-      "all_time": 73,
+      "all_time": 74,
       "May": 1,
       "Jun": 0,
       "Jul": 0,
@@ -841,7 +841,7 @@
       "Sep": 0,
       "Oct": 0,
       "total": 1,
-      "last_scheduled": "2026-05-10"
+      "last_scheduled": "2026-10-18"
     },
     {
       "title": "This Is How I Fight My Battles",

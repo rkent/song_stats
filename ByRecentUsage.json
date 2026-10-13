@@ -1,7 +1,7 @@
 {
   "title": "By Recent Usage",
   "prepared_by": "Kent James",
-  "prepared_date": "2026-10-12",
+  "prepared_date": "2026-10-13",
   "footer": [
     "Bold titles: every all-time play of the song happened within these recent years (i.e., new to the congregation)."
   ],
@@ -229,6 +229,14 @@
       "new": true
     },
     {
+      "title": "This Is Amazing Grace",
+      "all_time": 74,
+      "2025": 4,
+      "2026": 2,
+      "recent": 6,
+      "last_scheduled": "2026-10-18"
+    },
+    {
       "title": "Trust In God",
       "all_time": 9,
       "2025": 3,
@@ -277,12 +285,12 @@
       "last_scheduled": "2026-10-11"
     },
     {
-      "title": "This Is Amazing Grace",
-      "all_time": 73,
-      "2025": 4,
-      "2026": 1,
+      "title": "The Blessing",
+      "all_time": 13,
+      "2025": 1,
+      "2026": 4,
       "recent": 5,
-      "last_scheduled": "2026-05-10"
+      "last_scheduled": "2026-10-18"
     },
     {
       "title": "Washed",
@@ -291,6 +299,15 @@
       "2026": 5,
       "recent": 5,
       "last_scheduled": "2026-09-13",
+      "new": true
+    },
+    {
+      "title": "Who Else",
+      "all_time": 5,
+      "2025": 0,
+      "2026": 5,
+      "recent": 5,
+      "last_scheduled": "2026-10-18",
       "new": true
     },
     {
@@ -351,6 +368,14 @@
       "new": true
     },
     {
+      "title": "In Christ Alone",
+      "all_time": 27,
+      "2025": 2,
+      "2026": 2,
+      "recent": 4,
+      "last_scheduled": "2026-10-18"
+    },
+    {
       "title": "King Of Kings",
       "all_time": 12,
       "2025": 3,
@@ -391,14 +416,6 @@
       "last_scheduled": "2026-10-11"
     },
     {
-      "title": "The Blessing",
-      "all_time": 12,
-      "2025": 1,
-      "2026": 3,
-      "recent": 4,
-      "last_scheduled": "2026-09-06"
-    },
-    {
       "title": "The Lion And The Lamb",
       "all_time": 14,
       "2025": 3,
@@ -421,15 +438,6 @@
       "2026": 1,
       "recent": 4,
       "last_scheduled": "2026-02-08"
-    },
-    {
-      "title": "Who Else",
-      "all_time": 4,
-      "2025": 0,
-      "2026": 4,
-      "recent": 4,
-      "last_scheduled": "2026-08-16",
-      "new": true
     },
     {
       "title": "Worthy",
@@ -514,14 +522,6 @@
       "last_scheduled": "2026-08-09"
     },
     {
-      "title": "In Christ Alone",
-      "all_time": 26,
-      "2025": 2,
-      "2026": 1,
-      "recent": 3,
-      "last_scheduled": "2026-05-03"
-    },
-    {
       "title": "Living Hope",
       "all_time": 20,
       "2025": 1,
@@ -585,6 +585,14 @@
       "2026": 1,
       "recent": 2,
       "last_scheduled": "2026-09-13"
+    },
+    {
+      "title": "All Creatures Of Our God And King",
+      "all_time": 20,
+      "2025": 1,
+      "2026": 1,
+      "recent": 2,
+      "last_scheduled": "2026-10-18"
     },
     {
       "title": "All Hail King Jesus",
@@ -658,6 +666,15 @@
       "2026": 1,
       "recent": 2,
       "last_scheduled": "2026-03-01"
+    },
+    {
+      "title": "Light Of The World",
+      "all_time": 2,
+      "2025": 1,
+      "2026": 1,
+      "recent": 2,
+      "last_scheduled": "2026-12-20",
+      "new": true
     },
     {
       "title": "Love Comes Down (Gungor)",
@@ -757,14 +774,6 @@
       "2026": 0,
       "recent": 1,
       "last_scheduled": "2025-06-29"
-    },
-    {
-      "title": "All Creatures Of Our God And King",
-      "all_time": 19,
-      "2025": 1,
-      "2026": 0,
-      "recent": 1,
-      "last_scheduled": "2025-05-04"
     },
     {
       "title": "All My Hope",
@@ -957,15 +966,6 @@
       "2026": 1,
       "recent": 1,
       "last_scheduled": "2026-10-11"
-    },
-    {
-      "title": "Light Of The World",
-      "all_time": 1,
-      "2025": 1,
-      "2026": 0,
-      "recent": 1,
-      "last_scheduled": "2025-12-21",
-      "new": true
     },
     {
       "title": "Mary Did You Know",

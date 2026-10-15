@@ -1,7 +1,7 @@
 {
   "title": "By Recent Usage",
   "prepared_by": "Kent James",
-  "prepared_date": "2026-10-14",
+  "prepared_date": "2026-10-15",
   "footer": [
     "Bold titles: every all-time play of the song happened within these recent years (i.e., new to the congregation)."
   ],
@@ -311,14 +311,6 @@
       "new": true
     },
     {
-      "title": "Be Thou My Vision",
-      "all_time": 29,
-      "2025": 1,
-      "2026": 3,
-      "recent": 4,
-      "last_scheduled": "2026-10-25"
-    },
-    {
       "title": "Come As You Are",
       "all_time": 14,
       "2025": 2,
@@ -333,6 +325,14 @@
       "2026": 1,
       "recent": 4,
       "last_scheduled": "2026-09-13"
+    },
+    {
+      "title": "God I Look To You",
+      "all_time": 15,
+      "2025": 3,
+      "2026": 1,
+      "recent": 4,
+      "last_scheduled": "2026-10-25"
     },
     {
       "title": "Good Good Father",
@@ -448,6 +448,14 @@
       "last_scheduled": "2025-11-09"
     },
     {
+      "title": "Be Thou My Vision",
+      "all_time": 28,
+      "2025": 1,
+      "2026": 2,
+      "recent": 3,
+      "last_scheduled": "2026-07-19"
+    },
+    {
       "title": "Build My Life",
       "all_time": 18,
       "2025": 1,
@@ -471,14 +479,6 @@
       "2026": 1,
       "recent": 3,
       "last_scheduled": "2026-05-17"
-    },
-    {
-      "title": "God I Look To You",
-      "all_time": 14,
-      "2025": 3,
-      "2026": 0,
-      "recent": 3,
-      "last_scheduled": "2025-10-12"
     },
     {
       "title": "Greatness",

@@ -1,7 +1,7 @@
 {
   "title": "Songs by Key",
   "prepared_by": "Kent James",
-  "prepared_date": "2026-10-14",
+  "prepared_date": "2026-10-15",
   "footer": [],
   "count": 337,
   "rows": [
@@ -335,11 +335,11 @@
       "title": "Be Thou My Vision",
       "keys": [
         {
-          "key": "D",
-          "count": 15
+          "key": "C",
+          "count": 14
         },
         {
-          "key": "C",
+          "key": "D",
           "count": 14
         }
       ]
@@ -1257,7 +1257,7 @@
       "keys": [
         {
           "key": "C",
-          "count": 9
+          "count": 10
         },
         {
           "key": "G",

@@ -335,7 +335,6 @@ def calculate_set_oldness(song_sets: list[dict], all_time: dict[str, int],
         service_date = song_set["service_date"]
         week_start = service_date - timedelta(days=service_date.weekday())
         songs = []
-        score = 0
         for title in song_set["songs"]:
             later_uses = sum(
                 title in plan_songs
@@ -348,7 +347,8 @@ def calculate_set_oldness(song_sets: list[dict], all_time: dict[str, int],
                     f"Later scheduled uses for {title!r} exceed its all-time "
                     f"count before {service_date}")
             songs.append({"title": title, "prior_uses": prior_uses})
-            score += prior_uses
+        score = (round(sum(song["prior_uses"] for song in songs) / len(songs), 1)
+                 if songs else 0)
         scored_sets.append({
             "service_date": service_date,
             "oldness_score": score,
@@ -1002,8 +1002,8 @@ def render_oldness_report(path: Path, scored_sets: list[dict], prepared_date: da
 </header>
 <p>Populated plans through the next 90 days are eligible. Each song's count
 includes Sunday Morning Worship plans before the Monday that set's week began.
-Uses from that week onward are excluded. The set's oldness score is the sum of
-the listed counts.</p>
+Uses from that week onward are excluded. The set's oldness score is the average
+of the listed counts.</p>
 {sets_html}
 </body>
 </html>

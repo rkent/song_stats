@@ -25,12 +25,12 @@ to prepare multiple weeks.
    it does not override the 3-30 all-time range or `exclude_songs.txt`; report
    any conflict. User-named songs follow the explicit-request exceptions below.
 4. Choose and present a coherent top five as the proposed lineup. Keep its
-   oldness score (sum of the five all-time counts) between 30 and 120, aiming
-   near 68; favor songs with solid usage in the last six months and a balanced
-   mix of familiar and fresher songs. Then list two distinct, eligible
+   oldness score (average of the five all-time counts) between 6 and 24,
+   aiming near 13.6; favor songs with solid usage in the last six months and a
+   balanced mix of familiar and fresher songs. Then list two distinct, eligible
    alternatives for each proposed song (10 alternatives total), grouped by the
    proposed song they could replace. Choose options that keep a replacement
-   lineup's score in range and near 68. If hard constraints leave fewer than
+   lineup's score in range and near 13.6. If hard constraints leave fewer than
    two alternatives for a proposed song, explain the shortfall rather than
    relaxing a hard constraint. For each alternative, identify the proposed
    song it could replace, then give a concise fit-based reason similar to the
@@ -50,7 +50,7 @@ to prepare multiple weeks.
    {
      "generated_date": "YYYY-MM-DD",
      "service_date": "YYYY-MM-DD",
-     "oldness_score": 68,
+     "oldness_score": 13.6,
      "proposed_songs": [
        {"title": "...", "all_time": 3, "recent_6mo": 3, "keys": "G, Bb",
         "last_scheduled": "YYYY-MM-DD", "reason": "..."}
@@ -67,12 +67,12 @@ to prepare multiple weeks.
 
 ## Set "oldness" heuristic
 
-For a proposed set of 5 songs, sum each song's all-time play count (the same
-`all_time` field used in the hard constraint above). That sum is the set's
-"oldness" score — lower means a fresher/newer-feeling set, higher means a more
-familiar/well-known set. Keep each week's oldness score between 30 and 120,
+For a proposed set of 5 songs, average the songs' all-time play counts (the
+same `all_time` field used in the hard constraint above), rounded to one
+decimal place. That average is the set's "oldness" score — lower means a
+fresher/newer-feeling set, higher means a more familiar/well-known set. Keep each week's oldness score between 6 and 24,
 but treat that as the outer bound, not the target: aim for something close to
-68, and lean toward more lesser-known/fresher songs rather than defaulting to
+13.6, and lean toward more lesser-known/fresher songs rather than defaulting to
 the most familiar ones whenever the mix allows it. Mention the computed score
 when presenting the set.
 

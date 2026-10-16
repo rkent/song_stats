@@ -1,9 +1,9 @@
 {
   "title": "By All Time",
   "prepared_by": "Kent James",
-  "prepared_date": "2026-10-15",
+  "prepared_date": "2026-10-16",
   "footer": [],
-  "count": 354,
+  "count": 355,
   "rows": [
     {
       "title": "This Is Amazing Grace",
@@ -416,6 +416,16 @@
       "last_scheduled": "2024-03-17"
     },
     {
+      "title": "Battle Belongs",
+      "all_time": 20,
+      "2022": 0,
+      "2023": 8,
+      "2024": 5,
+      "2025": 4,
+      "2026": 3,
+      "last_scheduled": "2026-11-22"
+    },
+    {
       "title": "Give Me Jesus",
       "all_time": 20,
       "2022": 0,
@@ -454,16 +464,6 @@
       "2025": 2,
       "2026": 3,
       "last_scheduled": "2026-10-11"
-    },
-    {
-      "title": "Battle Belongs",
-      "all_time": 19,
-      "2022": 0,
-      "2023": 8,
-      "2024": 5,
-      "2025": 4,
-      "2026": 2,
-      "last_scheduled": "2026-07-05"
     },
     {
       "title": "Give Me Faith",
@@ -1366,6 +1366,16 @@
       "last_scheduled": "2021-05-09"
     },
     {
+      "title": "Greatness",
+      "all_time": 4,
+      "2022": 0,
+      "2023": 0,
+      "2024": 0,
+      "2025": 0,
+      "2026": 4,
+      "last_scheduled": "2026-11-22"
+    },
+    {
       "title": "Holy Holy Holy",
       "all_time": 4,
       "2022": 1,
@@ -1434,6 +1444,16 @@
       "2025": 0,
       "2026": 0,
       "last_scheduled": "2024-02-11"
+    },
+    {
+      "title": "Thank You Jesus For The Blood",
+      "all_time": 4,
+      "2022": 0,
+      "2023": 0,
+      "2024": 0,
+      "2025": 0,
+      "2026": 4,
+      "last_scheduled": "2026-11-22"
     },
     {
       "title": "Blessed Assurance",
@@ -1506,16 +1526,6 @@
       "last_scheduled": "2020-10-11"
     },
     {
-      "title": "Greatness",
-      "all_time": 3,
-      "2022": 0,
-      "2023": 0,
-      "2024": 0,
-      "2025": 0,
-      "2026": 3,
-      "last_scheduled": "2026-09-13"
-    },
-    {
       "title": "Mary Did You Know",
       "all_time": 3,
       "2022": 0,
@@ -1564,16 +1574,6 @@
       "2025": 0,
       "2026": 0,
       "last_scheduled": "2017-04-02"
-    },
-    {
-      "title": "Thank You Jesus For The Blood",
-      "all_time": 3,
-      "2022": 0,
-      "2023": 0,
-      "2024": 0,
-      "2025": 0,
-      "2026": 3,
-      "last_scheduled": "2026-04-19"
     },
     {
       "title": "Trisagion",
@@ -2154,6 +2154,16 @@
       "2025": 0,
       "2026": 0,
       "last_scheduled": "2014-03-09"
+    },
+    {
+      "title": "Spirit Lead Me",
+      "all_time": 1,
+      "2022": 0,
+      "2023": 0,
+      "2024": 0,
+      "2025": 0,
+      "2026": 1,
+      "last_scheduled": "2026-11-22"
     },
     {
       "title": "Spirit Move",

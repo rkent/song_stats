@@ -1,9 +1,9 @@
 {
   "title": "Songs by Key",
   "prepared_by": "Kent James",
-  "prepared_date": "2026-10-15",
+  "prepared_date": "2026-10-16",
   "footer": [],
-  "count": 337,
+  "count": 338,
   "rows": [
     {
       "title": "10,000 Reasons (Bless The Lord)",
@@ -310,7 +310,7 @@
       "keys": [
         {
           "key": "Bb",
-          "count": 7
+          "count": 8
         },
         {
           "key": "C",
@@ -1470,7 +1470,7 @@
       "keys": [
         {
           "key": "B",
-          "count": 3
+          "count": 4
         }
       ]
     },
@@ -3315,6 +3315,15 @@
       ]
     },
     {
+      "title": "Spirit Lead Me",
+      "keys": [
+        {
+          "key": "C",
+          "count": 1
+        }
+      ]
+    },
+    {
       "title": "Spirit Move",
       "keys": [
         {
@@ -3441,12 +3450,12 @@
       "title": "Thank You Jesus For The Blood",
       "keys": [
         {
-          "key": "G",
+          "key": "Bb",
           "count": 2
         },
         {
-          "key": "Bb",
-          "count": 1
+          "key": "G",
+          "count": 2
         }
       ]
     },

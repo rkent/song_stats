@@ -1,11 +1,11 @@
 {
   "title": "By Recent Usage",
   "prepared_by": "Kent James",
-  "prepared_date": "2026-10-15",
+  "prepared_date": "2026-10-16",
   "footer": [
     "Bold titles: every all-time play of the song happened within these recent years (i.e., new to the congregation)."
   ],
-  "count": 132,
+  "count": 133,
   "rows": [
     {
       "title": "Goodness Of God",
@@ -100,6 +100,14 @@
       "last_scheduled": "2026-09-27"
     },
     {
+      "title": "Battle Belongs",
+      "all_time": 20,
+      "2025": 4,
+      "2026": 3,
+      "recent": 7,
+      "last_scheduled": "2026-11-22"
+    },
+    {
       "title": "Because Of Christ",
       "all_time": 13,
       "2025": 5,
@@ -170,14 +178,6 @@
       "2026": 3,
       "recent": 7,
       "last_scheduled": "2026-10-04"
-    },
-    {
-      "title": "Battle Belongs",
-      "all_time": 19,
-      "2025": 4,
-      "2026": 2,
-      "recent": 6,
-      "last_scheduled": "2026-07-05"
     },
     {
       "title": "Christ Be Magnified",
@@ -359,6 +359,15 @@
       "last_scheduled": "2026-08-16"
     },
     {
+      "title": "Greatness",
+      "all_time": 4,
+      "2025": 0,
+      "2026": 4,
+      "recent": 4,
+      "last_scheduled": "2026-11-22",
+      "new": true
+    },
+    {
       "title": "How We Remember",
       "all_time": 4,
       "2025": 4,
@@ -414,6 +423,15 @@
       "2026": 2,
       "recent": 4,
       "last_scheduled": "2026-10-11"
+    },
+    {
+      "title": "Thank You Jesus For The Blood",
+      "all_time": 4,
+      "2025": 0,
+      "2026": 4,
+      "recent": 4,
+      "last_scheduled": "2026-11-22",
+      "new": true
     },
     {
       "title": "The Lion And The Lamb",
@@ -481,15 +499,6 @@
       "last_scheduled": "2026-05-17"
     },
     {
-      "title": "Greatness",
-      "all_time": 3,
-      "2025": 0,
-      "2026": 3,
-      "recent": 3,
-      "last_scheduled": "2026-09-13",
-      "new": true
-    },
-    {
       "title": "Here Again",
       "all_time": 15,
       "2025": 2,
@@ -552,15 +561,6 @@
       "2026": 2,
       "recent": 3,
       "last_scheduled": "2026-04-02"
-    },
-    {
-      "title": "Thank You Jesus For The Blood",
-      "all_time": 3,
-      "2025": 0,
-      "2026": 3,
-      "recent": 3,
-      "last_scheduled": "2026-04-19",
-      "new": true
     },
     {
       "title": "What A Beautiful Name",
@@ -1023,6 +1023,15 @@
       "2026": 0,
       "recent": 1,
       "last_scheduled": "2025-05-04"
+    },
+    {
+      "title": "Spirit Lead Me",
+      "all_time": 1,
+      "2025": 0,
+      "2026": 1,
+      "recent": 1,
+      "last_scheduled": "2026-11-22",
+      "new": true
     },
     {
       "title": "Still I Will Praise",

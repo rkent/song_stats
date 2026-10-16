@@ -1,9 +1,9 @@
 {
   "title": "By Title",
   "prepared_by": "Kent James",
-  "prepared_date": "2026-10-15",
+  "prepared_date": "2026-10-16",
   "footer": [],
-  "count": 354,
+  "count": 355,
   "rows": [
     {
       "title": "1,000 Names",
@@ -367,13 +367,13 @@
     },
     {
       "title": "Battle Belongs",
-      "all_time": 19,
+      "all_time": 20,
       "2022": 0,
       "2023": 8,
       "2024": 5,
       "2025": 4,
-      "2026": 2,
-      "last_scheduled": "2026-07-05"
+      "2026": 3,
+      "last_scheduled": "2026-11-22"
     },
     {
       "title": "Be Glorified",
@@ -1337,13 +1337,13 @@
     },
     {
       "title": "Greatness",
-      "all_time": 3,
+      "all_time": 4,
       "2022": 0,
       "2023": 0,
       "2024": 0,
       "2025": 0,
-      "2026": 3,
-      "last_scheduled": "2026-09-13"
+      "2026": 4,
+      "last_scheduled": "2026-11-22"
     },
     {
       "title": "Hallelujah (Secret Chord)",
@@ -2766,6 +2766,16 @@
       "last_scheduled": null
     },
     {
+      "title": "Spirit Lead Me",
+      "all_time": 1,
+      "2022": 0,
+      "2023": 0,
+      "2024": 0,
+      "2025": 0,
+      "2026": 1,
+      "last_scheduled": "2026-11-22"
+    },
+    {
       "title": "Spirit Move",
       "all_time": 1,
       "2022": 0,
@@ -2897,13 +2907,13 @@
     },
     {
       "title": "Thank You Jesus For The Blood",
-      "all_time": 3,
+      "all_time": 4,
       "2022": 0,
       "2023": 0,
       "2024": 0,
       "2025": 0,
-      "2026": 3,
-      "last_scheduled": "2026-04-19"
+      "2026": 4,
+      "last_scheduled": "2026-11-22"
     },
     {
       "title": "That's Not You",

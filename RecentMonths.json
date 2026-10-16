@@ -1,7 +1,7 @@
 {
   "title": "Recent Months",
   "prepared_by": "Kent James",
-  "prepared_date": "2026-10-15",
+  "prepared_date": "2026-10-16",
   "footer": [
     "Total songs: 73",
     "Bold titles: every all-time play of the song happened within this report's months (i.e., new to the congregation)."
@@ -59,7 +59,7 @@
     },
     {
       "title": "Greatness",
-      "all_time": 3,
+      "all_time": 4,
       "May": 0,
       "Jun": 0,
       "Jul": 2,
@@ -67,8 +67,7 @@
       "Sep": 1,
       "Oct": 0,
       "total": 3,
-      "last_scheduled": "2026-09-13",
-      "new": true
+      "last_scheduled": "2026-11-22"
     },
     {
       "title": "I Know A Name",
@@ -385,7 +384,7 @@
     },
     {
       "title": "Battle Belongs",
-      "all_time": 19,
+      "all_time": 20,
       "May": 0,
       "Jun": 0,
       "Jul": 1,
@@ -393,7 +392,7 @@
       "Sep": 0,
       "Oct": 0,
       "total": 1,
-      "last_scheduled": "2026-07-05"
+      "last_scheduled": "2026-11-22"
     },
     {
       "title": "Be Still My Soul",

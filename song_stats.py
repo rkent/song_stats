@@ -303,9 +303,9 @@ def plan_service_date(plan: dict) -> date:
 
 def load_recent_song_sets(service_type_id: str, as_of: date,
                           limit: int = 8) -> list[dict]:
-    """Load the most recent plans with songs, including the next 90 days."""
+    """Load the most recent plans with songs, including the next 15 days."""
     oldest_date = date(EARLIEST_YEAR, 1, 1)
-    search_end = as_of + timedelta(days=90)
+    search_end = as_of + timedelta(days=15)
     plans = fetch_recent_plans(service_type_id, oldest_date, search_end)
     dated_plans = sorted(
         ((plan_service_date(plan), plan) for plan in plans),
@@ -1000,7 +1000,7 @@ def render_oldness_report(path: Path, scored_sets: list[dict], prepared_date: da
 <p class="meta">Prepared by {html.escape(PREPARED_BY)} &middot; {prepared_date:%-m/%-d/%Y}
 &middot; <a href="index.html">Home</a></p>
 </header>
-<p>Populated plans through the next 90 days are eligible. Each song's count
+<p>Populated plans through the next 15 days are eligible. Each song's count
 includes Sunday Morning Worship plans before the Monday that set's week began.
 Uses from that week onward are excluded. The set's oldness score is the average
 of the listed counts.</p>

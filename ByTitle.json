@@ -1,9 +1,9 @@
 {
   "title": "By Title",
   "prepared_by": "Kent James",
-  "prepared_date": "2026-10-20",
+  "prepared_date": "2026-10-21",
   "footer": [],
-  "count": 355,
+  "count": 356,
   "rows": [
     {
       "title": "1,000 Names",
@@ -687,13 +687,13 @@
     },
     {
       "title": "Come As You Are",
-      "all_time": 14,
+      "all_time": 15,
       "2022": 2,
       "2023": 3,
       "2024": 3,
       "2025": 2,
-      "2026": 2,
-      "last_scheduled": "2026-08-16"
+      "2026": 3,
+      "last_scheduled": "2026-11-01"
     },
     {
       "title": "Come Behold The Wondrous Mystery",
@@ -1097,13 +1097,13 @@
     },
     {
       "title": "Fresh Fire",
-      "all_time": 12,
+      "all_time": 13,
       "2022": 3,
       "2023": 3,
       "2024": 3,
       "2025": 2,
-      "2026": 1,
-      "last_scheduled": "2026-05-17"
+      "2026": 2,
+      "last_scheduled": "2026-11-01"
     },
     {
       "title": "From Everlasting (Psalm 90)",
@@ -2616,6 +2616,16 @@
       "last_scheduled": "2022-04-17"
     },
     {
+      "title": "Resurrection Day",
+      "all_time": 1,
+      "2022": 0,
+      "2023": 0,
+      "2024": 0,
+      "2025": 0,
+      "2026": 1,
+      "last_scheduled": "2026-11-01"
+    },
+    {
       "title": "Revelation Song",
       "all_time": 26,
       "2022": 2,
@@ -3057,13 +3067,13 @@
     },
     {
       "title": "The Lord Will Provide",
-      "all_time": 11,
+      "all_time": 12,
       "2022": 0,
       "2023": 0,
       "2024": 3,
       "2025": 1,
-      "2026": 7,
-      "last_scheduled": "2026-09-27"
+      "2026": 8,
+      "last_scheduled": "2026-11-01"
     },
     {
       "title": "The River",
@@ -3267,13 +3277,13 @@
     },
     {
       "title": "We Praise You",
-      "all_time": 9,
+      "all_time": 10,
       "2022": 0,
       "2023": 0,
       "2024": 0,
       "2025": 3,
-      "2026": 6,
-      "last_scheduled": "2026-08-02"
+      "2026": 7,
+      "last_scheduled": "2026-11-01"
     },
     {
       "title": "Were You There",

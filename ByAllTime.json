@@ -1,9 +1,9 @@
 {
   "title": "By All Time",
   "prepared_by": "Kent James",
-  "prepared_date": "2026-10-20",
+  "prepared_date": "2026-10-21",
   "footer": [],
-  "count": 355,
+  "count": 356,
   "rows": [
     {
       "title": "This Is Amazing Grace",
@@ -586,6 +586,16 @@
       "last_scheduled": "2025-06-29"
     },
     {
+      "title": "Come As You Are",
+      "all_time": 15,
+      "2022": 2,
+      "2023": 3,
+      "2024": 3,
+      "2025": 2,
+      "2026": 3,
+      "last_scheduled": "2026-11-01"
+    },
+    {
       "title": "Come Thou Fount",
       "all_time": 15,
       "2022": 0,
@@ -636,16 +646,6 @@
       "last_scheduled": "2026-10-11"
     },
     {
-      "title": "Come As You Are",
-      "all_time": 14,
-      "2022": 2,
-      "2023": 3,
-      "2024": 3,
-      "2025": 2,
-      "2026": 2,
-      "last_scheduled": "2026-08-16"
-    },
-    {
       "title": "Gratitude",
       "all_time": 14,
       "2022": 2,
@@ -684,6 +684,16 @@
       "2025": 5,
       "2026": 2,
       "last_scheduled": "2026-07-12"
+    },
+    {
+      "title": "Fresh Fire",
+      "all_time": 13,
+      "2022": 3,
+      "2023": 3,
+      "2024": 3,
+      "2025": 2,
+      "2026": 2,
+      "last_scheduled": "2026-11-01"
     },
     {
       "title": "Great Is Thy Faithfulness",
@@ -766,16 +776,6 @@
       "last_scheduled": "2026-09-13"
     },
     {
-      "title": "Fresh Fire",
-      "all_time": 12,
-      "2022": 3,
-      "2023": 3,
-      "2024": 3,
-      "2025": 2,
-      "2026": 1,
-      "last_scheduled": "2026-05-17"
-    },
-    {
       "title": "Hosanna",
       "all_time": 12,
       "2022": 1,
@@ -814,6 +814,16 @@
       "2025": 0,
       "2026": 1,
       "last_scheduled": "2026-04-02"
+    },
+    {
+      "title": "The Lord Will Provide",
+      "all_time": 12,
+      "2022": 0,
+      "2023": 0,
+      "2024": 3,
+      "2025": 1,
+      "2026": 8,
+      "last_scheduled": "2026-11-01"
     },
     {
       "title": "The Wonderful Cross",
@@ -906,16 +916,6 @@
       "last_scheduled": "2026-09-13"
     },
     {
-      "title": "The Lord Will Provide",
-      "all_time": 11,
-      "2022": 0,
-      "2023": 0,
-      "2024": 3,
-      "2025": 1,
-      "2026": 7,
-      "last_scheduled": "2026-09-27"
-    },
-    {
       "title": "Holy Forever",
       "all_time": 10,
       "2022": 0,
@@ -984,6 +984,16 @@
       "2025": 1,
       "2026": 1,
       "last_scheduled": "2026-05-31"
+    },
+    {
+      "title": "We Praise You",
+      "all_time": 10,
+      "2022": 0,
+      "2023": 0,
+      "2024": 0,
+      "2025": 3,
+      "2026": 7,
+      "last_scheduled": "2026-11-01"
     },
     {
       "title": "Yes I Will",
@@ -1134,16 +1144,6 @@
       "2025": 3,
       "2026": 3,
       "last_scheduled": "2026-06-07"
-    },
-    {
-      "title": "We Praise You",
-      "all_time": 9,
-      "2022": 0,
-      "2023": 0,
-      "2024": 0,
-      "2025": 3,
-      "2026": 6,
-      "last_scheduled": "2026-08-02"
     },
     {
       "title": "I Know A Name",
@@ -2154,6 +2154,16 @@
       "2025": 0,
       "2026": 0,
       "last_scheduled": "2014-03-09"
+    },
+    {
+      "title": "Resurrection Day",
+      "all_time": 1,
+      "2022": 0,
+      "2023": 0,
+      "2024": 0,
+      "2025": 0,
+      "2026": 1,
+      "last_scheduled": "2026-11-01"
     },
     {
       "title": "Spirit Lead Me",

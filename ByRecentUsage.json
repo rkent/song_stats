@@ -1,11 +1,11 @@
 {
   "title": "By Recent Usage",
   "prepared_by": "Kent James",
-  "prepared_date": "2026-10-20",
+  "prepared_date": "2026-10-21",
   "footer": [
     "Bold titles: every all-time play of the song happened within these recent years (i.e., new to the congregation)."
   ],
-  "count": 133,
+  "count": 134,
   "rows": [
     {
       "title": "Goodness Of God",
@@ -59,12 +59,20 @@
     },
     {
       "title": "We Praise You",
-      "all_time": 9,
+      "all_time": 10,
       "2025": 3,
-      "2026": 6,
-      "recent": 9,
-      "last_scheduled": "2026-08-02",
+      "2026": 7,
+      "recent": 10,
+      "last_scheduled": "2026-11-01",
       "new": true
+    },
+    {
+      "title": "The Lord Will Provide",
+      "all_time": 12,
+      "2025": 1,
+      "2026": 8,
+      "recent": 9,
+      "last_scheduled": "2026-11-01"
     },
     {
       "title": "You've Already Won",
@@ -90,14 +98,6 @@
       "2026": 4,
       "recent": 8,
       "last_scheduled": "2026-10-25"
-    },
-    {
-      "title": "The Lord Will Provide",
-      "all_time": 11,
-      "2025": 1,
-      "2026": 7,
-      "recent": 8,
-      "last_scheduled": "2026-09-27"
     },
     {
       "title": "Battle Belongs",
@@ -253,6 +253,14 @@
       "last_scheduled": "2026-10-04"
     },
     {
+      "title": "Come As You Are",
+      "all_time": 15,
+      "2025": 2,
+      "2026": 3,
+      "recent": 5,
+      "last_scheduled": "2026-11-01"
+    },
+    {
       "title": "Glorious Day",
       "all_time": 25,
       "2025": 3,
@@ -311,20 +319,20 @@
       "new": true
     },
     {
-      "title": "Come As You Are",
-      "all_time": 14,
-      "2025": 2,
-      "2026": 2,
-      "recent": 4,
-      "last_scheduled": "2026-08-16"
-    },
-    {
       "title": "Do It Again",
       "all_time": 12,
       "2025": 3,
       "2026": 1,
       "recent": 4,
       "last_scheduled": "2026-09-13"
+    },
+    {
+      "title": "Fresh Fire",
+      "all_time": 13,
+      "2025": 2,
+      "2026": 2,
+      "recent": 4,
+      "last_scheduled": "2026-11-01"
     },
     {
       "title": "God I Look To You",
@@ -489,14 +497,6 @@
       "recent": 3,
       "last_scheduled": "2026-04-05",
       "new": true
-    },
-    {
-      "title": "Fresh Fire",
-      "all_time": 12,
-      "2025": 2,
-      "2026": 1,
-      "recent": 3,
-      "last_scheduled": "2026-05-17"
     },
     {
       "title": "Here Again",
@@ -1015,6 +1015,15 @@
       "2026": 0,
       "recent": 1,
       "last_scheduled": "2025-09-14"
+    },
+    {
+      "title": "Resurrection Day",
+      "all_time": 1,
+      "2025": 0,
+      "2026": 1,
+      "recent": 1,
+      "last_scheduled": "2026-11-01",
+      "new": true
     },
     {
       "title": "See His Love",

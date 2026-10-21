@@ -1,9 +1,9 @@
 {
   "title": "Songs by Key",
   "prepared_by": "Kent James",
-  "prepared_date": "2026-10-20",
+  "prepared_date": "2026-10-21",
   "footer": [],
-  "count": 338,
+  "count": 339,
   "rows": [
     {
       "title": "10,000 Reasons (Bless The Lord)",
@@ -703,7 +703,7 @@
       "keys": [
         {
           "key": "C",
-          "count": 13
+          "count": 14
         },
         {
           "key": "G",
@@ -1082,11 +1082,11 @@
       "title": "Fresh Fire",
       "keys": [
         {
-          "key": "A",
-          "count": 3
+          "key": "B",
+          "count": 4
         },
         {
-          "key": "B",
+          "key": "A",
           "count": 3
         },
         {
@@ -3089,6 +3089,15 @@
       ]
     },
     {
+      "title": "Resurrection Day",
+      "keys": [
+        {
+          "key": "A",
+          "count": 1
+        }
+      ]
+    },
+    {
       "title": "Revelation Song",
       "keys": [
         {
@@ -3563,12 +3572,12 @@
       "title": "The Lord Will Provide",
       "keys": [
         {
-          "key": "G",
+          "key": "B",
           "count": 4
         },
         {
-          "key": "B",
-          "count": 3
+          "key": "G",
+          "count": 4
         },
         {
           "key": "A",
@@ -3927,7 +3936,7 @@
       "keys": [
         {
           "key": "A",
-          "count": 9
+          "count": 10
         }
       ]
     },

@@ -1,11 +1,11 @@
 {
-  "title": "Not Played Since 2022-10-22",
+  "title": "Not Played Since 2022-10-23",
   "prepared_by": "Kent James",
-  "prepared_date": "2026-10-22",
+  "prepared_date": "2026-10-23",
   "footer": [
-    "Total songs: 60"
+    "Total songs: 58"
   ],
-  "count": 60,
+  "count": 58,
   "rows": [
     {
       "title": "Open Up The Sky",
@@ -156,16 +156,6 @@
       "2025": 0,
       "2026": 0,
       "last_scheduled": "2019-02-24"
-    },
-    {
-      "title": "The River",
-      "all_time": 19,
-      "2022": 0,
-      "2023": 0,
-      "2024": 0,
-      "2025": 0,
-      "2026": 0,
-      "last_scheduled": "2019-05-12"
     },
     {
       "title": "Glorious",
@@ -576,16 +566,6 @@
       "2025": 0,
       "2026": 0,
       "last_scheduled": "2022-04-17"
-    },
-    {
-      "title": "Made New",
-      "all_time": 21,
-      "2022": 1,
-      "2023": 0,
-      "2024": 0,
-      "2025": 0,
-      "2026": 0,
-      "last_scheduled": "2022-08-07"
     },
     {
       "title": "Catch Me Singing",

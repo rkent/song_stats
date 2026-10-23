@@ -1,9 +1,9 @@
 {
   "title": "By All Time",
   "prepared_by": "Kent James",
-  "prepared_date": "2026-10-22",
+  "prepared_date": "2026-10-23",
   "footer": [],
-  "count": 356,
+  "count": 357,
   "rows": [
     {
       "title": "This Is Amazing Grace",
@@ -363,7 +363,7 @@
       "2024": 0,
       "2025": 0,
       "2026": 0,
-      "last_scheduled": "2022-08-07"
+      "last_scheduled": "2027-01-24"
     },
     {
       "title": "There's Nothing That Our God Can't Do",
@@ -403,7 +403,7 @@
       "2024": 1,
       "2025": 0,
       "2026": 0,
-      "last_scheduled": "2024-07-21"
+      "last_scheduled": "2027-01-24"
     },
     {
       "title": "All The Poor And Powerless",
@@ -493,7 +493,7 @@
       "2024": 0,
       "2025": 0,
       "2026": 0,
-      "last_scheduled": "2019-05-12"
+      "last_scheduled": "2027-01-24"
     },
     {
       "title": "Build My Life",
@@ -706,6 +706,16 @@
       "last_scheduled": "2024-04-07"
     },
     {
+      "title": "Happy Day",
+      "all_time": 13,
+      "2022": 0,
+      "2023": 0,
+      "2024": 0,
+      "2025": 0,
+      "2026": 0,
+      "last_scheduled": "2027-01-24"
+    },
+    {
       "title": "I Thank God",
       "all_time": 13,
       "2022": 0,
@@ -843,7 +853,7 @@
       "2024": 1,
       "2025": 1,
       "2026": 0,
-      "last_scheduled": "2025-09-07"
+      "last_scheduled": "2027-01-24"
     },
     {
       "title": "Your Grace Is Enough",

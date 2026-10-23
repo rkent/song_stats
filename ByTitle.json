@@ -1,9 +1,9 @@
 {
   "title": "By Title",
   "prepared_by": "Kent James",
-  "prepared_date": "2026-10-22",
+  "prepared_date": "2026-10-23",
   "footer": [],
-  "count": 356,
+  "count": 357,
   "rows": [
     {
       "title": "1,000 Names",
@@ -193,7 +193,7 @@
       "2024": 1,
       "2025": 0,
       "2026": 0,
-      "last_scheduled": "2024-07-21"
+      "last_scheduled": "2027-01-24"
     },
     {
       "title": "All My Hope",
@@ -1366,6 +1366,16 @@
       "last_scheduled": "2021-07-25"
     },
     {
+      "title": "Happy Day",
+      "all_time": 13,
+      "2022": 0,
+      "2023": 0,
+      "2024": 0,
+      "2025": 0,
+      "2026": 0,
+      "last_scheduled": "2027-01-24"
+    },
+    {
       "title": "Have Thine Own Way",
       "all_time": 0,
       "2022": 0,
@@ -2083,7 +2093,7 @@
       "2024": 0,
       "2025": 0,
       "2026": 0,
-      "last_scheduled": "2022-08-07"
+      "last_scheduled": "2027-01-24"
     },
     {
       "title": "Make Room",
@@ -3083,7 +3093,7 @@
       "2024": 0,
       "2025": 0,
       "2026": 0,
-      "last_scheduled": "2019-05-12"
+      "last_scheduled": "2027-01-24"
     },
     {
       "title": "The Servant Song",
@@ -3203,7 +3213,7 @@
       "2024": 1,
       "2025": 1,
       "2026": 0,
-      "last_scheduled": "2025-09-07"
+      "last_scheduled": "2027-01-24"
     },
     {
       "title": "Trisagion",

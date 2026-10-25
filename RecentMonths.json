@@ -1,12 +1,12 @@
 {
   "title": "Recent Months",
   "prepared_by": "Kent James",
-  "prepared_date": "2026-10-24",
+  "prepared_date": "2026-10-25",
   "footer": [
-    "Total songs: 74",
+    "Total songs: 76",
     "Bold titles: every all-time play of the song happened within this report's months (i.e., new to the congregation)."
   ],
-  "count": 74,
+  "count": 76,
   "rows": [
     {
       "title": "Washed",
@@ -68,6 +68,18 @@
       "Oct": 1,
       "total": 3,
       "last_scheduled": "2026-10-04"
+    },
+    {
+      "title": "Firm Foundation (He Won't)",
+      "all_time": 23,
+      "May": 0,
+      "Jun": 1,
+      "Jul": 0,
+      "Aug": 0,
+      "Sep": 1,
+      "Oct": 1,
+      "total": 3,
+      "last_scheduled": "2026-10-25"
     },
     {
       "title": "Goodness Of God",
@@ -154,6 +166,18 @@
       "last_scheduled": "2026-07-19"
     },
     {
+      "title": "Build My Life",
+      "all_time": 18,
+      "May": 0,
+      "Jun": 1,
+      "Jul": 0,
+      "Aug": 0,
+      "Sep": 0,
+      "Oct": 1,
+      "total": 2,
+      "last_scheduled": "2026-10-25"
+    },
+    {
       "title": "Christ Be Magnified",
       "all_time": 16,
       "May": 0,
@@ -176,18 +200,6 @@
       "Oct": 0,
       "total": 2,
       "last_scheduled": "2026-09-06"
-    },
-    {
-      "title": "Firm Foundation (He Won't)",
-      "all_time": 23,
-      "May": 0,
-      "Jun": 1,
-      "Jul": 0,
-      "Aug": 0,
-      "Sep": 1,
-      "Oct": 0,
-      "total": 2,
-      "last_scheduled": "2026-10-25"
     },
     {
       "title": "God So Loved",
@@ -260,6 +272,18 @@
       "Oct": 1,
       "total": 2,
       "last_scheduled": "2026-10-11"
+    },
+    {
+      "title": "Praise",
+      "all_time": 10,
+      "May": 0,
+      "Jun": 0,
+      "Jul": 0,
+      "Aug": 0,
+      "Sep": 1,
+      "Oct": 1,
+      "total": 2,
+      "last_scheduled": "2026-10-25"
     },
     {
       "title": "Raise A Hallelujah",
@@ -468,18 +492,6 @@
       "last_scheduled": "2026-07-12"
     },
     {
-      "title": "Build My Life",
-      "all_time": 18,
-      "May": 0,
-      "Jun": 1,
-      "Jul": 0,
-      "Aug": 0,
-      "Sep": 0,
-      "Oct": 0,
-      "total": 1,
-      "last_scheduled": "2026-10-25"
-    },
-    {
       "title": "Came To My Rescue",
       "all_time": 23,
       "May": 1,
@@ -552,6 +564,18 @@
       "last_scheduled": "2026-06-21"
     },
     {
+      "title": "God I Look To You",
+      "all_time": 15,
+      "May": 0,
+      "Jun": 0,
+      "Jul": 0,
+      "Aug": 0,
+      "Sep": 0,
+      "Oct": 1,
+      "total": 1,
+      "last_scheduled": "2026-10-25"
+    },
+    {
       "title": "God I'm Just Grateful",
       "all_time": 1,
       "May": 0,
@@ -611,6 +635,18 @@
       "Oct": 0,
       "total": 1,
       "last_scheduled": "2026-06-07"
+    },
+    {
+      "title": "Holy Forever",
+      "all_time": 10,
+      "May": 0,
+      "Jun": 0,
+      "Jul": 0,
+      "Aug": 0,
+      "Sep": 0,
+      "Oct": 1,
+      "total": 1,
+      "last_scheduled": "2026-10-25"
     },
     {
       "title": "Holy Spirit",
@@ -767,18 +803,6 @@
       "Oct": 0,
       "total": 1,
       "last_scheduled": "2026-09-20"
-    },
-    {
-      "title": "Praise",
-      "all_time": 10,
-      "May": 0,
-      "Jun": 0,
-      "Jul": 0,
-      "Aug": 0,
-      "Sep": 1,
-      "Oct": 0,
-      "total": 1,
-      "last_scheduled": "2026-10-25"
     },
     {
       "title": "Praise To The Lord the Almighty",

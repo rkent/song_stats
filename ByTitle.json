@@ -1,9 +1,9 @@
 {
   "title": "By Title",
   "prepared_by": "Kent James",
-  "prepared_date": "2026-10-27",
+  "prepared_date": "2026-10-28",
   "footer": [],
-  "count": 357,
+  "count": 358,
   "rows": [
     {
       "title": "1,000 Names",
@@ -687,13 +687,13 @@
     },
     {
       "title": "Come As You Are",
-      "all_time": 15,
+      "all_time": 14,
       "2022": 2,
       "2023": 3,
       "2024": 3,
       "2025": 2,
-      "2026": 3,
-      "last_scheduled": "2026-11-01"
+      "2026": 2,
+      "last_scheduled": "2026-08-16"
     },
     {
       "title": "Come Behold The Wondrous Mystery",
@@ -1477,13 +1477,13 @@
     },
     {
       "title": "Holy Holy Holy",
-      "all_time": 4,
+      "all_time": 5,
       "2022": 1,
       "2023": 0,
       "2024": 0,
       "2025": 0,
-      "2026": 0,
-      "last_scheduled": "2022-04-17"
+      "2026": 1,
+      "last_scheduled": "2026-11-01"
     },
     {
       "title": "Holy Spirit",
@@ -2627,13 +2627,13 @@
     },
     {
       "title": "Resurrection Day",
-      "all_time": 1,
+      "all_time": 0,
       "2022": 0,
       "2023": 0,
       "2024": 0,
       "2025": 0,
-      "2026": 1,
-      "last_scheduled": "2026-11-01"
+      "2026": 0,
+      "last_scheduled": null
     },
     {
       "title": "Revelation Song",
@@ -2986,6 +2986,16 @@
       "last_scheduled": null
     },
     {
+      "title": "The Church's One Foundation",
+      "all_time": 1,
+      "2022": 0,
+      "2023": 0,
+      "2024": 0,
+      "2025": 0,
+      "2026": 1,
+      "last_scheduled": "2026-11-01"
+    },
+    {
       "title": "The Commission",
       "all_time": 0,
       "2022": 0,
@@ -3257,13 +3267,13 @@
     },
     {
       "title": "Washed",
-      "all_time": 5,
+      "all_time": 6,
       "2022": 0,
       "2023": 0,
       "2024": 0,
       "2025": 0,
-      "2026": 5,
-      "last_scheduled": "2026-09-13"
+      "2026": 6,
+      "last_scheduled": "2026-11-01"
     },
     {
       "title": "Way Maker",
@@ -3287,13 +3297,13 @@
     },
     {
       "title": "We Praise You",
-      "all_time": 10,
+      "all_time": 9,
       "2022": 0,
       "2023": 0,
       "2024": 0,
       "2025": 3,
-      "2026": 7,
-      "last_scheduled": "2026-11-01"
+      "2026": 6,
+      "last_scheduled": "2026-08-02"
     },
     {
       "title": "Were You There",

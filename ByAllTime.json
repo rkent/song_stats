@@ -1,9 +1,9 @@
 {
   "title": "By All Time",
   "prepared_by": "Kent James",
-  "prepared_date": "2026-10-27",
+  "prepared_date": "2026-10-28",
   "footer": [],
-  "count": 357,
+  "count": 358,
   "rows": [
     {
       "title": "This Is Amazing Grace",
@@ -586,16 +586,6 @@
       "last_scheduled": "2025-06-29"
     },
     {
-      "title": "Come As You Are",
-      "all_time": 15,
-      "2022": 2,
-      "2023": 3,
-      "2024": 3,
-      "2025": 2,
-      "2026": 3,
-      "last_scheduled": "2026-11-01"
-    },
-    {
       "title": "Come Thou Fount",
       "all_time": 15,
       "2022": 0,
@@ -644,6 +634,16 @@
       "2025": 2,
       "2026": 2,
       "last_scheduled": "2026-10-11"
+    },
+    {
+      "title": "Come As You Are",
+      "all_time": 14,
+      "2022": 2,
+      "2023": 3,
+      "2024": 3,
+      "2025": 2,
+      "2026": 2,
+      "last_scheduled": "2026-08-16"
     },
     {
       "title": "Gratitude",
@@ -996,16 +996,6 @@
       "last_scheduled": "2026-05-31"
     },
     {
-      "title": "We Praise You",
-      "all_time": 10,
-      "2022": 0,
-      "2023": 0,
-      "2024": 0,
-      "2025": 3,
-      "2026": 7,
-      "last_scheduled": "2026-11-01"
-    },
-    {
       "title": "Yes I Will",
       "all_time": 10,
       "2022": 2,
@@ -1156,6 +1146,16 @@
       "last_scheduled": "2026-06-07"
     },
     {
+      "title": "We Praise You",
+      "all_time": 9,
+      "2022": 0,
+      "2023": 0,
+      "2024": 0,
+      "2025": 3,
+      "2026": 6,
+      "last_scheduled": "2026-08-02"
+    },
+    {
       "title": "I Know A Name",
       "all_time": 8,
       "2022": 0,
@@ -1286,6 +1286,16 @@
       "last_scheduled": null
     },
     {
+      "title": "Washed",
+      "all_time": 6,
+      "2022": 0,
+      "2023": 0,
+      "2024": 0,
+      "2025": 0,
+      "2026": 6,
+      "last_scheduled": "2026-11-01"
+    },
+    {
       "title": "What A Friend We Have In Jesus",
       "all_time": 6,
       "2022": 0,
@@ -1326,6 +1336,16 @@
       "last_scheduled": "2020-10-18"
     },
     {
+      "title": "Holy Holy Holy",
+      "all_time": 5,
+      "2022": 1,
+      "2023": 0,
+      "2024": 0,
+      "2025": 0,
+      "2026": 1,
+      "last_scheduled": "2026-11-01"
+    },
+    {
       "title": "How Can I Keep From Singing",
       "all_time": 5,
       "2022": 0,
@@ -1334,16 +1354,6 @@
       "2025": 0,
       "2026": 0,
       "last_scheduled": "2021-07-25"
-    },
-    {
-      "title": "Washed",
-      "all_time": 5,
-      "2022": 0,
-      "2023": 0,
-      "2024": 0,
-      "2025": 0,
-      "2026": 5,
-      "last_scheduled": "2026-09-13"
     },
     {
       "title": "Who Else",
@@ -1384,16 +1394,6 @@
       "2025": 0,
       "2026": 4,
       "last_scheduled": "2026-11-22"
-    },
-    {
-      "title": "Holy Holy Holy",
-      "all_time": 4,
-      "2022": 1,
-      "2023": 0,
-      "2024": 0,
-      "2025": 0,
-      "2026": 0,
-      "last_scheduled": "2022-04-17"
     },
     {
       "title": "How We Remember",
@@ -2166,16 +2166,6 @@
       "last_scheduled": "2014-03-09"
     },
     {
-      "title": "Resurrection Day",
-      "all_time": 1,
-      "2022": 0,
-      "2023": 0,
-      "2024": 0,
-      "2025": 0,
-      "2026": 1,
-      "last_scheduled": "2026-11-01"
-    },
-    {
       "title": "Spirit Lead Me",
       "all_time": 1,
       "2022": 0,
@@ -2234,6 +2224,16 @@
       "2025": 1,
       "2026": 0,
       "last_scheduled": "2025-11-23"
+    },
+    {
+      "title": "The Church's One Foundation",
+      "all_time": 1,
+      "2022": 0,
+      "2023": 0,
+      "2024": 0,
+      "2025": 0,
+      "2026": 1,
+      "last_scheduled": "2026-11-01"
     },
     {
       "title": "The Glorious Impossible",
@@ -3267,6 +3267,16 @@
     },
     {
       "title": "Psalm 90 (Satisfy Us With Your Love)",
+      "all_time": 0,
+      "2022": 0,
+      "2023": 0,
+      "2024": 0,
+      "2025": 0,
+      "2026": 0,
+      "last_scheduled": null
+    },
+    {
+      "title": "Resurrection Day",
       "all_time": 0,
       "2022": 0,
       "2023": 0,

@@ -1,11 +1,11 @@
 {
   "title": "Never Played",
   "prepared_by": "Kent James",
-  "prepared_date": "2026-10-28",
+  "prepared_date": "2026-10-29",
   "footer": [
-    "Total songs: 126"
+    "Total songs: 127"
   ],
-  "count": 126,
+  "count": 127,
   "rows": [
     {
       "title": "Down To The River To Pray - old hymn",
@@ -761,6 +761,12 @@
       "title": "Resurrection Day",
       "all_time": 0,
       "id": 30988724,
+      "last_scheduled": null
+    },
+    {
+      "title": "For All The Saints",
+      "all_time": 0,
+      "id": 31035215,
       "last_scheduled": null
     }
   ]

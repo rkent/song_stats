@@ -1,11 +1,11 @@
 {
   "title": "By Recent Usage",
   "prepared_by": "Kent James",
-  "prepared_date": "2026-10-28",
+  "prepared_date": "2026-10-29",
   "footer": [
     "Bold titles: every all-time play of the song happened within these recent years (i.e., new to the congregation)."
   ],
-  "count": 135,
+  "count": 139,
   "rows": [
     {
       "title": "Goodness Of God",
@@ -58,14 +58,6 @@
       "last_scheduled": "2026-10-04"
     },
     {
-      "title": "The Lord Will Provide",
-      "all_time": 12,
-      "2025": 1,
-      "2026": 8,
-      "recent": 9,
-      "last_scheduled": "2026-11-01"
-    },
-    {
       "title": "We Praise You",
       "all_time": 9,
       "2025": 3,
@@ -98,6 +90,14 @@
       "2026": 4,
       "recent": 8,
       "last_scheduled": "2026-10-25"
+    },
+    {
+      "title": "The Lord Will Provide",
+      "all_time": 11,
+      "2025": 1,
+      "2026": 7,
+      "recent": 8,
+      "last_scheduled": "2026-09-27"
     },
     {
       "title": "Battle Belongs",
@@ -302,6 +302,14 @@
       "last_scheduled": "2026-10-18"
     },
     {
+      "title": "This I Believe",
+      "all_time": 44,
+      "2025": 3,
+      "2026": 2,
+      "recent": 5,
+      "last_scheduled": "2026-11-01"
+    },
+    {
       "title": "Who Else",
       "all_time": 5,
       "2025": 0,
@@ -456,14 +464,6 @@
       "2026": 2,
       "recent": 4,
       "last_scheduled": "2026-08-02"
-    },
-    {
-      "title": "This I Believe",
-      "all_time": 43,
-      "2025": 3,
-      "2026": 1,
-      "recent": 4,
-      "last_scheduled": "2026-02-08"
     },
     {
       "title": "Worthy",
@@ -752,6 +752,14 @@
       "new": true
     },
     {
+      "title": "Trading My Sorrows",
+      "all_time": 13,
+      "2025": 1,
+      "2026": 1,
+      "recent": 2,
+      "last_scheduled": "2027-01-24"
+    },
+    {
       "title": "Worthy Of It All",
       "all_time": 3,
       "2025": 2,
@@ -774,6 +782,14 @@
       "2026": 0,
       "recent": 1,
       "last_scheduled": "2025-06-29"
+    },
+    {
+      "title": "All My Fountains",
+      "all_time": 21,
+      "2025": 0,
+      "2026": 1,
+      "recent": 1,
+      "last_scheduled": "2027-01-24"
     },
     {
       "title": "All My Hope",
@@ -885,6 +901,14 @@
       "new": true
     },
     {
+      "title": "Happy Day",
+      "all_time": 14,
+      "2025": 0,
+      "2026": 1,
+      "recent": 1,
+      "last_scheduled": "2027-01-24"
+    },
+    {
       "title": "Here As In Heaven",
       "all_time": 7,
       "2025": 1,
@@ -974,6 +998,14 @@
       "2026": 1,
       "recent": 1,
       "last_scheduled": "2026-10-11"
+    },
+    {
+      "title": "Made New",
+      "all_time": 22,
+      "2025": 0,
+      "2026": 1,
+      "recent": 1,
+      "last_scheduled": "2027-01-24"
     },
     {
       "title": "Mary Did You Know",
@@ -1077,6 +1109,14 @@
       "new": true
     },
     {
+      "title": "The River",
+      "all_time": 20,
+      "2025": 0,
+      "2026": 1,
+      "recent": 1,
+      "last_scheduled": "2027-01-24"
+    },
+    {
       "title": "The Stand",
       "all_time": 1,
       "2025": 0,
@@ -1084,14 +1124,6 @@
       "recent": 1,
       "last_scheduled": "2026-06-21",
       "new": true
-    },
-    {
-      "title": "Trading My Sorrows",
-      "all_time": 12,
-      "2025": 1,
-      "2026": 0,
-      "recent": 1,
-      "last_scheduled": "2027-01-24"
     },
     {
       "title": "Trisagion",

@@ -1,7 +1,7 @@
 {
   "title": "Recent Months",
   "prepared_by": "Kent James",
-  "prepared_date": "2026-10-28",
+  "prepared_date": "2026-10-29",
   "footer": [
     "Total songs: 76",
     "Bold titles: every all-time play of the song happened within this report's months (i.e., new to the congregation)."
@@ -34,7 +34,7 @@
     },
     {
       "title": "The Lord Will Provide",
-      "all_time": 12,
+      "all_time": 11,
       "May": 1,
       "Jun": 1,
       "Jul": 1,
@@ -42,7 +42,7 @@
       "Sep": 1,
       "Oct": 0,
       "total": 4,
-      "last_scheduled": "2026-11-01"
+      "last_scheduled": "2026-09-27"
     },
     {
       "title": "Who Else",

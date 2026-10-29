@@ -1,9 +1,9 @@
 {
   "title": "By Title",
   "prepared_by": "Kent James",
-  "prepared_date": "2026-10-28",
+  "prepared_date": "2026-10-29",
   "footer": [],
-  "count": 358,
+  "count": 359,
   "rows": [
     {
       "title": "1,000 Names",
@@ -187,12 +187,12 @@
     },
     {
       "title": "All My Fountains",
-      "all_time": 20,
+      "all_time": 21,
       "2022": 2,
       "2023": 1,
       "2024": 1,
       "2025": 0,
-      "2026": 0,
+      "2026": 1,
       "last_scheduled": "2027-01-24"
     },
     {
@@ -1056,6 +1056,16 @@
       "last_scheduled": "2026-10-25"
     },
     {
+      "title": "For All The Saints",
+      "all_time": 0,
+      "2022": 0,
+      "2023": 0,
+      "2024": 0,
+      "2025": 0,
+      "2026": 0,
+      "last_scheduled": null
+    },
+    {
       "title": "For the Beauty of the Earth",
       "all_time": 1,
       "2022": 0,
@@ -1367,12 +1377,12 @@
     },
     {
       "title": "Happy Day",
-      "all_time": 13,
+      "all_time": 14,
       "2022": 0,
       "2023": 0,
       "2024": 0,
       "2025": 0,
-      "2026": 0,
+      "2026": 1,
       "last_scheduled": "2027-01-24"
     },
     {
@@ -2087,12 +2097,12 @@
     },
     {
       "title": "Made New",
-      "all_time": 21,
+      "all_time": 22,
       "2022": 1,
       "2023": 0,
       "2024": 0,
       "2025": 0,
-      "2026": 0,
+      "2026": 1,
       "last_scheduled": "2027-01-24"
     },
     {
@@ -3087,22 +3097,22 @@
     },
     {
       "title": "The Lord Will Provide",
-      "all_time": 12,
+      "all_time": 11,
       "2022": 0,
       "2023": 0,
       "2024": 3,
       "2025": 1,
-      "2026": 8,
-      "last_scheduled": "2026-11-01"
+      "2026": 7,
+      "last_scheduled": "2026-09-27"
     },
     {
       "title": "The River",
-      "all_time": 19,
+      "all_time": 20,
       "2022": 0,
       "2023": 0,
       "2024": 0,
       "2025": 0,
-      "2026": 0,
+      "2026": 1,
       "last_scheduled": "2027-01-24"
     },
     {
@@ -3147,13 +3157,13 @@
     },
     {
       "title": "This I Believe",
-      "all_time": 43,
+      "all_time": 44,
       "2022": 3,
       "2023": 5,
       "2024": 3,
       "2025": 3,
-      "2026": 1,
-      "last_scheduled": "2026-02-08"
+      "2026": 2,
+      "last_scheduled": "2026-11-01"
     },
     {
       "title": "This Is Amazing Grace",
@@ -3217,12 +3227,12 @@
     },
     {
       "title": "Trading My Sorrows",
-      "all_time": 12,
+      "all_time": 13,
       "2022": 1,
       "2023": 1,
       "2024": 1,
       "2025": 1,
-      "2026": 0,
+      "2026": 1,
       "last_scheduled": "2027-01-24"
     },
     {

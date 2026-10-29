@@ -1,9 +1,9 @@
 {
   "title": "By All Time",
   "prepared_by": "Kent James",
-  "prepared_date": "2026-10-28",
+  "prepared_date": "2026-10-29",
   "footer": [],
-  "count": 358,
+  "count": 359,
   "rows": [
     {
       "title": "This Is Amazing Grace",
@@ -47,13 +47,13 @@
     },
     {
       "title": "This I Believe",
-      "all_time": 43,
+      "all_time": 44,
       "2022": 3,
       "2023": 5,
       "2024": 3,
       "2025": 3,
-      "2026": 1,
-      "last_scheduled": "2026-02-08"
+      "2026": 2,
+      "last_scheduled": "2026-11-01"
     },
     {
       "title": "My Lighthouse",
@@ -336,6 +336,16 @@
       "last_scheduled": "2026-07-19"
     },
     {
+      "title": "Made New",
+      "all_time": 22,
+      "2022": 1,
+      "2023": 0,
+      "2024": 0,
+      "2025": 0,
+      "2026": 1,
+      "last_scheduled": "2027-01-24"
+    },
+    {
       "title": "O Come To The Altar",
       "all_time": 22,
       "2022": 4,
@@ -356,13 +366,13 @@
       "last_scheduled": "2025-09-21"
     },
     {
-      "title": "Made New",
+      "title": "All My Fountains",
       "all_time": 21,
-      "2022": 1,
-      "2023": 0,
-      "2024": 0,
+      "2022": 2,
+      "2023": 1,
+      "2024": 1,
       "2025": 0,
-      "2026": 0,
+      "2026": 1,
       "last_scheduled": "2027-01-24"
     },
     {
@@ -394,16 +404,6 @@
       "2025": 1,
       "2026": 1,
       "last_scheduled": "2026-10-18"
-    },
-    {
-      "title": "All My Fountains",
-      "all_time": 20,
-      "2022": 2,
-      "2023": 1,
-      "2024": 1,
-      "2025": 0,
-      "2026": 0,
-      "last_scheduled": "2027-01-24"
     },
     {
       "title": "All The Poor And Powerless",
@@ -466,6 +466,16 @@
       "last_scheduled": "2026-10-11"
     },
     {
+      "title": "The River",
+      "all_time": 20,
+      "2022": 0,
+      "2023": 0,
+      "2024": 0,
+      "2025": 0,
+      "2026": 1,
+      "last_scheduled": "2027-01-24"
+    },
+    {
       "title": "Give Me Faith",
       "all_time": 19,
       "2022": 1,
@@ -484,16 +494,6 @@
       "2025": 6,
       "2026": 5,
       "last_scheduled": "2026-09-27"
-    },
-    {
-      "title": "The River",
-      "all_time": 19,
-      "2022": 0,
-      "2023": 0,
-      "2024": 0,
-      "2025": 0,
-      "2026": 0,
-      "last_scheduled": "2027-01-24"
     },
     {
       "title": "Build My Life",
@@ -656,6 +656,16 @@
       "last_scheduled": "2026-06-14"
     },
     {
+      "title": "Happy Day",
+      "all_time": 14,
+      "2022": 0,
+      "2023": 0,
+      "2024": 0,
+      "2025": 0,
+      "2026": 1,
+      "last_scheduled": "2027-01-24"
+    },
+    {
       "title": "The Lion And The Lamb",
       "all_time": 14,
       "2022": 4,
@@ -706,16 +716,6 @@
       "last_scheduled": "2024-04-07"
     },
     {
-      "title": "Happy Day",
-      "all_time": 13,
-      "2022": 0,
-      "2023": 0,
-      "2024": 0,
-      "2025": 0,
-      "2026": 0,
-      "last_scheduled": "2027-01-24"
-    },
-    {
       "title": "I Thank God",
       "all_time": 13,
       "2022": 0,
@@ -754,6 +754,16 @@
       "2025": 1,
       "2026": 4,
       "last_scheduled": "2026-10-18"
+    },
+    {
+      "title": "Trading My Sorrows",
+      "all_time": 13,
+      "2022": 1,
+      "2023": 1,
+      "2024": 1,
+      "2025": 1,
+      "2026": 1,
+      "last_scheduled": "2027-01-24"
     },
     {
       "title": "You've Already Won",
@@ -826,16 +836,6 @@
       "last_scheduled": "2026-04-02"
     },
     {
-      "title": "The Lord Will Provide",
-      "all_time": 12,
-      "2022": 0,
-      "2023": 0,
-      "2024": 3,
-      "2025": 1,
-      "2026": 8,
-      "last_scheduled": "2026-11-01"
-    },
-    {
       "title": "The Wonderful Cross",
       "all_time": 12,
       "2022": 0,
@@ -844,16 +844,6 @@
       "2025": 2,
       "2026": 2,
       "last_scheduled": "2026-08-02"
-    },
-    {
-      "title": "Trading My Sorrows",
-      "all_time": 12,
-      "2022": 1,
-      "2023": 1,
-      "2024": 1,
-      "2025": 1,
-      "2026": 0,
-      "last_scheduled": "2027-01-24"
     },
     {
       "title": "Your Grace Is Enough",
@@ -924,6 +914,16 @@
       "2025": 4,
       "2026": 3,
       "last_scheduled": "2026-09-13"
+    },
+    {
+      "title": "The Lord Will Provide",
+      "all_time": 11,
+      "2022": 0,
+      "2023": 0,
+      "2024": 3,
+      "2025": 1,
+      "2026": 7,
+      "last_scheduled": "2026-09-27"
     },
     {
       "title": "Holy Forever",
@@ -2767,6 +2767,16 @@
     },
     {
       "title": "Fill This Place",
+      "all_time": 0,
+      "2022": 0,
+      "2023": 0,
+      "2024": 0,
+      "2025": 0,
+      "2026": 0,
+      "last_scheduled": null
+    },
+    {
+      "title": "For All The Saints",
       "all_time": 0,
       "2022": 0,
       "2023": 0,

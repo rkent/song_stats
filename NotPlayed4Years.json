@@ -1,11 +1,11 @@
 {
-  "title": "Not Played Since 2022-10-30",
+  "title": "Not Played Since 2022-10-31",
   "prepared_by": "Kent James",
-  "prepared_date": "2026-10-30",
+  "prepared_date": "2026-10-31",
   "footer": [
-    "Total songs: 57"
+    "Total songs: 59"
   ],
-  "count": 57,
+  "count": 59,
   "rows": [
     {
       "title": "Open Up The Sky",
@@ -576,6 +576,26 @@
       "2025": 0,
       "2026": 0,
       "last_scheduled": "2022-10-02"
+    },
+    {
+      "title": "Doxology",
+      "all_time": 29,
+      "2022": 1,
+      "2023": 0,
+      "2024": 0,
+      "2025": 0,
+      "2026": 0,
+      "last_scheduled": "2022-10-30"
+    },
+    {
+      "title": "My Jesus I Love Thee",
+      "all_time": 2,
+      "2022": 1,
+      "2023": 0,
+      "2024": 0,
+      "2025": 0,
+      "2026": 0,
+      "last_scheduled": "2022-10-30"
     }
   ]
 }

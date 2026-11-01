@@ -1,7 +1,7 @@
 {
   "title": "By Title",
   "prepared_by": "Kent James",
-  "prepared_date": "2026-10-31",
+  "prepared_date": "2026-11-01",
   "footer": [],
   "count": 359,
   "rows": [
@@ -257,13 +257,13 @@
     },
     {
       "title": "Amazing",
-      "all_time": 0,
+      "all_time": 1,
       "2022": 0,
       "2023": 0,
       "2024": 0,
       "2025": 0,
-      "2026": 0,
-      "last_scheduled": null
+      "2026": 1,
+      "last_scheduled": "2026-11-08"
     },
     {
       "title": "Amazing Grace",
@@ -457,13 +457,13 @@
     },
     {
       "title": "Because Of Christ",
-      "all_time": 13,
+      "all_time": 14,
       "2022": 1,
       "2023": 0,
       "2024": 5,
       "2025": 5,
-      "2026": 2,
-      "last_scheduled": "2026-07-12"
+      "2026": 3,
+      "last_scheduled": "2026-11-08"
     },
     {
       "title": "Before The Throne Of God Above",
@@ -1297,13 +1297,13 @@
     },
     {
       "title": "Graves Into Gardens",
-      "all_time": 22,
+      "all_time": 23,
       "2022": 5,
       "2023": 3,
       "2024": 4,
       "2025": 4,
-      "2026": 3,
-      "last_scheduled": "2026-07-19"
+      "2026": 4,
+      "last_scheduled": "2026-11-08"
     },
     {
       "title": "Great Are You Lord",
@@ -3327,13 +3327,13 @@
     },
     {
       "title": "What A Beautiful Name",
-      "all_time": 32,
+      "all_time": 33,
       "2022": 2,
       "2023": 3,
       "2024": 3,
       "2025": 2,
-      "2026": 1,
-      "last_scheduled": "2026-04-12"
+      "2026": 2,
+      "last_scheduled": "2026-11-08"
     },
     {
       "title": "What A Friend We Have In Jesus",
@@ -3417,13 +3417,13 @@
     },
     {
       "title": "Who You Say I Am",
-      "all_time": 31,
+      "all_time": 32,
       "2022": 4,
       "2023": 3,
       "2024": 4,
       "2025": 2,
-      "2026": 1,
-      "last_scheduled": "2026-01-18"
+      "2026": 2,
+      "last_scheduled": "2026-11-08"
     },
     {
       "title": "Worthy",

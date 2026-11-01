@@ -1,11 +1,11 @@
 {
   "title": "Never Played",
   "prepared_by": "Kent James",
-  "prepared_date": "2026-10-31",
+  "prepared_date": "2026-11-01",
   "footer": [
-    "Total songs: 127"
+    "Total songs: 126"
   ],
-  "count": 127,
+  "count": 126,
   "rows": [
     {
       "title": "Down To The River To Pray - old hymn",
@@ -737,12 +737,6 @@
       "title": "Praise The Giver",
       "all_time": 0,
       "id": 30819692,
-      "last_scheduled": null
-    },
-    {
-      "title": "Amazing",
-      "all_time": 0,
-      "id": 30869719,
       "last_scheduled": null
     },
     {

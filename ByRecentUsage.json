@@ -1,11 +1,11 @@
 {
   "title": "By Recent Usage",
   "prepared_by": "Kent James",
-  "prepared_date": "2026-10-31",
+  "prepared_date": "2026-11-01",
   "footer": [
     "Bold titles: every all-time play of the song happened within these recent years (i.e., new to the congregation)."
   ],
-  "count": 139,
+  "count": 140,
   "rows": [
     {
       "title": "Goodness Of God",
@@ -75,6 +75,22 @@
       "last_scheduled": "2026-10-04"
     },
     {
+      "title": "Because Of Christ",
+      "all_time": 14,
+      "2025": 5,
+      "2026": 3,
+      "recent": 8,
+      "last_scheduled": "2026-11-08"
+    },
+    {
+      "title": "Graves Into Gardens",
+      "all_time": 23,
+      "2025": 4,
+      "2026": 4,
+      "recent": 8,
+      "last_scheduled": "2026-11-08"
+    },
+    {
       "title": "I Know A Name",
       "all_time": 8,
       "2025": 3,
@@ -106,22 +122,6 @@
       "2026": 3,
       "recent": 7,
       "last_scheduled": "2026-11-22"
-    },
-    {
-      "title": "Because Of Christ",
-      "all_time": 13,
-      "2025": 5,
-      "2026": 2,
-      "recent": 7,
-      "last_scheduled": "2026-07-12"
-    },
-    {
-      "title": "Graves Into Gardens",
-      "all_time": 22,
-      "2025": 4,
-      "2026": 3,
-      "recent": 7,
-      "last_scheduled": "2026-07-19"
     },
     {
       "title": "Great Things",
@@ -466,6 +466,22 @@
       "last_scheduled": "2026-08-02"
     },
     {
+      "title": "What A Beautiful Name",
+      "all_time": 33,
+      "2025": 2,
+      "2026": 2,
+      "recent": 4,
+      "last_scheduled": "2026-11-08"
+    },
+    {
+      "title": "Who You Say I Am",
+      "all_time": 32,
+      "2025": 2,
+      "2026": 2,
+      "recent": 4,
+      "last_scheduled": "2026-11-08"
+    },
+    {
       "title": "Worthy",
       "all_time": 8,
       "2025": 4,
@@ -561,22 +577,6 @@
       "2026": 2,
       "recent": 3,
       "last_scheduled": "2026-04-02"
-    },
-    {
-      "title": "What A Beautiful Name",
-      "all_time": 32,
-      "2025": 2,
-      "2026": 1,
-      "recent": 3,
-      "last_scheduled": "2026-04-12"
-    },
-    {
-      "title": "Who You Say I Am",
-      "all_time": 31,
-      "2025": 2,
-      "2026": 1,
-      "recent": 3,
-      "last_scheduled": "2026-01-18"
     },
     {
       "title": "A Thousand Hallelujahs",
@@ -815,6 +815,15 @@
       "2026": 1,
       "recent": 1,
       "last_scheduled": "2026-04-02"
+    },
+    {
+      "title": "Amazing",
+      "all_time": 1,
+      "2025": 0,
+      "2026": 1,
+      "recent": 1,
+      "last_scheduled": "2026-11-08",
+      "new": true
     },
     {
       "title": "Ancient Of Days",

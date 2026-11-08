@@ -1,12 +1,12 @@
 {
   "title": "Recent Months",
   "prepared_by": "Kent James",
-  "prepared_date": "2026-11-07",
+  "prepared_date": "2026-11-08",
   "footer": [
-    "Total songs: 72",
+    "Total songs: 75",
     "Bold titles: every all-time play of the song happened within this report's months (i.e., new to the congregation)."
   ],
-  "count": 72,
+  "count": 75,
   "rows": [
     {
       "title": "Washed",
@@ -105,6 +105,18 @@
       "last_scheduled": "2026-07-19"
     },
     {
+      "title": "Because Of Christ",
+      "all_time": 14,
+      "Jun": 0,
+      "Jul": 1,
+      "Aug": 0,
+      "Sep": 0,
+      "Oct": 0,
+      "Nov": 1,
+      "total": 2,
+      "last_scheduled": "2026-11-08"
+    },
+    {
       "title": "Build My Life",
       "all_time": 18,
       "Jun": 1,
@@ -163,6 +175,18 @@
       "Nov": 0,
       "total": 2,
       "last_scheduled": "2026-09-27"
+    },
+    {
+      "title": "Graves Into Gardens",
+      "all_time": 23,
+      "Jun": 0,
+      "Jul": 1,
+      "Aug": 0,
+      "Sep": 0,
+      "Oct": 0,
+      "Nov": 1,
+      "total": 2,
+      "last_scheduled": "2026-11-08"
     },
     {
       "title": "I Know A Name",
@@ -321,6 +345,19 @@
       "last_scheduled": "2026-10-18"
     },
     {
+      "title": "Amazing",
+      "all_time": 1,
+      "Jun": 0,
+      "Jul": 0,
+      "Aug": 0,
+      "Sep": 0,
+      "Oct": 0,
+      "Nov": 1,
+      "total": 1,
+      "last_scheduled": "2026-11-08",
+      "new": true
+    },
+    {
       "title": "Amazing Grace (My Chains Are Gone)",
       "all_time": 16,
       "Jun": 0,
@@ -368,18 +405,6 @@
       "Nov": 0,
       "total": 1,
       "last_scheduled": "2026-09-06"
-    },
-    {
-      "title": "Because Of Christ",
-      "all_time": 14,
-      "Jun": 0,
-      "Jul": 1,
-      "Aug": 0,
-      "Sep": 0,
-      "Oct": 0,
-      "Nov": 0,
-      "total": 1,
-      "last_scheduled": "2026-11-08"
     },
     {
       "title": "Come As You Are",
@@ -489,18 +514,6 @@
       "Nov": 0,
       "total": 1,
       "last_scheduled": "2026-06-14"
-    },
-    {
-      "title": "Graves Into Gardens",
-      "all_time": 23,
-      "Jun": 0,
-      "Jul": 1,
-      "Aug": 0,
-      "Sep": 0,
-      "Oct": 0,
-      "Nov": 0,
-      "total": 1,
-      "last_scheduled": "2026-11-08"
     },
     {
       "title": "Great Are You Lord",
@@ -876,6 +889,30 @@
       "total": 1,
       "last_scheduled": "2026-07-19",
       "new": true
+    },
+    {
+      "title": "What A Beautiful Name",
+      "all_time": 33,
+      "Jun": 0,
+      "Jul": 0,
+      "Aug": 0,
+      "Sep": 0,
+      "Oct": 0,
+      "Nov": 1,
+      "total": 1,
+      "last_scheduled": "2026-11-08"
+    },
+    {
+      "title": "Who You Say I Am",
+      "all_time": 32,
+      "Jun": 0,
+      "Jul": 0,
+      "Aug": 0,
+      "Sep": 0,
+      "Oct": 0,
+      "Nov": 1,
+      "total": 1,
+      "last_scheduled": "2026-11-08"
     }
   ]
 }

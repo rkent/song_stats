@@ -1,7 +1,7 @@
 {
   "title": "Songs by Key",
   "prepared_by": "Kent James",
-  "prepared_date": "2026-11-09",
+  "prepared_date": "2026-11-10",
   "footer": [],
   "count": 340,
   "rows": [
@@ -118,12 +118,12 @@
       "title": "All I Need Is You",
       "keys": [
         {
-          "key": "G",
+          "key": "E",
           "count": 4
         },
         {
-          "key": "E",
-          "count": 3
+          "key": "G",
+          "count": 4
         }
       ]
     },
@@ -149,7 +149,7 @@
         },
         {
           "key": "E",
-          "count": 1
+          "count": 2
         },
         {
           "key": "Gb",
@@ -1501,7 +1501,7 @@
         },
         {
           "key": "Bb",
-          "count": 4
+          "count": 3
         },
         {
           "key": "A",
@@ -3797,7 +3797,7 @@
         },
         {
           "key": "A",
-          "count": 4
+          "count": 3
         },
         {
           "key": "D",

@@ -1,7 +1,7 @@
 {
   "title": "By Recent Usage",
   "prepared_by": "Kent James",
-  "prepared_date": "2026-11-09",
+  "prepared_date": "2026-11-10",
   "footer": [
     "Bold titles: every all-time play of the song happened within these recent years (i.e., new to the congregation)."
   ],
@@ -603,6 +603,14 @@
       "last_scheduled": "2026-05-03"
     },
     {
+      "title": "All My Hope",
+      "all_time": 10,
+      "2025": 1,
+      "2026": 1,
+      "recent": 2,
+      "last_scheduled": "2026-11-15"
+    },
+    {
       "title": "Amazing Grace (My Chains Are Gone)",
       "all_time": 16,
       "2025": 0,
@@ -752,14 +760,6 @@
       "new": true
     },
     {
-      "title": "Trading My Sorrows",
-      "all_time": 13,
-      "2025": 1,
-      "2026": 1,
-      "recent": 2,
-      "last_scheduled": "2027-01-24"
-    },
-    {
       "title": "Worthy Of It All",
       "all_time": 3,
       "2025": 2,
@@ -784,20 +784,20 @@
       "last_scheduled": "2025-06-29"
     },
     {
+      "title": "All I Need Is You",
+      "all_time": 8,
+      "2025": 0,
+      "2026": 1,
+      "recent": 1,
+      "last_scheduled": "2026-11-15"
+    },
+    {
       "title": "All My Fountains",
       "all_time": 21,
       "2025": 0,
       "2026": 1,
       "recent": 1,
       "last_scheduled": "2027-01-24"
-    },
-    {
-      "title": "All My Hope",
-      "all_time": 9,
-      "2025": 1,
-      "2026": 0,
-      "recent": 1,
-      "last_scheduled": "2025-11-16"
     },
     {
       "title": "All Sufficient Merit",
@@ -908,14 +908,6 @@
       "recent": 1,
       "last_scheduled": "2026-08-09",
       "new": true
-    },
-    {
-      "title": "Happy Day",
-      "all_time": 14,
-      "2025": 0,
-      "2026": 1,
-      "recent": 1,
-      "last_scheduled": "2027-01-24"
     },
     {
       "title": "Here As In Heaven",
@@ -1133,6 +1125,14 @@
       "recent": 1,
       "last_scheduled": "2026-06-21",
       "new": true
+    },
+    {
+      "title": "Trading My Sorrows",
+      "all_time": 12,
+      "2025": 1,
+      "2026": 0,
+      "recent": 1,
+      "last_scheduled": "2027-01-24"
     },
     {
       "title": "Trisagion",

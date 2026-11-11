@@ -1,9 +1,9 @@
 {
   "title": "By All Time",
   "prepared_by": "Kent James",
-  "prepared_date": "2026-11-10",
+  "prepared_date": "2026-11-11",
   "footer": [],
-  "count": 360,
+  "count": 361,
   "rows": [
     {
       "title": "This Is Amazing Grace",
@@ -43,7 +43,7 @@
       "2024": 3,
       "2025": 4,
       "2026": 2,
-      "last_scheduled": "2026-07-26"
+      "last_scheduled": "2026-11-14"
     },
     {
       "title": "This I Believe",
@@ -63,7 +63,7 @@
       "2024": 2,
       "2025": 0,
       "2026": 0,
-      "last_scheduled": "2024-11-03"
+      "last_scheduled": "2026-11-15"
     },
     {
       "title": "Beautiful Things",
@@ -73,7 +73,7 @@
       "2024": 3,
       "2025": 0,
       "2026": 0,
-      "last_scheduled": "2024-09-29"
+      "last_scheduled": "2026-11-14"
     },
     {
       "title": "Great Are You Lord",
@@ -103,7 +103,7 @@
       "2024": 3,
       "2025": 2,
       "2026": 2,
-      "last_scheduled": "2026-11-08"
+      "last_scheduled": "2026-11-13"
     },
     {
       "title": "Who You Say I Am",
@@ -123,7 +123,7 @@
       "2024": 4,
       "2025": 2,
       "2026": 1,
-      "last_scheduled": "2026-06-21"
+      "last_scheduled": "2026-11-15"
     },
     {
       "title": "Oceans (Where Feet May Fail)",
@@ -493,7 +493,7 @@
       "2024": 0,
       "2025": 6,
       "2026": 5,
-      "last_scheduled": "2026-09-27"
+      "last_scheduled": "2026-11-13"
     },
     {
       "title": "Build My Life",
@@ -663,7 +663,7 @@
       "2024": 6,
       "2025": 1,
       "2026": 3,
-      "last_scheduled": "2026-06-14"
+      "last_scheduled": "2026-11-14"
     },
     {
       "title": "The Lion And The Lamb",
@@ -723,7 +723,7 @@
       "2024": 3,
       "2025": 6,
       "2026": 4,
-      "last_scheduled": "2026-08-09"
+      "last_scheduled": "2026-11-14"
     },
     {
       "title": "Mighty To Save",
@@ -753,7 +753,7 @@
       "2024": 3,
       "2025": 1,
       "2026": 4,
-      "last_scheduled": "2026-10-18"
+      "last_scheduled": "2026-11-15"
     },
     {
       "title": "You've Already Won",
@@ -913,7 +913,7 @@
       "2024": 0,
       "2025": 4,
       "2026": 3,
-      "last_scheduled": "2026-09-13"
+      "last_scheduled": "2026-11-15"
     },
     {
       "title": "The Lord Will Provide",
@@ -983,7 +983,7 @@
       "2024": 2,
       "2025": 4,
       "2026": 4,
-      "last_scheduled": "2026-10-25"
+      "last_scheduled": "2026-11-14"
     },
     {
       "title": "Praise Before My Breakthrough",
@@ -1303,7 +1303,7 @@
       "2024": 0,
       "2025": 0,
       "2026": 6,
-      "last_scheduled": "2026-11-01"
+      "last_scheduled": "2026-11-13"
     },
     {
       "title": "What A Friend We Have In Jesus",
@@ -1373,7 +1373,7 @@
       "2024": 0,
       "2025": 0,
       "2026": 5,
-      "last_scheduled": "2026-10-18"
+      "last_scheduled": "2026-11-14"
     },
     {
       "title": "Catch Me Singing",
@@ -1463,7 +1463,7 @@
       "2024": 1,
       "2025": 0,
       "2026": 0,
-      "last_scheduled": "2024-02-11"
+      "last_scheduled": "2026-11-13"
     },
     {
       "title": "Thank You Jesus For The Blood",
@@ -1913,7 +1913,7 @@
       "2024": 0,
       "2025": 0,
       "2026": 1,
-      "last_scheduled": "2026-11-08"
+      "last_scheduled": "2026-11-15"
     },
     {
       "title": "Ancient Of Days",
@@ -2877,6 +2877,16 @@
     },
     {
       "title": "Great I Am",
+      "all_time": 0,
+      "2022": 0,
+      "2023": 0,
+      "2024": 0,
+      "2025": 0,
+      "2026": 0,
+      "last_scheduled": null
+    },
+    {
+      "title": "Great Is The Lord",
       "all_time": 0,
       "2022": 0,
       "2023": 0,

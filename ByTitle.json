@@ -1,9 +1,9 @@
 {
   "title": "By Title",
   "prepared_by": "Kent James",
-  "prepared_date": "2026-11-10",
+  "prepared_date": "2026-11-11",
   "footer": [],
-  "count": 360,
+  "count": 361,
   "rows": [
     {
       "title": "1,000 Names",
@@ -273,7 +273,7 @@
       "2024": 0,
       "2025": 0,
       "2026": 1,
-      "last_scheduled": "2026-11-08"
+      "last_scheduled": "2026-11-15"
     },
     {
       "title": "Amazing Grace",
@@ -453,7 +453,7 @@
       "2024": 3,
       "2025": 0,
       "2026": 0,
-      "last_scheduled": "2024-09-29"
+      "last_scheduled": "2026-11-14"
     },
     {
       "title": "Because He Lives (Amen)",
@@ -1293,7 +1293,7 @@
       "2024": 0,
       "2025": 6,
       "2026": 5,
-      "last_scheduled": "2026-09-27"
+      "last_scheduled": "2026-11-13"
     },
     {
       "title": "Gratitude",
@@ -1303,7 +1303,7 @@
       "2024": 6,
       "2025": 1,
       "2026": 3,
-      "last_scheduled": "2026-06-14"
+      "last_scheduled": "2026-11-14"
     },
     {
       "title": "Graves Into Gardens",
@@ -1327,6 +1327,16 @@
     },
     {
       "title": "Great I Am",
+      "all_time": 0,
+      "2022": 0,
+      "2023": 0,
+      "2024": 0,
+      "2025": 0,
+      "2026": 0,
+      "last_scheduled": null
+    },
+    {
+      "title": "Great Is The Lord",
       "all_time": 0,
       "2022": 0,
       "2023": 0,
@@ -1513,7 +1523,7 @@
       "2024": 4,
       "2025": 2,
       "2026": 1,
-      "last_scheduled": "2026-06-21"
+      "last_scheduled": "2026-11-15"
     },
     {
       "title": "Holy Water",
@@ -1763,7 +1773,7 @@
       "2024": 3,
       "2025": 6,
       "2026": 4,
-      "last_scheduled": "2026-08-09"
+      "last_scheduled": "2026-11-14"
     },
     {
       "title": "I Will Follow",
@@ -2213,7 +2223,7 @@
       "2024": 2,
       "2025": 0,
       "2026": 0,
-      "last_scheduled": "2024-11-03"
+      "last_scheduled": "2026-11-15"
     },
     {
       "title": "My Redeemer Lives",
@@ -2493,7 +2503,7 @@
       "2024": 2,
       "2025": 4,
       "2026": 4,
-      "last_scheduled": "2026-10-25"
+      "last_scheduled": "2026-11-14"
     },
     {
       "title": "Praise Before My Breakthrough",
@@ -2603,7 +2613,7 @@
       "2024": 3,
       "2025": 4,
       "2026": 2,
-      "last_scheduled": "2026-07-26"
+      "last_scheduled": "2026-11-14"
     },
     {
       "title": "Remembrance",
@@ -2703,7 +2713,7 @@
       "2024": 0,
       "2025": 4,
       "2026": 3,
-      "last_scheduled": "2026-09-13"
+      "last_scheduled": "2026-11-15"
     },
     {
       "title": "See A Victory",
@@ -2753,7 +2763,7 @@
       "2024": 1,
       "2025": 0,
       "2026": 0,
-      "last_scheduled": "2024-02-11"
+      "last_scheduled": "2026-11-13"
     },
     {
       "title": "Shadows",
@@ -2983,7 +2993,7 @@
       "2024": 3,
       "2025": 1,
       "2026": 4,
-      "last_scheduled": "2026-10-18"
+      "last_scheduled": "2026-11-15"
     },
     {
       "title": "The Butterfly Song / If I Were A Butterfly",
@@ -3293,7 +3303,7 @@
       "2024": 0,
       "2025": 0,
       "2026": 6,
-      "last_scheduled": "2026-11-01"
+      "last_scheduled": "2026-11-13"
     },
     {
       "title": "Way Maker",
@@ -3343,7 +3353,7 @@
       "2024": 3,
       "2025": 2,
       "2026": 2,
-      "last_scheduled": "2026-11-08"
+      "last_scheduled": "2026-11-13"
     },
     {
       "title": "What A Friend We Have In Jesus",
@@ -3423,7 +3433,7 @@
       "2024": 0,
       "2025": 0,
       "2026": 5,
-      "last_scheduled": "2026-10-18"
+      "last_scheduled": "2026-11-14"
     },
     {
       "title": "Who You Say I Am",

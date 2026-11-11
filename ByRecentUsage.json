@@ -1,7 +1,7 @@
 {
   "title": "By Recent Usage",
   "prepared_by": "Kent James",
-  "prepared_date": "2026-11-10",
+  "prepared_date": "2026-11-11",
   "footer": [
     "Bold titles: every all-time play of the song happened within these recent years (i.e., new to the congregation)."
   ],
@@ -13,7 +13,7 @@
       "2025": 6,
       "2026": 5,
       "recent": 11,
-      "last_scheduled": "2026-09-27"
+      "last_scheduled": "2026-11-13"
     },
     {
       "title": "I Speak Jesus",
@@ -38,7 +38,7 @@
       "2025": 6,
       "2026": 4,
       "recent": 10,
-      "last_scheduled": "2026-08-09"
+      "last_scheduled": "2026-11-14"
     },
     {
       "title": "Make Room",
@@ -105,7 +105,7 @@
       "2025": 4,
       "2026": 4,
       "recent": 8,
-      "last_scheduled": "2026-10-25"
+      "last_scheduled": "2026-11-14"
     },
     {
       "title": "The Lord Will Provide",
@@ -153,7 +153,7 @@
       "2025": 4,
       "2026": 3,
       "recent": 7,
-      "last_scheduled": "2026-09-13"
+      "last_scheduled": "2026-11-15"
     },
     {
       "title": "The Father's House",
@@ -217,7 +217,7 @@
       "2025": 4,
       "2026": 2,
       "recent": 6,
-      "last_scheduled": "2026-07-26"
+      "last_scheduled": "2026-11-14"
     },
     {
       "title": "Run To The Father",
@@ -250,7 +250,7 @@
       "2025": 0,
       "2026": 6,
       "recent": 6,
-      "last_scheduled": "2026-11-01",
+      "last_scheduled": "2026-11-13",
       "new": true
     },
     {
@@ -299,7 +299,7 @@
       "2025": 1,
       "2026": 4,
       "recent": 5,
-      "last_scheduled": "2026-10-18"
+      "last_scheduled": "2026-11-15"
     },
     {
       "title": "This I Believe",
@@ -315,7 +315,7 @@
       "2025": 0,
       "2026": 5,
       "recent": 5,
-      "last_scheduled": "2026-10-18",
+      "last_scheduled": "2026-11-14",
       "new": true
     },
     {
@@ -364,7 +364,7 @@
       "2025": 1,
       "2026": 3,
       "recent": 4,
-      "last_scheduled": "2026-06-14"
+      "last_scheduled": "2026-11-14"
     },
     {
       "title": "Great Are You Lord",
@@ -471,7 +471,7 @@
       "2025": 2,
       "2026": 2,
       "recent": 4,
-      "last_scheduled": "2026-11-08"
+      "last_scheduled": "2026-11-13"
     },
     {
       "title": "Who You Say I Am",
@@ -528,7 +528,7 @@
       "2025": 2,
       "2026": 1,
       "recent": 3,
-      "last_scheduled": "2026-06-21"
+      "last_scheduled": "2026-11-15"
     },
     {
       "title": "Hosanna (Praise Is Rising)",
@@ -822,7 +822,7 @@
       "2025": 0,
       "2026": 1,
       "recent": 1,
-      "last_scheduled": "2026-11-08",
+      "last_scheduled": "2026-11-15",
       "new": true
     },
     {

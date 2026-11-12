@@ -1,7 +1,7 @@
 {
   "title": "By Recent Usage",
   "prepared_by": "Kent James",
-  "prepared_date": "2026-11-11",
+  "prepared_date": "2026-11-12",
   "footer": [
     "Bold titles: every all-time play of the song happened within these recent years (i.e., new to the congregation)."
   ],
@@ -21,7 +21,7 @@
       "2025": 6,
       "2026": 5,
       "recent": 11,
-      "last_scheduled": "2026-10-04",
+      "last_scheduled": "2026-11-13",
       "new": true
     },
     {
@@ -372,7 +372,7 @@
       "2025": 2,
       "2026": 2,
       "recent": 4,
-      "last_scheduled": "2026-08-16"
+      "last_scheduled": "2026-11-15"
     },
     {
       "title": "Greatness",
@@ -471,7 +471,7 @@
       "2025": 2,
       "2026": 2,
       "recent": 4,
-      "last_scheduled": "2026-11-13"
+      "last_scheduled": "2026-11-08"
     },
     {
       "title": "Who You Say I Am",
@@ -528,7 +528,7 @@
       "2025": 2,
       "2026": 1,
       "recent": 3,
-      "last_scheduled": "2026-11-15"
+      "last_scheduled": "2026-06-21"
     },
     {
       "title": "Hosanna (Praise Is Rising)",

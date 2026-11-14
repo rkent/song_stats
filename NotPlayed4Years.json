@@ -1,11 +1,11 @@
 {
-  "title": "Not Played Since 2022-11-13",
+  "title": "Not Played Since 2022-11-14",
   "prepared_by": "Kent James",
-  "prepared_date": "2026-11-13",
+  "prepared_date": "2026-11-14",
   "footer": [
-    "Total songs: 59"
+    "Total songs: 60"
   ],
-  "count": 59,
+  "count": 60,
   "rows": [
     {
       "title": "Open Up The Sky",
@@ -596,6 +596,16 @@
       "2025": 0,
       "2026": 0,
       "last_scheduled": "2022-10-30"
+    },
+    {
+      "title": "Give Us Clean Hands",
+      "all_time": 3,
+      "2022": 1,
+      "2023": 0,
+      "2024": 0,
+      "2025": 0,
+      "2026": 0,
+      "last_scheduled": "2022-11-13"
     }
   ]
 }

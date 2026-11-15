@@ -1,12 +1,12 @@
 {
   "title": "Recent Months",
   "prepared_by": "Kent James",
-  "prepared_date": "2026-11-14",
+  "prepared_date": "2026-11-15",
   "footer": [
-    "Total songs: 75",
+    "Total songs: 80",
     "Bold titles: every all-time play of the song happened within this report's months (i.e., new to the congregation)."
   ],
-  "count": 75,
+  "count": 80,
   "rows": [
     {
       "title": "Washed",
@@ -343,6 +343,42 @@
       "Nov": 0,
       "total": 1,
       "last_scheduled": "2026-10-18"
+    },
+    {
+      "title": "All I Need Is You",
+      "all_time": 8,
+      "Jun": 0,
+      "Jul": 0,
+      "Aug": 0,
+      "Sep": 0,
+      "Oct": 0,
+      "Nov": 1,
+      "total": 1,
+      "last_scheduled": "2026-11-15"
+    },
+    {
+      "title": "All My Fountains",
+      "all_time": 21,
+      "Jun": 0,
+      "Jul": 0,
+      "Aug": 0,
+      "Sep": 0,
+      "Oct": 0,
+      "Nov": 1,
+      "total": 1,
+      "last_scheduled": "2027-01-24"
+    },
+    {
+      "title": "All My Hope",
+      "all_time": 10,
+      "Jun": 0,
+      "Jul": 0,
+      "Aug": 0,
+      "Sep": 0,
+      "Oct": 0,
+      "Nov": 1,
+      "total": 1,
+      "last_scheduled": "2026-11-15"
     },
     {
       "title": "Amazing",
@@ -708,6 +744,18 @@
       "last_scheduled": "2026-08-02"
     },
     {
+      "title": "Made New",
+      "all_time": 22,
+      "Jun": 0,
+      "Jul": 0,
+      "Aug": 0,
+      "Sep": 0,
+      "Oct": 0,
+      "Nov": 1,
+      "total": 1,
+      "last_scheduled": "2027-01-24"
+    },
+    {
       "title": "Open The Eyes Of My Heart",
       "all_time": 2,
       "Jun": 0,
@@ -803,6 +851,18 @@
       "Nov": 0,
       "total": 1,
       "last_scheduled": "2026-07-12"
+    },
+    {
+      "title": "The River",
+      "all_time": 20,
+      "Jun": 0,
+      "Jul": 0,
+      "Aug": 0,
+      "Sep": 0,
+      "Oct": 0,
+      "Nov": 1,
+      "total": 1,
+      "last_scheduled": "2027-01-24"
     },
     {
       "title": "The Stand",

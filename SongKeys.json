@@ -1,7 +1,7 @@
 {
   "title": "Songs by Key",
   "prepared_by": "Kent James",
-  "prepared_date": "2026-11-16",
+  "prepared_date": "2026-11-17",
   "footer": [],
   "count": 340,
   "rows": [
@@ -2407,6 +2407,10 @@
         {
           "key": "G",
           "count": 10
+        },
+        {
+          "key": "C",
+          "count": 1
         }
       ]
     },

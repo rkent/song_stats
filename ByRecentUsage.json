@@ -1,7 +1,7 @@
 {
   "title": "By Recent Usage",
   "prepared_by": "Kent James",
-  "prepared_date": "2026-11-16",
+  "prepared_date": "2026-11-17",
   "footer": [
     "Bold titles: every all-time play of the song happened within these recent years (i.e., new to the congregation)."
   ],
@@ -25,6 +25,15 @@
       "new": true
     },
     {
+      "title": "Make Room",
+      "all_time": 11,
+      "2025": 5,
+      "2026": 6,
+      "recent": 11,
+      "last_scheduled": "2026-11-22",
+      "new": true
+    },
+    {
       "title": "Firm Foundation (He Won't)",
       "all_time": 23,
       "2025": 6,
@@ -39,15 +48,6 @@
       "2026": 4,
       "recent": 10,
       "last_scheduled": "2026-11-14"
-    },
-    {
-      "title": "Make Room",
-      "all_time": 10,
-      "2025": 5,
-      "2026": 5,
-      "recent": 10,
-      "last_scheduled": "2026-09-20",
-      "new": true
     },
     {
       "title": "Raise A Hallelujah",

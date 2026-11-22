@@ -1,12 +1,12 @@
 {
   "title": "Recent Months",
   "prepared_by": "Kent James",
-  "prepared_date": "2026-11-21",
+  "prepared_date": "2026-11-22",
   "footer": [
-    "Total songs: 80",
+    "Total songs: 82",
     "Bold titles: every all-time play of the song happened within this report's months (i.e., new to the congregation)."
   ],
-  "count": 80,
+  "count": 82,
   "rows": [
     {
       "title": "Washed",
@@ -21,6 +21,19 @@
       "last_scheduled": "2026-11-13"
     },
     {
+      "title": "Greatness",
+      "all_time": 4,
+      "Jun": 0,
+      "Jul": 2,
+      "Aug": 0,
+      "Sep": 1,
+      "Oct": 0,
+      "Nov": 1,
+      "total": 4,
+      "last_scheduled": "2026-11-22",
+      "new": true
+    },
+    {
       "title": "Firm Foundation (He Won't)",
       "all_time": 23,
       "Jun": 1,
@@ -33,18 +46,6 @@
       "last_scheduled": "2026-10-25"
     },
     {
-      "title": "Greatness",
-      "all_time": 4,
-      "Jun": 0,
-      "Jul": 2,
-      "Aug": 0,
-      "Sep": 1,
-      "Oct": 0,
-      "Nov": 0,
-      "total": 3,
-      "last_scheduled": "2026-11-22"
-    },
-    {
       "title": "I Speak Jesus",
       "all_time": 11,
       "Jun": 0,
@@ -55,6 +56,18 @@
       "Nov": 0,
       "total": 3,
       "last_scheduled": "2026-11-13"
+    },
+    {
+      "title": "Make Room",
+      "all_time": 11,
+      "Jun": 0,
+      "Jul": 1,
+      "Aug": 0,
+      "Sep": 1,
+      "Oct": 0,
+      "Nov": 1,
+      "total": 3,
+      "last_scheduled": "2026-11-22"
     },
     {
       "title": "The Blessing",
@@ -91,6 +104,18 @@
       "Nov": 0,
       "total": 3,
       "last_scheduled": "2026-11-14"
+    },
+    {
+      "title": "Battle Belongs",
+      "all_time": 20,
+      "Jun": 0,
+      "Jul": 1,
+      "Aug": 0,
+      "Sep": 0,
+      "Oct": 0,
+      "Nov": 1,
+      "total": 2,
+      "last_scheduled": "2026-11-22"
     },
     {
       "title": "Be Thou My Vision",
@@ -211,18 +236,6 @@
       "Nov": 0,
       "total": 2,
       "last_scheduled": "2026-11-14"
-    },
-    {
-      "title": "Make Room",
-      "all_time": 11,
-      "Jun": 0,
-      "Jul": 1,
-      "Aug": 0,
-      "Sep": 1,
-      "Oct": 0,
-      "Nov": 0,
-      "total": 2,
-      "last_scheduled": "2026-11-22"
     },
     {
       "title": "Nothing But The Blood (Plainfield)",
@@ -404,18 +417,6 @@
       "Nov": 0,
       "total": 1,
       "last_scheduled": "2026-07-12"
-    },
-    {
-      "title": "Battle Belongs",
-      "all_time": 20,
-      "Jun": 0,
-      "Jul": 1,
-      "Aug": 0,
-      "Sep": 0,
-      "Oct": 0,
-      "Nov": 0,
-      "total": 1,
-      "last_scheduled": "2026-11-22"
     },
     {
       "title": "Be Still My Soul",
@@ -826,6 +827,31 @@
       "Nov": 0,
       "total": 1,
       "last_scheduled": "2026-11-15"
+    },
+    {
+      "title": "Spirit Lead Me",
+      "all_time": 1,
+      "Jun": 0,
+      "Jul": 0,
+      "Aug": 0,
+      "Sep": 0,
+      "Oct": 0,
+      "Nov": 1,
+      "total": 1,
+      "last_scheduled": "2026-11-22",
+      "new": true
+    },
+    {
+      "title": "Thank You Jesus For The Blood",
+      "all_time": 4,
+      "Jun": 0,
+      "Jul": 0,
+      "Aug": 0,
+      "Sep": 0,
+      "Oct": 0,
+      "Nov": 1,
+      "total": 1,
+      "last_scheduled": "2026-11-22"
     },
     {
       "title": "The Church's One Foundation",

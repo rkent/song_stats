@@ -1,7 +1,7 @@
 {
   "title": "Christmas Songs",
   "prepared_by": "Kent James",
-  "prepared_date": "2026-11-22",
+  "prepared_date": "2026-11-23",
   "footer": [
     "Total songs: 31"
   ],
@@ -19,23 +19,23 @@
     },
     {
       "title": "O Come All Ye Faithful",
-      "all_time": 18,
+      "all_time": 19,
       "2022": 1,
       "2023": 3,
       "2024": 1,
       "2025": 2,
-      "2026": 0,
-      "last_scheduled": "2025-12-24"
+      "2026": 1,
+      "last_scheduled": "2026-12-20"
     },
     {
       "title": "Angels We Have Heard On High",
-      "all_time": 16,
+      "all_time": 17,
       "2022": 2,
       "2023": 2,
       "2024": 2,
       "2025": 0,
-      "2026": 0,
-      "last_scheduled": "2024-12-15"
+      "2026": 1,
+      "last_scheduled": "2026-12-20"
     },
     {
       "title": "Joy To The World",
@@ -148,6 +148,16 @@
       "last_scheduled": "2025-12-28"
     },
     {
+      "title": "All Creation Sing (Joy To The World)",
+      "all_time": 4,
+      "2022": 0,
+      "2023": 0,
+      "2024": 0,
+      "2025": 0,
+      "2026": 1,
+      "last_scheduled": "2026-12-20"
+    },
+    {
       "title": "O Holy Night",
       "all_time": 4,
       "2022": 1,
@@ -166,16 +176,6 @@
       "2025": 1,
       "2026": 0,
       "last_scheduled": "2025-12-28"
-    },
-    {
-      "title": "All Creation Sing (Joy To The World)",
-      "all_time": 3,
-      "2022": 0,
-      "2023": 0,
-      "2024": 0,
-      "2025": 0,
-      "2026": 0,
-      "last_scheduled": "2019-12-22"
     },
     {
       "title": "Angels (Glory To God)",

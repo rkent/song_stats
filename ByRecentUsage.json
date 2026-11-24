@@ -1,7 +1,7 @@
 {
   "title": "By Recent Usage",
   "prepared_by": "Kent James",
-  "prepared_date": "2026-11-23",
+  "prepared_date": "2026-11-24",
   "footer": [
     "Bold titles: every all-time play of the song happened within these recent years (i.e., new to the congregation)."
   ],
@@ -286,6 +286,14 @@
       "last_scheduled": "2026-08-16"
     },
     {
+      "title": "King Of Kings",
+      "all_time": 13,
+      "2025": 3,
+      "2026": 2,
+      "recent": 5,
+      "last_scheduled": "2026-11-29"
+    },
+    {
       "title": "Nothing But The Blood (Plainfield)",
       "all_time": 20,
       "2025": 2,
@@ -399,14 +407,6 @@
       "2026": 2,
       "recent": 4,
       "last_scheduled": "2026-10-18"
-    },
-    {
-      "title": "King Of Kings",
-      "all_time": 12,
-      "2025": 3,
-      "2026": 1,
-      "recent": 4,
-      "last_scheduled": "2026-05-10"
     },
     {
       "title": "King Of My Heart",
@@ -571,6 +571,14 @@
       "last_scheduled": "2026-04-19"
     },
     {
+      "title": "Royal Son",
+      "all_time": 5,
+      "2025": 2,
+      "2026": 1,
+      "recent": 3,
+      "last_scheduled": "2026-11-29"
+    },
+    {
       "title": "Simple Kingdom",
       "all_time": 9,
       "2025": 1,
@@ -733,14 +741,6 @@
       "2026": 1,
       "recent": 2,
       "last_scheduled": "2026-04-02"
-    },
-    {
-      "title": "Royal Son",
-      "all_time": 4,
-      "2025": 2,
-      "2026": 0,
-      "recent": 2,
-      "last_scheduled": "2025-12-14"
     },
     {
       "title": "This Is How I Fight My Battles",

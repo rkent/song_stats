@@ -1,7 +1,7 @@
 {
   "title": "By Title",
   "prepared_by": "Kent James",
-  "prepared_date": "2026-11-23",
+  "prepared_date": "2026-11-24",
   "footer": [],
   "count": 361,
   "rows": [
@@ -1947,13 +1947,13 @@
     },
     {
       "title": "King Of Kings",
-      "all_time": 12,
+      "all_time": 13,
       "2022": 3,
       "2023": 3,
       "2024": 1,
       "2025": 3,
-      "2026": 1,
-      "last_scheduled": "2026-05-10"
+      "2026": 2,
+      "last_scheduled": "2026-11-29"
     },
     {
       "title": "King Of My Heart",
@@ -2687,13 +2687,13 @@
     },
     {
       "title": "Royal Son",
-      "all_time": 4,
+      "all_time": 5,
       "2022": 0,
       "2023": 0,
       "2024": 2,
       "2025": 2,
-      "2026": 0,
-      "last_scheduled": "2025-12-14"
+      "2026": 1,
+      "last_scheduled": "2026-11-29"
     },
     {
       "title": "Run To The Father",

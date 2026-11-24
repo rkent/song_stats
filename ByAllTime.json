@@ -1,7 +1,7 @@
 {
   "title": "By All Time",
   "prepared_by": "Kent James",
-  "prepared_date": "2026-11-23",
+  "prepared_date": "2026-11-24",
   "footer": [],
   "count": 361,
   "rows": [
@@ -726,6 +726,16 @@
       "last_scheduled": "2026-11-14"
     },
     {
+      "title": "King Of Kings",
+      "all_time": 13,
+      "2022": 3,
+      "2023": 3,
+      "2024": 1,
+      "2025": 3,
+      "2026": 2,
+      "last_scheduled": "2026-11-29"
+    },
+    {
       "title": "Mighty To Save",
       "all_time": 13,
       "2022": 0,
@@ -794,16 +804,6 @@
       "2025": 0,
       "2026": 1,
       "last_scheduled": "2026-10-11"
-    },
-    {
-      "title": "King Of Kings",
-      "all_time": 12,
-      "2022": 3,
-      "2023": 3,
-      "2024": 1,
-      "2025": 3,
-      "2026": 1,
-      "last_scheduled": "2026-05-10"
     },
     {
       "title": "Oh How I Need You (Find You)",
@@ -1366,6 +1366,16 @@
       "last_scheduled": "2021-07-25"
     },
     {
+      "title": "Royal Son",
+      "all_time": 5,
+      "2022": 0,
+      "2023": 0,
+      "2024": 2,
+      "2025": 2,
+      "2026": 1,
+      "last_scheduled": "2026-11-29"
+    },
+    {
       "title": "Who Else",
       "all_time": 5,
       "2022": 0,
@@ -1444,16 +1454,6 @@
       "2025": 0,
       "2026": 0,
       "last_scheduled": "2022-04-17"
-    },
-    {
-      "title": "Royal Son",
-      "all_time": 4,
-      "2022": 0,
-      "2023": 0,
-      "2024": 2,
-      "2025": 2,
-      "2026": 0,
-      "last_scheduled": "2025-12-14"
     },
     {
       "title": "Set A Fire",

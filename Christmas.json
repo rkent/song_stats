@@ -1,7 +1,7 @@
 {
   "title": "Christmas Songs",
   "prepared_by": "Kent James",
-  "prepared_date": "2026-11-23",
+  "prepared_date": "2026-11-24",
   "footer": [
     "Total songs: 31"
   ],
@@ -78,6 +78,16 @@
       "last_scheduled": "2025-12-28"
     },
     {
+      "title": "God Rest Ye Merry Gentlemen",
+      "all_time": 7,
+      "2022": 1,
+      "2023": 2,
+      "2024": 1,
+      "2025": 1,
+      "2026": 1,
+      "last_scheduled": "2026-11-29"
+    },
+    {
       "title": "What Child Is This",
       "all_time": 7,
       "2022": 1,
@@ -98,16 +108,6 @@
       "last_scheduled": "2025-12-24"
     },
     {
-      "title": "God Rest Ye Merry Gentlemen",
-      "all_time": 6,
-      "2022": 1,
-      "2023": 2,
-      "2024": 1,
-      "2025": 1,
-      "2026": 0,
-      "last_scheduled": "2025-12-21"
-    },
-    {
       "title": "How Many Kings",
       "all_time": 6,
       "2022": 1,
@@ -116,6 +116,16 @@
       "2025": 1,
       "2026": 0,
       "last_scheduled": "2025-12-07"
+    },
+    {
+      "title": "It Came Upon A Midnight Clear",
+      "all_time": 6,
+      "2022": 0,
+      "2023": 0,
+      "2024": 0,
+      "2025": 2,
+      "2026": 1,
+      "last_scheduled": "2026-11-29"
     },
     {
       "title": "O Little Town Of Bethlehem",
@@ -136,16 +146,6 @@
       "2025": 0,
       "2026": 0,
       "last_scheduled": "2021-12-19"
-    },
-    {
-      "title": "It Came Upon A Midnight Clear",
-      "all_time": 5,
-      "2022": 0,
-      "2023": 0,
-      "2024": 0,
-      "2025": 2,
-      "2026": 0,
-      "last_scheduled": "2025-12-28"
     },
     {
       "title": "All Creation Sing (Joy To The World)",

@@ -1,11 +1,11 @@
 {
   "title": "Christmas Songs",
   "prepared_by": "Kent James",
-  "prepared_date": "2026-11-25",
+  "prepared_date": "2026-11-26",
   "footer": [
-    "Total songs: 31"
+    "Total songs: 32"
   ],
-  "count": 31,
+  "count": 32,
   "rows": [
     {
       "title": "Hark The Herald Angels Sing",
@@ -19,23 +19,23 @@
     },
     {
       "title": "O Come All Ye Faithful",
-      "all_time": 19,
+      "all_time": 18,
       "2022": 1,
       "2023": 3,
       "2024": 1,
       "2025": 2,
-      "2026": 1,
-      "last_scheduled": "2026-12-20"
+      "2026": 0,
+      "last_scheduled": "2025-12-24"
     },
     {
       "title": "Angels We Have Heard On High",
-      "all_time": 17,
+      "all_time": 16,
       "2022": 2,
       "2023": 2,
       "2024": 2,
       "2025": 0,
-      "2026": 1,
-      "last_scheduled": "2026-12-20"
+      "2026": 0,
+      "last_scheduled": "2024-12-15"
     },
     {
       "title": "Joy To The World",
@@ -158,6 +158,16 @@
       "last_scheduled": "2026-12-20"
     },
     {
+      "title": "Angels (Glory To God)",
+      "all_time": 4,
+      "2022": 0,
+      "2023": 0,
+      "2024": 0,
+      "2025": 3,
+      "2026": 1,
+      "last_scheduled": "2026-12-20"
+    },
+    {
       "title": "O Holy Night",
       "all_time": 4,
       "2022": 1,
@@ -176,16 +186,6 @@
       "2025": 1,
       "2026": 0,
       "last_scheduled": "2025-12-28"
-    },
-    {
-      "title": "Angels (Glory To God)",
-      "all_time": 3,
-      "2022": 0,
-      "2023": 0,
-      "2024": 0,
-      "2025": 3,
-      "2026": 0,
-      "last_scheduled": "2025-12-21"
     },
     {
       "title": "It Came Upon The Midnight Clear",
@@ -246,6 +246,16 @@
       "2025": 0,
       "2026": 0,
       "last_scheduled": "2023-12-24"
+    },
+    {
+      "title": "O Come All Ye Faithful (His Name Shall Be)",
+      "all_time": 1,
+      "2022": 0,
+      "2023": 0,
+      "2024": 0,
+      "2025": 0,
+      "2026": 1,
+      "last_scheduled": "2026-12-20"
     },
     {
       "title": "O Come O Come Emmanuel",

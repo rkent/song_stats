@@ -1,11 +1,11 @@
 {
-  "title": "Not Played Since 2022-11-27",
+  "title": "Not Played Since 2022-11-28",
   "prepared_by": "Kent James",
-  "prepared_date": "2026-11-27",
+  "prepared_date": "2026-11-28",
   "footer": [
-    "Total songs: 60"
+    "Total songs: 61"
   ],
-  "count": 60,
+  "count": 61,
   "rows": [
     {
       "title": "Open Up The Sky",
@@ -606,6 +606,16 @@
       "2025": 0,
       "2026": 0,
       "last_scheduled": "2022-11-13"
+    },
+    {
+      "title": "Come Thou Fount Come Thou King",
+      "all_time": 1,
+      "2022": 1,
+      "2023": 0,
+      "2024": 0,
+      "2025": 0,
+      "2026": 0,
+      "last_scheduled": "2022-11-27"
     }
   ]
 }
